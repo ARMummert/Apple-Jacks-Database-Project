@@ -1,0 +1,23 @@
+{
+  "name": "app.js",
+  "version": "1.0.0",
+  "description": "A baton twirling competition entry form database",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MummertAR/Apple-Jacks-Database-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MummertAR/Apple-Jacks-Database-Project/issues"
+  },
+  "homepage": "https://github.com/MummertAR/Apple-Jacks-Database-Project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3"
+  }
+}

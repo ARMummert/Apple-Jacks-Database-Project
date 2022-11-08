@@ -1,44 +1,49 @@
 // APP.JS SETUP
 
+//Port
+require('dotenv').config()
+const port = process.env.PORT;
+
 // Express
 var express = require('express');   
-var app     = express();            
-               
-// App Setup
+var app     = express();    
+
+              
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-
-//Port
-PORT        = 4014;  
-
-//SQL
-var mysql = require('mysql')
 
 // Database
 var db = require('./db-connector')
 
 // ROUTES
+
 app.get('/',function(req,res){
-
-    var context = {};
-    res.render('index', context);
-  
-  });
-
+  res.type('text/plain');
+  res.send('Welcome to the main page!');
+});
+    
 //Exceptions Handling
-app.use(function(req, res) {
-    res.status(404);
-    res.render('404');
-  });
-  
-app.use(function(err, req, res, next) {
-    console.log(err.stack);
-    res.status(500);
-    res.render('500');
-  })
+
+app.use(function(req,res){
+  res.type('text/plain');
+  res.status(404);
+  res.send('404 - Not Found');
+});
+
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.type('plain/text');
+  res.status(500);
+  res.send('500 - Server Error');
+});
 
 // LISTENER
 
-app.listen(app.get('port'), function () {
-    console.log('Express started on http://flip2.engr.oregonstate.edu:' + app.get('port') + '; press Ctrl-C to terminate.');
-});
+app.listen(process.env.PORT, (err) => {
+   
+	  if (err) {
+		      return console.log('Error: Something went wrong!', err)
+	  }
+
+	    console.log(`server is listening on ${process.env.PORT}`)
+})

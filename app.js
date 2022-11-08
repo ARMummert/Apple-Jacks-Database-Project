@@ -1,19 +1,27 @@
 // APP.JS SETUP
+// Express
+
+var express = require('express');   
+var app     = express();    
+PORT = 4014;
+var os = require('os');
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //Port
 require('dotenv').config()
 const port = process.env.PORT;
 
-// Express
-var express = require('express');   
-var app     = express();    
-
-              
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
 // Database
-var db = require('../db-connector')
+var db = require('./db-connector')
+
+const { engine } = require('express-handlebars');
+var exphbs = require('express-handlebars');     // Import express-handlebars
+app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+
+app.use(express.static(__dirname + '/Public')); //Express serves static files from public folder
 
 // ROUTES
 
@@ -38,11 +46,9 @@ app.use(function(err, req, res, next){
 
 // LISTENER
 
-app.listen(process.env.PORT, (err) => {
-   
-	  if (err) {
-		      return console.log('Error: Something went wrong!', err)
-	  }
-
-	    console.log(`server is listening on ${process.env.PORT}`)
-})
+app.listen(PORT, function () {
+  var hostname = os.hostname();
+  console.log(
+    `Server running on http://${hostname}:${PORT}/. Press Ctrl-C to terminate...`
+  );
+});

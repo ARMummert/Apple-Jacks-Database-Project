@@ -3,15 +3,12 @@
 
 var express = require('express');   
 var app     = express();    
-PORT = 4014;
+PORT = 4004;
 var os = require('os');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-//Port
-require('dotenv').config()
-const port = process.env.PORT;
 
 // Database
 var db = require('./db-connector')

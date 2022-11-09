@@ -1,0 +1,251 @@
+body{
+        
+    font-family: 'Roboto', sans-serif;
+    color: #DEFFFF;
+    font-size: 15px;
+    background-color: #151F22;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-color: #00788F;
+    opacity: 0.9;
+}
+
+.hero-text {
+    text-align: center;
+    padding: 15px;
+}
+
+.headertext {
+
+    font-family: 'Montserrat', sans-serif;
+    color: #80FFF4;
+    font-size: 30px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: 75px;
+    padding: 25px;
+}
+
+.header-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: #80FFF4;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+a:visited {
+    color: #80FFF4;
+}
+
+a:hover {
+    color:  #DEFFFF;
+}
+
+a {
+    color: #80FFF4;
+    text-decoration: none;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+
+}
+
+nav, #navmenu, li, ul {
+    font-family: 'Montserrat', sans-serif;
+    color: #DEFFFF;
+    font-size: 18px;
+    position: relative;
+    display: inline-block;
+    border: None;
+    margin: 5px auto auto auto;
+    padding: 10px;
+    text-align: center;
+    align-content: space-around;
+
+}
+
+.sticky {
+    background-color: #00788F;
+    position: fixed;
+    top: 0;
+    display: flex;
+    flex: 3;
+    margin: -15px;
+}
+ 
+#nav-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.home-desc {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    text-align: center;
+    margin: 25px;
+    padding-left: 300px;
+    padding-right: 300px;
+}
+.summary-box {
+    background-color:  #151F22;
+    padding: 25px;
+    box-shadow: 2px 2px 4px 2px #3795af;
+    border-radius: 25px;
+}
+h1 {
+    font-family: 'Roboto', sans-serif;
+    color: #3795af;
+    font-size: 35px;
+    text-align: center;
+}
+h2 {
+    font-family: 'Roboto', sans-serif;
+    color:  #3795af;
+    font-size: 30px;
+    text-align: center;
+
+
+}
+h3 {
+    font-family: 'Roboto', sans-serif;
+    color: #3795af;
+    font-size: 25px;
+    text-align: center;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+strong {
+    color: #3795af;
+}
+
+footer {
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5px;
+    padding-top: 15px;
+    color: #3795af;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    
+}
+.footer-text {
+    font-size: 15px;
+}
+
+.tableone {
+      
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    padding-bottom: 25px;
+    font-size: 15px;
+    color:  #DEFFFF;
+    text-align: center;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+    
+}
+.tableone th tr { 
+    
+    text-align: center;
+    color: white;
+    background-color: rgb(0, 0, 0);
+}   
+
+.tableone th td {
+    border: 1px solid gray;
+    height: 20px;
+    width: 160px
+  }
+
+.tabletwo {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+.tablethree {
+    
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    margin: auto;
+    padding: 25px;
+    
+  }
+.tablefour {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    width: 100vh;
+    
+
+  }
+.tablefive {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    width: 75vh;
+    
+
+  }
+.section-header{
+    color:#80FFF4;
+}  
+.sectionone {
+    padding-top: 20px;
+    background-color: #151F22;
+}
+.sectiontwo {
+    background-color: #00788F;
+    padding: 15px;
+    
+}
+.sectionthree {
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #151F22;
+    
+}
+
+.sectionfour {
+    background-color: #00788F;
+    padding-top: 15px;
+    
+}
+.sectionfive {
+    background-color: #151F22;
+    padding: 25px;
+}

@@ -3,7 +3,7 @@
 
 var express = require('express');   
 var app     = express();    
-PORT = 4004;
+PORT = 4418;
 var os = require('os');
 
 app.use(express.json());
@@ -13,17 +13,10 @@ app.use(express.urlencoded({extended: true}));
 // Database
 var db = require('./db-connector')
 
-const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
-app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
-
-app.use(express.static(__dirname + '/Public')); //Express serves static files from public folder
-
 // ROUTES
 
 app.get('/', function (req, res) {
-  res.render('index')
+  res.send('hi update')
 });
 
 //Exceptions Handling

@@ -16,7 +16,7 @@ var db = require('./db-connector')
 // ROUTES
 
 app.get('/', function (req, res) {
-  res.send('hi update')
+  res.send('hi, this is our main page!')
 });
 
 //Exceptions Handling

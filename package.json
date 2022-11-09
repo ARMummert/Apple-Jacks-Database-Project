@@ -1,0 +1,24 @@
+{
+  "name": "apple_jacks_database_project",
+  "version": "1.0.0",
+  "description": "Baton Twirling Competition Entry Form Database",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MummertAR/Apple-Jacks-Database-Project.git"
+  },
+  "author": "Amy Mummert and Joel Vrieze",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MummertAR/Apple-Jacks-Database-Project/issues"
+  },
+  "homepage": "https://github.com/MummertAR/Apple-Jacks-Database-Project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  }
+}

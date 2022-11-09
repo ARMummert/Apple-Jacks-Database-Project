@@ -11,14 +11,9 @@ app.use(express.urlencoded({extended: true}));
 
 
 // Database
-var db = require('./db-connector')
+var db = require('./database/db-connector')
 
-// Controllers
-
-const competitions = require('./server/controllers/competitions');
-app.use('/competitions', competitions);
-
-const 
+// Routes
 
 app.get('/', function (req, res) {
   res.send('Hi, this is our main page!')

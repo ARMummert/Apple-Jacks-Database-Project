@@ -18,7 +18,9 @@
   "homepage": "https://github.com/MummertAR/Apple-Jacks-Database-Project#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
     "forever": "^4.0.3",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "promisify": "^0.0.3"
   }
 }

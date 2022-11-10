@@ -50,7 +50,7 @@ app.get('/competitions', function (req, res){
 // Create Competitions
 app.post('/addCompetition', function(req, res) {
   let data = req.body;
-});
+
 
   // Create Competitions Query
   query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
@@ -69,6 +69,7 @@ app.post('/addCompetition', function(req, res) {
       res.redirect('/competitions');
     }
   });
+});
 
 // Update Competition
 app.put('/updateCompetition', function(req, res, next) {
@@ -99,7 +100,7 @@ app.put('/updateCompetition', function(req, res, next) {
       }
     }
   );
-});
+})
 // Delete Competition
 app.delete('deleteCompetition', function(req, res, next) {
   let data = req.body;

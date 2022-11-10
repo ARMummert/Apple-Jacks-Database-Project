@@ -3,7 +3,7 @@
 
 var express = require('express');   
 var app     = express();    
-PORT = 4008;
+PORT = 4448;
 var os = require('os');
 const { promisify } = require('promisify');
 
@@ -46,7 +46,36 @@ app.get('/competitions', function (req, res){
   });
 });
 
+app.get('/events', function(req, res){
+  res.render('events')
+});
 
+app.get('/athletes', function(req, res){
+  res.render('athletes')
+});
+
+app.get('/athletes-events', function(req, res){
+  res.render('athletes-events')
+});
+
+app.get('/divisions', function(req, res){
+  res.render('divisions')
+});
+
+app.get('/event-levels', function(req, res){
+  res.render('event-levels')
+});
+
+app.get('teams', function(req, res){
+  res.render('teams')
+});
+
+app.get('/project-development', function(req, res){
+  res.render('project-development')
+});
+
+// Create Competitions
+app.post('/update-')
 //Exceptions Handling
 
 app.use(function(req,res){

@@ -65,9 +65,26 @@ app.post('/addCompetition', function(req, res) {
     if (error) {
       res.sendStatus(400);
     }
-    else {
-      res.redirect('/competitions');
-    }
+    else
+        {
+            // If there was no error, perform a SELECT all from Competitions
+            query2 = `SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`,locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            });       
+        }
+    })
   });
 
 // Update Competition

@@ -52,7 +52,7 @@ app.get('/competitions', function (req, res){
 });
 
 // Create Competitions
-app.post('./public/js/add_competition', function(req, res) {
+app.post('add_competition', function(req, res) {
   let data = req.body;
 
   // Create Competitions Query
@@ -187,3 +187,20 @@ app.listen(PORT, function () {
     `Server running on http://${hostname}:${PORT}/. Press Ctrl-C to terminate...`
   );
 });
+
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+

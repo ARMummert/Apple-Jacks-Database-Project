@@ -14,7 +14,7 @@ var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/views'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -26,16 +26,20 @@ var db = require('./database/db-connector')
 // Routes - Homepage
 
 app.get('/', function(req, res)
-    {
-        res.render('/index');                    
-    });     
+  {
+      res.render('./index');                    
+  });   
+
+app.get('/', function(req, res) {
+  res.render('./competitions')
+});
 
 // Competitions
 
 app.get('/competitions', function (req, res){
   //Search
   let competitions;
-  if (req.query.compeitionName === undefined) {
+  if (req.query.competitionName === undefined) {
     competitions = 'SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`, locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions;';
   } else {
     competitions = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name", locationAddress as "Location Address", locationPhone as "Location Phone" FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
@@ -48,7 +52,7 @@ app.get('/competitions', function (req, res){
 });
 
 // Create Competitions
-app.post('/addCompetition', function(req, res) {
+app.post('./public/js/add_competition', function(req, res) {
   let data = req.body;
 
   // Create Competitions Query
@@ -84,8 +88,7 @@ app.post('/addCompetition', function(req, res) {
             });       
         }
     });
-
-
+  });
 // Update Competition
 app.put('/updateCompetition', function(req, res, next) {
   let data = req.body;

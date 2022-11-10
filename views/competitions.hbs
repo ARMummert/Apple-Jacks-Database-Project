@@ -1,0 +1,32 @@
+
+<div id="browse" >
+    <section class="sectionone">
+    <table class="tableone" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th><button class="btn" value="Add Competition" onClick="addCompetition({{this.id}})">Add Competition</button></th>
+                <th></th>
+                <th>ID</th>
+                <th>Competition Name</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>Location Name</th>
+                <th>Location Address</th>
+                <th>Location Phone</th>      
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+                <tr data-value = {{this.id}}>
+                <td><button class="btn" value="Update Competition" onClick="updateCompetition({{this.id}})">Update Competition</button></td>
+                <td><button class="btn" value= "Delete Competition" onClick="deleteCompetition({{this.id}})">Delete Competition</button></td>
+                <td>{{this.id}}</td>
+                <td>{{this.competitionName}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.startTime}}</td>
+                <td>{{this.locationName}}</td>
+                <td>{{this.locationAddress}}</td>
+                <td>{{this.locationPhone}}</td>
+                </tr>     
+            {{/each}}
+        </tbody>

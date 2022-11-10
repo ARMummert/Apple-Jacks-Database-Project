@@ -274,12 +274,15 @@ footer {
 </style>
 
 <body>
-<div id="browse" >
-    <section class="sectionone">
-    <table class="tableone" border="1" cellpadding="5">
+<div id="browse">
+
+<form id="add-competition" method = "POST" action = "/add-competition>
+<section class="sectionone">
+    
+    <table class="tableone" border="1" cellpadding="5" >
         <thead>
             <tr>
-                <th><button class="btn" value="Add Competition" onClick="addCompetition({{this.id}})">Add Competition</button></th>
+                <th><button class="btn" value="Add Competition" onClick="addCompetitionForm({{this.id}})">Add Competition</button></th>
                 <th></th>
                 <th>ID</th>
                 <th>Competition Name</th>
@@ -306,7 +309,10 @@ footer {
             {{/each}}
         </tbody>
     </table>
-    </section>
+    
+</section>    
+</form>
+
 </div>
 
 <div id="search" class="sectiontwo">

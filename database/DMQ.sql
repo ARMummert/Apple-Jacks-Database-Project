@@ -2,13 +2,6 @@
 SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`,
 locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions;
 
---get all competitions from a search by Name
-SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`,
-locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions
-Where competitionName = :Search_input_field;
-
-
-
 --add a new competition
 INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
     VALUES(:CompetitionNameInput,:dateInput,:startTimeInput,:locationNameInput,:locationAddressInput,
@@ -35,11 +28,6 @@ UPDATE Competitions
 --get all divisions
 SELECT divisionID as `ID`, divisionName as `Division Name` FROM Divisions;
 
---get all divisions from a search by Name
-SELECT divisionID as `ID`, divisionName as `Division Name` FROM Divisions
-WHERE divisionName = :Search_input_field;
-
-
 --add a new Division
 INSERT INTO Divisions(divisionName)
     VALUES(:DivisonNameInput);
@@ -50,10 +38,6 @@ SELECT divisionID,divisionName FROM Divisions;
 --get all eventLevels
 SELECT eventlevelID as `ID`, eventLevelName as `Event Level Name` FROM EventLevels;
 
---get all eventLevels from a search by Name
-SELECT eventlevelID as `ID`, eventLevelName as `Event Level Name` FROM EventLevels
-WHERE eventLevelName = :Search_input_field
-
 --add a new eventLevel
 INSERT INTO EventLevels(eventlevelName)
     Values(:eventlevelNameInput);
@@ -61,22 +45,13 @@ INSERT INTO EventLevels(eventlevelName)
 --get all eventlevelIDs and eventlevelNames to populate EventLevel dropdown menu
 SELECT eventlevelID, eventlevelName FROM EventLevels;
 
---get all events 
+--get all events
 SELECT eventID as `ID`,eventName as `Event Name`, Competitions.competitionName as Competition,
        Divisions.divisionName as Divsion, EventLevels.eventlevelName as ` Event Level` 
 FROM Events
 INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
 INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
 INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;
-
---get all events from a search by Name
-SELECT eventID as `ID`,eventName as `Event Name`, Competitions.competitionName as Competition,
-       Divisions.divisionName as Divsion, EventLevels.eventlevelName as ` Event Level` 
-FROM Events
-INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
-INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
-INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
-WHERE eventName = :Search_input_field
 
 --add a new event
 INSERT INTO Events(competitionID,divisionID,eventlevelID,eventName)
@@ -95,14 +70,9 @@ UPDATE Events
         eventlevelID = :eventlevelID_from_dropdown_Input, eventName = :eventNameInput
     WHERE eventID = :eventID_selected_from_Event_page_update_form_dropdown_Input;
 
---get all teams(add a where for searches)
+--get all teams
 SELECT teamID as `ID`, teamName as `Team Name`, coachName as `Coach Name`, coachPhone as `Coach Phone`, 
-        coachEmail as `Coach Email` FROM Teams;
-
---get all teams from a Search by Name
-SELECT teamID as `ID`, teamName as `Team Name`, coachName as `Coach Name`, coachPhone as `Coach Phone`, 
-        coachEmail as `Coach Email` FROM Teams
-WHERE teamName = :Search_input_field;
+       coachEmail as `Coach Email` FROM Teams
 
 --add a new team
 INSERT INTO Teams(teamName,coachName,coachPhone,CoachEmail)
@@ -118,21 +88,13 @@ UPDATE Teams
     WHERE teamID = ;teamID_selected_from_Teams_page_update_form_dropdown_Input;
 
 --get all athletes
-SELECT Athletes.athleteID as `ID`,Teams.teamName as Team, Divisions.divisionName as Division, athleteName as `Athlete Name`,
+SELECT Teams.teamName as Team, Divisions.divisionName as Division, athleteName as `Athlete Name`,
        athletePhone as "Athlete Phone", athleteEmail as `Athlete Email`, athleteAddress as `Athlete Address`,
         athleteDOB as `Athlete DOB`, athleteAge as `Athlete Age`
 FROM Athletes
 INNER JOIN Teams ON Athletes.teamID = Teams.teamID
 INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
 
---get all athletes from search
-SELECT Athlete.athleteID as 'ID',Teams.teamName as Team, Divisions.divisionName as Division, athleteName as `Athlete Name`,
-       athletePhone as "Athlete Phone", athleteEmail as `Athlete Email`, athleteAddress as `Athlete Address`,
-        athleteDOB as `Athlete DOB`, athleteAge as `Athlete Age`
-FROM Athletes
-INNER JOIN Teams ON Athletes.teamID = Teams.teamID
-INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
-WHERE athlete.:attribute_from_dropdown = :search_input_field
 
 --add a new athlete
 INSERT INTO Athletes
@@ -165,16 +127,6 @@ INNER JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
 INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
 INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
 INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;
-
---get all athlete)events from a search by choosen attribute
-SELECT athlete_eventID as `ID`, Athletes.athleteName as `Athlete`,
-       Events.eventName as 'Event Name',EventLevels.eventLevelName as 'Event Level', Divisions.divisionName as `Athlete Division`
-FROM Athletes_Events
-INNER JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
-INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
-INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
-INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;
-WHERE Athletes_Events.:attribute_from_dropdown = :Search_input_field
 
 --get all eventIDs for selecting events based on eventName,Athletes.divisionID, and eventLevel in Athlete_Events Table
 SELECT eventID FROM Events;

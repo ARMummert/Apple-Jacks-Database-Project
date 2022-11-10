@@ -50,7 +50,6 @@ app.get('/competitions', function (req, res){
 // Create Competitions
 app.post('/addCompetition', function(req, res) {
   let data = req.body;
-});
 
   // Create Competitions Query
   query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
@@ -68,7 +67,7 @@ app.post('/addCompetition', function(req, res) {
     else
         {
             // If there was no error, perform a SELECT all from Competitions
-            query2 = `SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`,locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions`;
+            query2 = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name",locationAddress as "Location Address",locationPhone as "Location Phone" FROM Competitions`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -84,8 +83,8 @@ app.post('/addCompetition', function(req, res) {
                 }
             });       
         }
-    })
-  });
+    });
+
 
 // Update Competition
 app.put('/updateCompetition', function(req, res, next) {

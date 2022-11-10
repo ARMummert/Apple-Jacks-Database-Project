@@ -52,7 +52,7 @@ app.get('/competitions', function (req, res){
 });
 
 // Create Competitions
-app.post('/addCompetition', function(req, res) {
+app.post('./public/js/add_competition', function(req, res) {
   let data = req.body;
 
   // Create Competitions Query

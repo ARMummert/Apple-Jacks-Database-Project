@@ -36,9 +36,10 @@ app.get('/competitions', function (req, res){
   //Search
   let competitions;
   if (req.query.compeitionName === undefined) {
-    competitions = 'SELECT * FROM Competitions;';
+    competitions = 'SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`, locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions;';
   } else {
-    competitions = `SELECT * FROM Competitions WHERE competitionName LIKE '${req.query.compeitionName}%';`;
+    competitions = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name", locationAddress as "Location Address", locationPhone as "Location Phone" FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
+    
   }
 
   db.pool.query(competitions, function(error, rows, fields) {
@@ -46,6 +47,75 @@ app.get('/competitions', function (req, res){
   });
 });
 
+// Create Competitions
+app.post('/addCompetition', function(req, res) {
+  let data = req.body;
+});
+
+  // Create Competitions Query
+  query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
+  VALUES (
+    '${data['input-competitionName']}', 
+    '${data['input-date']}', 
+    '${data['input-startTime']}', 
+    '${data['input-locationName']}', 
+    '${data['input-locationAddress']}, 
+    '${data['input-locationPhone']}')`;
+  db.pool.query(query1, function(error, rows, fields) {
+    if (error) {
+      res.sendStatus(400);
+    }
+    else {
+      res.redirect('/competitions');
+    }
+  });
+
+// Update Competition
+app.put('/updateCompetition', function(req, res, next) {
+  let data = req.body;
+  let competitionID = parseInt(data.id);
+  let selectCompetition = 'SELECT competitionID,CompetitionName,date,startTime,locationName,locationAddress,locationPhone FROM Competitions WHERE competitionID = ?';
+  let updateCompetition = 'UPDATE Competitions SET CompetitionName = ?, data = ?, startTime = ?, locationName = ?, locationAddress = ?, locationPhone = ? WHERE competitionID = ?';
+
+  db.pool.query(
+    updateCompetition,
+    [
+      data['competitionName'],
+      data['date'],
+      data['startTime'],
+      data['locationName'],
+      data['locationAddress'],
+      data['locationPhone'],
+      competitionID,
+
+    ],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+        res.sendStatus(400);
+      }
+      else {
+        res.send(rows);
+      }
+    }
+  );
+});
+// Delete Competition
+app.delete('deleteCompetition', function(req, res, next) {
+  let data = req.body;
+  let competitionID = parseInt(data.id);
+  let deleteCompetition = 'DELETE FROM Competitions WHERE competitionID = ?';
+
+  db.pool.query(deleteCompetition, [competitionID], function(error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    }
+    else {
+      res.sendStatus(204);
+    }
+  });
+});
 app.get('/events', function(req, res){
   res.render('events')
 });
@@ -74,8 +144,7 @@ app.get('/project-development', function(req, res){
   res.render('project-development')
 });
 
-// Create Competitions
-app.post('/update-')
+
 //Exceptions Handling
 
 app.use(function(req,res){

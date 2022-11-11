@@ -299,6 +299,8 @@ footer {
                 <td>{{this.locationName}}</td>
                 <td>{{this.locationAddress}}</td>
                 <td>{{this.locationPhone}}</td>
+                <td><a href="#" onclick="deleteCompetition(`{{this.competitionID}} {{this.competitionName}} at {{this.date}} on {{this.startTime}} at {{this.locationName}} {{this.locationAddress}} {{this.locationPhone}}`)">
+                <img class="delete-icon" src="img/delete.png" /></a></td>
             </tr>   
             {{/each}}
         </tbody>

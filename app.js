@@ -41,7 +41,7 @@ app.get('/competitions', function (req, res){
   }
   else 
   {
-    competitions = `SELECT * FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
+    competitions = `SELECT * FROM Competitions WHERE competitionName '${req.query.competitionName}%';`;
   }
 
   db.pool.query(competitions, function(error, rows, fields) {

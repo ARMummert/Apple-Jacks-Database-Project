@@ -10,9 +10,9 @@ const { promisify } = require('promisify');
 
 // Express Handlebars
 const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
-app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+var exphbs = require('express-handlebars');     
+app.engine('.hbs', engine({extname: ".hbs", helpers: {trimString : function (inputString, start, end){var trimmed = String(inputString).slice(start, end); return trimmed}}}));  
+app.set('view engine', '.hbs');                 
 
 app.use(express.static(__dirname + '/views'));
 
@@ -41,7 +41,7 @@ app.get('/competitions', function (req, res){
   }
   else 
   {
-    competitions = `SELECT * FROM Competitions WHERE competitionName '${req.query.competitionName}%';`;
+    competitions = `SELECT * FROM Competitons WHERE lastName LIKE "${req.query.competitionName}%"`;
   }
 
   db.pool.query(competitions, function(error, rows, fields) {
@@ -70,7 +70,7 @@ app.post('add-competition-form', function(req, res) {
     else
         {
             // If there was no error, perform a SELECT all from Competitions
-            query2 = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name",locationAddress as "Location Address",locationPhone as "Location Phone" FROM Competitions`;
+            query2 = `SELECT competitionID as "ID", competitionName as "Competition Name", date, startTime as "Start Time", locationName as "Location Name",locationAddress as "Location Address",locationPhone as "Location Phone" FROM Competitions`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -82,6 +82,7 @@ app.post('add-competition-form', function(req, res) {
                 // If all went well, send the results of the query back.
                 else
                 {
+                    console.log(rows);
                     res.send(rows);
                 }
             });       

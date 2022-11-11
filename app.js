@@ -11,7 +11,8 @@ const { promisify } = require('promisify');
 // Express Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     
-app.engine('.hbs', engine({extname: ".hbs", helpers: {trimString : function (inputString, start, end){var trimmed = String(inputString).slice(start, end); return trimmed}}}));  
+//Sets handlebars configurations
+app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs');    
 
 app.use(express.static(__dirname +'/public'));
@@ -27,7 +28,7 @@ var db = require('./database/db-connector')
 
 app.get('/', function(req, res)
   {
-      res.render('./index');                    
+    res.render('main', {layout : './index'});                  
   });   
 
 // Competitions

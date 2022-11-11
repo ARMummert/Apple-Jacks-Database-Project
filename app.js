@@ -5,7 +5,8 @@ var express = require('express');
 var app     = express();    
 PORT = 4448;
 
-
+// Database
+var db = require('./database/db-connector')
 
 // Express Handlebars
 const { engine } = require('express-handlebars');
@@ -14,14 +15,11 @@ var exphbs = require('express-handlebars');
 app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs'); 
 
-app.use(express.static('/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-
-// Database
-var db = require('./database/db-connector')
 
 // Routes - Homepage
 

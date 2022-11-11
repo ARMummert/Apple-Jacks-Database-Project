@@ -33,7 +33,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
       locationAddress:competitionAddressValue,
       LocationPhone:competitionPhone  
       
-    }
+    };
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();

@@ -11,9 +11,9 @@ addCompetitionForm.addEventListener("submit", function (e) {
     let inputCompetitionName = document.getElementById("input-competition-name");
     let inputCompetitionDate = document.getElementById("input-competition-date");
     let inputCompetitonStartTime = document.getElementById("input-competition-start-time");
-    let inputCompetitionLocationName = document.getElementById("input-competition-location-name");
-    let inputCompetitionAddress = document.getElementById("input-competition-location-address");
-    let inputCompetitionPhone = document.getlElementbyID("input-competition-phone");
+    let inputCompetitionLocationName = document.getElementById("input-location-name");
+    let inputCompetitionAddress = document.getElementById("input-location-address");
+    let inputCompetitionPhone = document.getlElementbyID("input-location-phone");
     
 
     // Get the values from the form fields

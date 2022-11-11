@@ -39,9 +39,11 @@ app.get('/', function(req, res) {
 app.get('/competitions', function (req, res){
   //Search
   let competitions;
-  if (req.query.competitionName === undefined) {
-    competitions = 'SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`, locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions;';
-  } else {
+  if (req.query.competitionName === undefined)
+  {
+    competitions = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name", locationAddress as "Location Address",locationPhone as "Location Phone" FROM Competitions;`;
+  }
+  else {
     competitions = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name", locationAddress as "Location Address", locationPhone as "Location Phone" FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
     
   }

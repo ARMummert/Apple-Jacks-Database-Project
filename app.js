@@ -30,20 +30,18 @@ app.get('/', function(req, res)
       res.render('./index');                    
   });   
 
-app.get('/', function(req, res) {
-  res.render('./competitions')
-});
-
 // Competitions
 
 app.get('/competitions', function (req, res){
   //Search
   let competitions;
-  if (req.query.competitionName === undefined) {
-    competitions = 'SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`, locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions;';
-  } else {
-    competitions = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name", locationAddress as "Location Address", locationPhone as "Location Phone" FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
-    
+  if (req.query.competitionName === undefined)
+  {
+    competitions = `SELECT * FROM Competitions;`;
+  }
+  else 
+  {
+    competitions = `SELECT * FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
   }
 
   db.pool.query(competitions, function(error, rows, fields) {
@@ -66,6 +64,7 @@ app.post('add_competition', function(req, res) {
     '${data['input-locationPhone']}')`;
   db.pool.query(query1, function(error, rows, fields) {
     if (error) {
+      console.log(error)
       res.sendStatus(400);
     }
     else
@@ -188,19 +187,5 @@ app.listen(PORT, function () {
   );
 });
 
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
 
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
 

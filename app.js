@@ -88,6 +88,7 @@ app.post('/add-competition-form', function(req, res) {
                 {
                     console.log(rows);
                     res.send(rows);
+                    res.redirect('competitions');
                 }
             });       
         }

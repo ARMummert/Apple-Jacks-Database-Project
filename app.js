@@ -13,7 +13,8 @@ var exphbs = require('express-handlebars');
 //Sets handlebars configurations
 app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs');    
-app.use(express.static('public'));
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -21,6 +22,8 @@ app.use(express.urlencoded({extended: true}));
 
 // Database
 var db = require('./database/db-connector')
+
+app.use(express.static('public'));
 
 // Routes - Homepage
 

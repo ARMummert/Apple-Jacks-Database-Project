@@ -13,8 +13,7 @@ var exphbs = require('express-handlebars');
 //Sets handlebars configurations
 app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs');    
-
-app.use(express.static(__dirname +'/public'));
+app.use(express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -34,23 +33,24 @@ app.get('/', function(req, res)
 
 app.get('/competitions', function (req, res){
   //Search
-  let competitions;
+  let query1;
   if (req.query.competitionName === undefined)
   {
-    competitions = `SELECT * FROM Competitions;`;
+    query1 = "SELECT * FROM Competitions;";
   }
   else 
   {
-    competitions = `SELECT * FROM Competitons WHERE lastName LIKE "${req.query.competitionName}%"`;
+    query1 = `SELECT * FROM Competitons WHERE competitionName LIKE "${req.query.competitionName}%"`;
   }
 
-  db.pool.query(competitions, function(error, rows, fields) {
+  db.pool.query(query1, function(error, rows, fields) {
+  
     return res.render('competitions', {data: rows});
   });
 });
 
 // Create Competitions
-app.post('add-competition-form', function(req, res) {
+app.post('/add-competition-form', function(req, res) {
   let data = req.body;
   
   // Create Competitions Query
@@ -90,7 +90,7 @@ app.post('add-competition-form', function(req, res) {
     });
   });
 // Update Competition
-app.put('/update-competition', function(req, res, next) {
+app.put('/update-competition-form', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let selectCompetition = 'SELECT competitionID,CompetitionName,date,startTime,locationName,locationAddress,locationPhone FROM Competitions WHERE competitionID = ?';
@@ -120,7 +120,7 @@ app.put('/update-competition', function(req, res, next) {
   );
 });
 // Delete Competition
-app.delete('deleteCompetition', function(req, res, next) {
+app.delete('/delete-competition-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let deleteCompetition = 'DELETE FROM Competitions WHERE competitionID = ?';

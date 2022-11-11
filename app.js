@@ -50,18 +50,18 @@ app.get('/competitions', function (req, res){
 });
 
 // Create Competitions
-app.post('add_competition', function(req, res) {
+app.post('add-competition-form', function(req, res) {
   let data = req.body;
-
+  
   // Create Competitions Query
   query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
   VALUES (
-    '${data['input-competitionName']}', 
-    '${data['input-date']}', 
-    '${data['input-startTime']}', 
-    '${data['input-locationName']}', 
-    '${data['input-locationAddress']}, 
-    '${data['input-locationPhone']}')`;
+    '${data.compeitionName}', 
+    '${data.date}',
+    '${data.startTime}',
+    '${data.locationName}',
+    '${data.locationAddress}',
+    '${data.locationPhone}')`;
   db.pool.query(query1, function(error, rows, fields) {
     if (error) {
       console.log(error)
@@ -89,7 +89,7 @@ app.post('add_competition', function(req, res) {
     });
   });
 // Update Competition
-app.put('/updateCompetition', function(req, res, next) {
+app.put('/update-competition', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let selectCompetition = 'SELECT competitionID,CompetitionName,date,startTime,locationName,locationAddress,locationPhone FROM Competitions WHERE competitionID = ?';

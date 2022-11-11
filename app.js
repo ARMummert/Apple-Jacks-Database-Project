@@ -4,8 +4,7 @@
 var express = require('express');   
 var app     = express();    
 PORT = 4448;
-var os = require('os');
-const { promisify } = require('promisify');
+
 
 
 // Express Handlebars

@@ -53,21 +53,15 @@ app.post('/add-competition-form', function(req, res) {
   let data = req.body;
   
   // Create Competitions Query
-  //'${data['input-competition-name']}',
-    //'${data['input-date']}',
-    //'${data['input-start-time']}',
-    //'${data['input-location-name']}',
-    //'${data['input-location-address']}',
-    //'${data['input-location-phone']}',
+ 
   query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
   VALUES (
-    '${data.competitionName}', 
-    '${data.date}', 
-    '${data.startTime}',
-    '${data.locationName}',
-    '${data.locationAddress}',
-    '${data.locationPhone}'
-    )`;
+      '${data['input-competition-name']}',
+      '${data['input-date']}',
+      '${data['input-start-time']}',
+      '${data['input-location-name']}',
+      '${data['input-location-address']}',
+      '${data['input-location-phone']}')`;
   
     
   db.pool.query(query1, function(error, rows, fields) {
@@ -90,9 +84,7 @@ app.post('/add-competition-form', function(req, res) {
                 // If all went well, send the results of the query back.
                 else
                 {
-                    console.log(rows);
-                    res.send(rows);
-                    res.redirect('competitions');
+                    res.redirect('/competitions');
                 }
             });       
         }
@@ -131,7 +123,7 @@ app.put('/update-competition-form', function(req, res, next) {
 // Delete Competition
 app.delete('/delete-competition-ajax', function(req, res, next) {
   let data = req.body;
-  let competitionID = parseInt(data.competitionID);
+  let competitionID = parseInt(data.id);
   let deleteCompetition = 'DELETE FROM Competitions WHERE competitionID = ?';
 
   db.pool.query(deleteCompetition, [competitionID], function(error, rows, fields) {

@@ -12,9 +12,10 @@ const { promisify } = require('promisify');
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     
 app.engine('.hbs', engine({extname: ".hbs", helpers: {trimString : function (inputString, start, end){var trimmed = String(inputString).slice(start, end); return trimmed}}}));  
-app.set('view engine', '.hbs');                 
+app.set('view engine', '.hbs');    
 
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname +'public'));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

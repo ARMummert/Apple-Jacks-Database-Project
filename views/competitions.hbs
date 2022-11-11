@@ -297,7 +297,7 @@ footer {
                 <td>{{this.locationName}}</td>
                 <td>{{this.locationAddress}}</td>
                 <td>{{this.locationPhone}}</td>
-                <td><td><button onclick="deleteCompetition({{this.competitionID}})">Delete</button></td></td>
+                <td><button onclick="deleteCompetition(`{{this.competitionID}} {{this.competitionName}} {{this.date}} {{this.startTime}} {{this.locationName}} {{this.locationAddress}} {{this.locationPhone}}`)">Delete</button></td>
             </tr>   
             {{/each}}
         </tbody>
@@ -419,7 +419,7 @@ footer {
             
             <div id="delete">
                 <section class="sectionfive">
-                    <h3 class="section-header">Delete Competition</h3>
+                <h3 class="section-header">Delete Competition</h3>
                 <form id="deleteCompetitionForm" method="DELETE">
                     <table class="tablefive">
                     <tr>
@@ -434,9 +434,9 @@ footer {
                         <td>Are you sure you want to delete this competition?</td>       
                         </tr>
                         <tr>
-                            <td><input type="submit" id="deleteCompetition" value="Delete">
+                            <td><button onclick="deleteCompetition({competitionID})">Delete</button>
                             <a href='/competitions'><input type="reset" value="Cancel"></a></td>
-                        </tr>
+                    </tr>
                     </table>
                     
                 </form> 

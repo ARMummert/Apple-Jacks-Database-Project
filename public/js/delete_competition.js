@@ -5,14 +5,12 @@ deleteCompetitionForm.addEventListener("submit", function(e) {
     e.preventDefault();
 
 })
-let data = {
-    competitionID: inputCompetitionID
-};
-function deleteCompetition(competitionID) {
-    // Put our data we want to send in a javascript object
- 
 
-    // Setup our AJAX request
+function deleteCompetition(competitionID) {
+    console.log(competitionID);
+    let data = {
+        id: competitionID
+    };
     var xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "/delete-competition-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -22,16 +20,21 @@ function deleteCompetition(competitionID) {
         if (xhttp.readyState == 4 && xhttp.status == 204) {
 
             // Add the new data to the table
-            deleteRow(inputCompetitionID);
+            deleteRow(competitionID);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {
             console.log("There was an error with the input.")
         }
     }
+    
+}
+    console.log(data);
+    console.log(JSON.stringify(data));
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-}
+    // Reload the page
+    location.reload();
 
 
 function deleteRow(competitionID){

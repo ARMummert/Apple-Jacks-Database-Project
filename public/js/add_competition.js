@@ -8,30 +8,30 @@ addCompetitionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputCompetitionName = document.getElementById("input-competition-name");
-    let inputCompetitionDate = document.getElementById("input-competition-date");
-    let inputCompetitonStartTime = document.getElementById("input-competition-start-time");
-    let inputCompetitionLocationName = document.getElementById("input-location-name");
-    let inputCompetitionAddress = document.getElementById("input-location-address");
-    let inputCompetitionPhone = document.getlElementbyID("input-location-phone");
+    let inputCompetitionName = document.getElementById("inputCompetitionName");
+    let inputCompetitionDate = document.getElementById("inputDate");
+    let inputCompetitonStartTime = document.getElementById("inputStartTime");
+    let inputCompetitionLocationName = document.getElementById("inputLocationName");
+    let inputCompetitionAddress = document.getElementById("inputAddress");
+    let inputCompetitionPhone = document.getlElementbyID("inputPhone");
     
 
     // Get the values from the form fields
-    let nameValue = inputCompetitionName.value;
-    let dateValue = inputCompetitionDate.value;
-    let startTimeValue = inputCompetitonStartTime.value;
-    let locationNameValue = inputCompetitionLocationName.value;
+    let competitionNameValue = inputCompetitionName.value;
+    let competitionDateValue = inputCompetitionDate.value;
+    let competitionStartTimeValue= inputCompetitonStartTime.value;
+    let competitionLocatioNameValue = inputCompetitionLocationName.value;
     let competitionAddressValue = inputCompetitionAddress.value;
-    let competitionPhone = inputCompetitionPhone.value;
+    let competitionPhoneValue = inputCompetitionPhone.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-      competitionName:nameValue,
-      date:dateValue,
-      startTime:startTimeValue,
-      locationName:locationNameValue,
-      locationAddress:competitionAddressValue,
-      LocationPhone:competitionPhone  
+      competitionName:competitionNameValue,
+      competitionDate:competitionDateValue,
+      competitionStartTime:competitionStartTimeValue,
+      competitionLocatioName:competitionLocatioNameValue,
+      competitionAddress:competitionAddressValue,
+      competitionPhone:competitionPhoneValue 
       
     };
     
@@ -59,8 +59,8 @@ addCompetitionForm.addEventListener("submit", function (e) {
             inputDate.value = '';
             inputCompetitonStartTime.value = '';
             inputCompetitionLocationName.value = '';
-            inputCompetitionLocationAddress.value = '';
-            inputCompetitionLocationPhone.value = '';
+            inputCompetitionAddress.value = '';
+            inputCompetitionPhone.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -69,6 +69,8 @@ addCompetitionForm.addEventListener("submit", function (e) {
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
+    // Reload the page
+    location.reload();
 
 })
 
@@ -86,34 +88,35 @@ addRowToTable = (data) => {
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
+    console.log("newRow" + newRow)
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let competitionNameCell = document.createElement("TD");
-    let dateCell = document.createElement("TD");
-    let startTimeCell = document.createElement("TD");
-    let locationNameCell = document.createElement("TD");
-    let locationAddressCell = document.createElement("TD");
-    let locationPhoneCell = document.createElement("TD");
+    let competitionDateCell = document.createElement("TD");
+    let competitionStartTimeCell = document.createElement("TD");
+    let competitionLocationNameCell = document.createElement("TD");
+    let competitionAddressCell = document.createElement("TD");
+    let competitionPhoneCell = document.createElement("TD");
     
     // Fill the cells with correct data
     idCell.innerText = newRow.competitionID;
     competitionNameCell.innerText = newRow.competitionName;
-    dateCell.innerText = newRow.date;
-    startTimeCell.innerText = newRow.startTime;
-    locationNameCell.innerText = newRow.locationName;
-    locationAddressCell.innerText = newRow.locationAddress;
-    locationPhoneCell.innnerText =newRow.locationPhone;
+    competitionDateCell.innerText = newRow.competitionDate;
+    competitionStartTimeCell.innerText = newRow.competitionStartTime;
+    competitionLocationNameCell.innerText = newRow.locationName;
+    competitionAddressCell.innerText = newRow.competitionAddress;
+    competitionPhoneCell.innnerText =newRow.competitionPhone;
   
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(competitionNameCell);
-    row.appendChild(dateCell);
-    row.appendChild(startTimeCell);
-    row.appendChild(locationNameCell);
-    row.appendChild(locationAddressCell);
-    row.appendChild(locationPhoneCell);
+    row.appendChild(competitionDateCell);
+    row.appendChild(competitionStartTimeCell);
+    row.appendChild(competitionLocationNameCell);
+    row.appendChild(competitionAddressCell);
+    row.appendChild(competitionPhoneCell);
   
     // Add the row to the table
     currentTable.appendChild(row);

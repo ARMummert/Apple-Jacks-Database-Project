@@ -37,11 +37,11 @@ app.get('/competitions', function (req, res){
   let competitions;
   if (req.query.competitionName === undefined)
   {
-    competitions = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name", locationAddress as "Location Address",locationPhone as "Location Phone" FROM Competitions;`;
+    competitions = `SELECT * FROM Competitions;`;
   }
   else 
   {
-    competitions = `SELECT competitionID as "ID", competitionName as "Competition Name", Date, startTime as "Start Time", locationName as "Location Name", locationAddress as "Location Address", locationPhone as "Location Phone" FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
+    competitions = `SELECT * FROM Competitions WHERE competitionName '${req.query.compeitionName}%';`;
   }
 
   db.pool.query(competitions, function(error, rows, fields) {

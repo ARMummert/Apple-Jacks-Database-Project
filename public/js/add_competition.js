@@ -48,13 +48,19 @@ addCompetitionForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            competitionName:nameValue = '';
-            date:dateValue ='';
-            startTime:startTimeValue = '';
-            locationName:locationNameValue ='';
-            locationAddress:competitionAddressValue = '';
-            LocationPhone:competitionPhone = '';
+            //competitionName:nameValue = '';
+            //date:dateValue ='';
+            //startTime:startTimeValue = '';
+            //locationName:locationNameValue ='';
+            //locationAddress:competitionAddressValue = '';
+            //LocationPhone:competitionPhone = '';
             
+            inputCompetitionName.value = '';
+            inputDate.value = '';
+            inputCompetitonStartTime.value = '';
+            inputCompetitionLocationName.value = '';
+            inputCompetitionLocationAddress.value = '';
+            inputCompetitionLocationPhone.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")

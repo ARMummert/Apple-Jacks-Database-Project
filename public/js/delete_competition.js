@@ -1,8 +1,16 @@
+let deleteCompetitionForm = document.getElementById("deleteCompetitionForm")
+
+deleteCompetitionForm.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+})
+let data = {
+    competitionID: inputCompetitionID
+};
 function deleteCompetition(competitionID) {
     // Put our data we want to send in a javascript object
-    let data = {
-        id: competitionID
-    };
+ 
 
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -14,7 +22,7 @@ function deleteCompetition(competitionID) {
         if (xhttp.readyState == 4 && xhttp.status == 204) {
 
             // Add the new data to the table
-            deleteRow(competitionID);
+            deleteRow(inputCompetitionID);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {
@@ -32,7 +40,7 @@ function deleteRow(competitionID){
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == competitionID) {
+       if (table.row[i].getAttribute("data-value") == competitionID) {
             table.deleteRow(i);
             break;
        }

@@ -89,12 +89,35 @@ function updateRow(data, competitionID){
             td1.innerHTML = parasedData[1]
           
              // Get td of competition Name Value
-            let td1 = updateRowIndex.getElementsByTagName("td")[1];
+            let td2 = updateRowIndex.getElementsByTagName("td")[2];
           
             // Reassign competition Name to value we updated to
-            td1.innerHTML = parasedData[1]
+            td2.innerHTML = parasedData[2]
+            
+            // Get td of competition Name Value
+            let td3 = updateRowIndex.getElementsByTagName("td")[3];
+          
+            // Reassign competition Name to value we updated to
+            td3.innerHTML = parasedData[3]
+         
+            // Get td of competition Name Value
+            let td4 = updateRowIndex.getElementsByTagName("td")[4];
+          
+            // Reassign competition Name to value we updated to
+            td4.innerHTML = parasedData[4]
+         
+            // Get td of competition Name Value
+            let td5 = updateRowIndex.getElementsByTagName("td")[5];
+          
+            // Reassign competition Name to value we updated to
+            td5.innerHTML = parasedData[5]
+            // Get td of competition Name Value
+            let td6 = updateRowIndex.getElementsByTagName("td")[6];
+          
+            // Reassign competition Name to value we updated to
+            td6.innerHTML = parasedData[6]
+                  
        }
     }
 } 
-
-
+    

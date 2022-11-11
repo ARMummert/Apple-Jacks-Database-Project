@@ -16,7 +16,6 @@ app.set('view engine', '.hbs');
 
 app.use(express.static(__dirname +'/public'));
 
-
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -183,10 +182,7 @@ app.use(function(err, req, res, next){
 // LISTENER
 
 app.listen(PORT, function () {
-  var hostname = os.hostname();
-  console.log(
-    `Server running on http://${hostname}:${PORT}/. Press Ctrl-C to terminate...`
-  );
+  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

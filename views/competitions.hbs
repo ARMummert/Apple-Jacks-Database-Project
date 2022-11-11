@@ -274,30 +274,24 @@ footer {
 </style>
 
 <body>
+
 <div id="browse">
 
-<form id="add-competition" method = "POST" action = "/add-competition>
+<div>
+<h3>Competitions</h3>
+</div>
 <section class="sectionone">
-    
-    <table class="tableone" border="1" cellpadding="5" >
+    <table id="competitions-table" class="tableone" border="1" cellpadding="5" >
         <thead>
             <tr>
-                <th><button class="btn" value="Add Competition" onClick="addCompetitionForm({{this.id}})">Add Competition</button></th>
-                <th></th>
-                <th>ID</th>
-                <th>Competition Name</th>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>Location Name</th>
-                <th>Location Address</th>
-                <th>Location Phone</th>      
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}    
             </tr>
         </thead>
         <tbody>
             {{#each data}}
                 <tr data-value = {{this.id}}>
-                <td><button class="btn" value="Update Competition" onClick="updateCompetition({{this.id}})">Update Competition</button></td>
-                <td><button class="btn" value= "Delete Competition" onClick="deleteCompetition({{this.id}})">Delete Competition</button></td>
                 <td>{{this.id}}</td>
                 <td>{{this.competitionName}}</td>
                 <td>{{this.date}}</td>
@@ -305,70 +299,71 @@ footer {
                 <td>{{this.locationName}}</td>
                 <td>{{this.locationAddress}}</td>
                 <td>{{this.locationPhone}}</td>
+          </button>
+        </td>
                 </tr>     
             {{/each}}
         </tbody>
     </table>
-    
-</section>    
-</form>
-
+</section>   
 </div>
 
+
 <div id="search" class="sectiontwo">
-            <section >
-            <h3 class="section-header">Search By Competition Name</h3>
-            <form id="search-competitions" method='GET' action='/competitions.html'>
-                <table class="tabletwo">
-                    <tr>
-                        <td><input type="text" name="competition-text-search" required></td>
-                    </tr>
-                </table>
-                <div class="tabletwo">
-                    <input type="submit" value="Search">
-                    <a href='/competitions.html'><input type="button" value="Reset"></a>
-                </div>
-            </form>
-            </section>
-        </div>
+    <section>
+        <h3 for="competitionName" class="section-header">Search By Competition Name</h3>
+        <form id="search_competition" method='GET' action='/competitions'>
+            <table class="tabletwo">
+                <tr>
+                    <td><input type="text" name="competitionName" id="input_competition_name" placeholder="Competition Name..."></td>
+                </tr>
+            </table>
+            <div class="tabletwo">
+                <input type="submit" value="Search">
+                <input type="submit" value="Cancel">
+            </div>
+            
+        </form>
+    </section>
+</div>
         
         <div id="insert" class="sectionthree">
             <section>
                 <h3 class="section-header"> Add Competition </h3>
-                <form method="POST" id="addCompetition">         
+                <form id="add-competition-form" method="POST" action="/public/js/add_competition">         
                 <table class="tablethree">
                     <tr>
-                        <td><label>Name</label></td> 
-                        <td><input type="text" name="input-competition-name" required></td>
-                        <td>*Required</td>
+                        <td><label for="competitionName">Name</label></td> 
+                        <td><input type="text" name="input-competition-name" id="input-competition-name" required  placeholder="Competition Name"></td>
+                       
                     </tr>
                     <tr>
-                        <td><label>Date</label></td> 
-                        <td><input type="text" name="input-competition-date" required></td>
-                        <td>*Required</td>
+                        <td><label for="date">Date</label></td> 
+                        <td><input type="text" name="input-competition-date" id="input-competition-date" required placeholder="Date"></td>
+                        
                     </tr>
                     <tr>
-                        <td><label>Start Time</label></td> 
-                        <td><input type="text" name="input-competition-start-time" required></td>
-                        <td>*Required</td>
+                        <td><label for="startTime">Start Time</label></td> 
+                        <td><input type="text" name="input-competition-start-time" id="input-competition-start-time" required placeholder="Start Time"></td>
+                        
                     </tr>
                     <tr>
-                        <td><label>Location Name </label></td> 
-                        <td><input type="text" name="input-location-name" required></td>
-                        <td>*Required</td>
+                        <td><label for="locationName">Location Name </label></td> 
+                        <td><input type="text" name="input-location-name" id="input-location-name" required placeholder="Location Name"></td>
+                      
                     </tr>
                     <tr>
-                        <td><label>Address </label></td> 
-                        <td><input type="text" name="input-location-name" required></td>
-                        <td>*Required</td>
+                        <td><label for="locationAddress">Address </label></td> 
+                        <td><input type="text" name="input-location-address" id="input-location-address" required placeholder="Location Address"></td>
+                        
                     </tr>
                     <tr>
-                        <td><label>Phone</label></td> 
-                        <td><input type="text" name="input-location-phone"></td>
+                        <td><label for="locationPhone">Phone</label></td> 
+                        <td><input type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="Add"></td>
-                        <td><a href='/competitions.html'><input type="button" value="Cancel"></a></td>
+                        <td><a href='/competitions'><input type="submit" value="Add"></a></td>
+                        <td><a href='/competitions'><input type="submit" value="Cancel"></a></td>
                     </tr>
                 </table>
                 </form>
@@ -378,12 +373,12 @@ footer {
         
         <div id="update" class="sectionfour">
             <section>
-                <form id="updateCompetitions" method="POST">
+                <form id="update-competition-form-ajax" method="POST" action='/public/js/update_competition'>
                 <h3 class="section-header"> Update Competition </h3>
                
                 <table class="tablefour">
                     <tr>
-                        <td><label>Select Competition:</label></td>
+                        <td><label for="input=competition-name">Select Competition to Update:</label></td>
                         <td><select id="update-competition" onChange="formFill()" required>
                                 <option value="competition">Select a Competition</option>
                                 <option value="1">Kelly Kadet Baton Extravaganza</option>
@@ -394,31 +389,31 @@ footer {
                     </tr>
                     <tr>
                         <td><label>Name:</label></td>
-                        <td><input type="text" name="update-competition-name"></td>     
+                        <td><input type="text" name="update-competition-name" placeholder="Competition Name"></td>     
                     </tr>
                     <tr>
                         <td><label>Date: </label></td>
-                        <td><input type="text" name="update-date"></td>
+                        <td><input type="text" name="update-date" placeholder="Date"></td>
                     </tr>
                     <tr>
                         <td><label>Start Time: </label></td>
-                        <td><input type="text" name="update-start-time"></td>
+                        <td><input type="text" name="update-start-time" placeholder="Start Time"></td>
                     </tr>
                     <tr>
                         <td><label>Location Name: </label></td>
-                        <td><input type="text" name="update-location-name"></td>
+                        <td><input type="text" name="update-location-name" placeholder="Location Name"></td>
                     </tr>
                     <tr>
                         <td><label>Address:</label></td>
-                        <td><input type="text" name="update-location-address"></td>
+                        <td><input type="text" name="update-location-address" placeholder="Address"></td>
                     </tr>
                     <tr>
                         <td><label>Phone: </label></td>
-                        <td><input type="text" name="update-location-phone"></td>
+                        <td><input type="text" name="update-location-phone" placeholder="Phone"></td>
                     </tr>
                     <tr>
                         <td><input class='btn' type="submit" value="Update Competition"></td>
-                        <td><a href='/competitions.html'><input type="button" value="Cancel"></a></td>
+                        <td><a href='/competitions'><input type="submit" value="Cancel"></a></td>
                     </tr>
                 </table>
             </form>
@@ -427,9 +422,9 @@ footer {
             <div id="delete">
                 <section class="sectionfive">
                     <h3 class="section-header">Delete Competition</h3>
-                <form method="POST" id="deleteCompetition">
+                <form id="delete-competition-ajax" method="POST" action='/public/js/delete_competition'>
                     <table class="tablefive">
-                        <tr><td><select id="deletecompetitionID" onChange="formFill()" required>
+                        <tr><td><select id="delete-competition" onChange="formFill()" required>
                             <option value="competition">Select a Competition</option>
                             <option value="1">Kelly Kadet Baton Extravaganza</option>
                             <option value="2">Oregon State Baton Championships</option>
@@ -440,21 +435,21 @@ footer {
                         </tr>
                         <tr>
                             <td><input type="submit" value="Delete">
-                            <a href='/competitions.html'><input type="button" value="Cancel"></a></td>
+                            <a href='/competitions'><input type="submit" value="Cancel"></a></td>
                         </tr>
                     </table>
                     
                 </form> 
-            </section>
+            
               </div>
         </div>
     </body>
-    
-    <script language="JavaScript">
-        function newCompetition() { showform('insert'); }
-        function updateCompetition() { showform('update'); }
-        function deleteCompetition() { showform ('delete'); }
-        function browseCompetitions() { showform ('browse'); }
-        function showAll() { showform ('all'); }
-    </script>
+    <script src="./js/delete_competition.js"></script>
+    <script src="./js/update_competition.js"></script>
+    <script src="./js/add_competition.js"></script>
+    <script>
+        function formFill(data) {
+            var id = data.value;
+            update-competition(id)
+        };
     </html>

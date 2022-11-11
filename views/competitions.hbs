@@ -291,8 +291,7 @@ footer {
         </thead>
         <tbody>
             {{#each data}}
-                <tr data-value = {{this.id}}>
-                <td>{{this.id}}</td>
+                <td>{{this.competitionID}}</td>
                 <td>{{this.competitionName}}</td>
                 <td>{{this.date}}</td>
                 <td>{{this.startTime}}</td>
@@ -330,10 +329,10 @@ footer {
         <div id="insert" class="sectionthree">
             <section>
                 <h3 class="section-header"> Add Competition </h3>
-                <form id="add-competition-form" method="POST" action="/public/js/add_competition">         
+                <form id="add-competition-form" method="POST">         
                 <table class="tablethree">
                     <tr>
-                        <td><label for="competitionName">Name</label></td> 
+                        <td><label for="input-competition-name">Name</label></td> 
                         <td><input type="text" name="input-competition-name" id="input-competition-name" required  placeholder="Competition Name"></td>
                        
                     </tr>
@@ -362,8 +361,8 @@ footer {
                         <td><input type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
                     </tr>
                     <tr>
-                        <td><a href='/competitions'><input type="submit" value="Add"></a></td>
-                        <td><a href='/competitions'><input type="submit" value="Cancel"></a></td>
+                        <td><input type="submit" value="Add"></a></td>
+                        <td><input type="submit" value="Cancel"></a></td>
                     </tr>
                 </table>
                 </form>
@@ -373,7 +372,7 @@ footer {
         
         <div id="update" class="sectionfour">
             <section>
-                <form id="update-competition-form-ajax" method="POST" action='/public/js/update_competition'>
+                <form id="update-competition-form-ajax" method="POST">
                 <h3 class="section-header"> Update Competition </h3>
                
                 <table class="tablefour">
@@ -422,7 +421,7 @@ footer {
             <div id="delete">
                 <section class="sectionfive">
                     <h3 class="section-header">Delete Competition</h3>
-                <form id="delete-competition-ajax" method="POST" action='/public/js/delete_competition'>
+                <form id="delete-competition-ajax" method="POST">
                     <table class="tablefive">
                         <tr><td><select id="delete-competition" onChange="formFill()" required>
                             <option value="competition">Select a Competition</option>

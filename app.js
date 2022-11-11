@@ -13,8 +13,8 @@ var exphbs = require('express-handlebars');
 //Sets handlebars configurations
 app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs'); 
-   
-app.use(express.static('public'));
+
+app.use(express.static('/public'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -57,12 +57,15 @@ app.post('/add-competition-form', function(req, res) {
   // Create Competitions Query
   query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
   VALUES (
-    '${data.compeitionName}', 
-    '${data.date}',
-    '${data.startTime}',
-    '${data.locationName}',
-    '${data.locationAddress}',
-    '${data.locationPhone}')`;
+    '${data['input-competition-name']}',
+    '${data['input-date']}',
+    '${data['input-start-time']}',
+    '${data['input-location-name']}',
+    '${data['input-location-address']}',
+    '${data['input-location-phone']}',
+    )`;
+  
+    
   db.pool.query(query1, function(error, rows, fields) {
     if (error) {
       console.log(error)

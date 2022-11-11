@@ -92,7 +92,7 @@ addRowToTable = (data) => {
     let locationPhoneCell = document.createElement("TD");
     
     // Fill the cells with correct data
-    idCell.innerText = newRow.competitionId;
+    idCell.innerText = newRow.competitionID;
     competitionNameCell.innerText = newRow.competitionName;
     dateCell.innerText = newRow.date;
     startTimeCell.innerText = newRow.startTime;

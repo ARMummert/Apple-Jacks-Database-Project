@@ -297,7 +297,8 @@ footer {
                 <td>{{this.locationName}}</td>
                 <td>{{this.locationAddress}}</td>
                 <td>{{this.locationPhone}}</td>
-                <td><button onclick="deleteCompetition(`{{this.competitionID}} {{this.competitionName}} {{this.date}} {{this.startTime}} {{this.locationName}} {{this.locationAddress}} {{this.locationPhone}}`)">Delete</button></td>
+                <td><input class="deleteButton" type="submit" id="deleteCompetition" value="Delete"/>
+                        
             </tr>   
             {{/each}}
         </tbody>
@@ -423,7 +424,7 @@ footer {
                 <form id="deleteCompetitionForm" method="DELETE">
                     <table class="tablefive">
                     <tr>
-                        <td><select name="input-competition-name" id="input-competition-name">
+                        <td><select>
                                 <option value="">Select a Competition</option>
                                 {{#each data}}
                                 <option value="{{this.competitionID}}">{{this.competitionName}}</option>
@@ -434,7 +435,12 @@ footer {
                         <td>Are you sure you want to delete this competition?</td>       
                         </tr>
                         <tr>
-                            <td><button onclick="deleteCompetition({competitionID})">Delete</button>
+                            <td><input
+                            class="deleteButton"
+                            type="submit"
+                            id="deleteCompetition"
+                            value="Delete Competition"
+                        />
                             <a href='/competitions'><input type="reset" value="Cancel"></a></td>
                     </tr>
                     </table>
@@ -443,9 +449,9 @@ footer {
             
               </div>
         </div>
-    <script src="./js/delete_competition.js"></script>
-    <script src="./js/update_competition.js"></script>
-    <script src="./js/add_competition.js"></script>
+    <script src="/js/delete_competition.js"></script>
+    <script src="/js/update_competition.js"></script>
+    <script src="/js/add_competition.js"></script>
     </body>
     
 

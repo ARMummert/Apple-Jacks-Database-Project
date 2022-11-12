@@ -44,24 +44,24 @@ app.get('/competitions', function (req, res){
 
   db.pool.query(query1, function(error, rows, fields) {
   
-    return res.render('competitions', {data: rows});
+    res.render('competitions', {data: rows});
   });
 });
 
 // Create Competitions
-app.post('/add-competition-form', function(req, res) {
+app.post('/add-competition-ajax', function(req, res) {
   let data = req.body;
   
   // Create Competitions Query
  
   query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
   VALUES (
-      '${data['input-competition-name']}',
+      '${data['input-competitionName']}',
       '${data['input-date']}',
-      '${data['input-start-time']}',
-      '${data['input-location-name']}',
-      '${data['input-location-address']}',
-      '${data['input-location-phone']}')`;
+      '${data['input-startTime']}',
+      '${data['input-locationName']}',
+      '${data['input-address']}',
+      '${data['input-phone']}')`;
   
     
   db.pool.query(query1, function(error, rows, fields) {
@@ -91,7 +91,7 @@ app.post('/add-competition-form', function(req, res) {
     });
   });
 // Update Competition
-app.put('/update-competition-form', function(req, res, next) {
+app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let selectCompetition = 'SELECT competitionID,CompetitionName,date,startTime,locationName,locationAddress,locationPhone FROM Competitions WHERE competitionID = ?';
@@ -121,7 +121,7 @@ app.put('/update-competition-form', function(req, res, next) {
   );
 });
 // Delete Competition
-app.delete('/delete-competition-ajax', function(req, res, next) {
+app.delete('delete-competition-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let deleteCompetition = 'DELETE FROM Competitions WHERE competitionID = ?';

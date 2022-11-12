@@ -20,7 +20,7 @@ function deleteCompetition(competitionID) {
         if (xhttp.readyState == 4 && xhttp.status == 204) {
 
             // Add the new data to the table
-            deleteRow(competitionID);
+            deleteRow(data);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {

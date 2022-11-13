@@ -17,16 +17,45 @@ app.set('view engine', '.hbs');
 
 app.use(express.static(__dirname + '/public'));
 
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 
-// Routes - Homepage
+// Routes
 
 app.get('/', function(req, res)
   {
     res.render('index');                  
   });   
+
+  app.get('/events', function(req, res){
+    res.render('events')
+  });
+  
+  app.get('/athletes', function(req, res){
+    res.render('athletes')
+  });
+  
+  app.get('/athletes-events', function(req, res){
+    res.render('athletes-events')
+  });
+  
+  app.get('/divisions', function(req, res){
+    res.render('divisions')
+  });
+  
+  app.get('/event-levels', function(req, res){
+    res.render('event-levels')
+  });
+  
+  app.get('teams', function(req, res){
+    res.render('teams')
+  });
+  
+  app.get('/project-development', function(req, res){
+    res.render('project-development')
+  });
 
 // Competitions
 
@@ -43,8 +72,8 @@ app.get('/competitions', function (req, res){
   }
 
   db.pool.query(query1, function(error, rows, fields) {
-  
-    res.render('competitions', {data: rows});
+    let competitionName = rows;
+    res.render('competitions', {data: competitionName});
   });
 });
 
@@ -56,12 +85,12 @@ app.post('/add-competition-ajax', function(req, res) {
  
   query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
   VALUES (
-      '${data['input-competitionName']}',
-      '${data['input-date']}',
-      '${data['input-startTime']}',
-      '${data['input-locationName']}',
-      '${data['input-address']}',
-      '${data['input-phone']}')`;
+      '${data.competitionName}',
+      '${data.date}',
+      '${data.startTime}',
+      '${data.locationName}',
+      '${data.locationAddress}',
+      '${data.locationPhone}')`;
   
     
   db.pool.query(query1, function(error, rows, fields) {
@@ -72,7 +101,7 @@ app.post('/add-competition-ajax', function(req, res) {
     else
         {
             // If there was no error, perform a SELECT all from Competitions
-            query2 = `SELECT competitionID as "ID", competitionName as "Competition Name", date, startTime as "Start Time", locationName as "Location Name",locationAddress as "Location Address",locationPhone as "Location Phone" FROM Competitions`;
+            query2 = `SELECT Competitions.competitionID, Competitions.competitionName, Competitions.date, Competitions.startTime, Competitions.locationName, Competitions.locationAddress, Competitions.locationPhone FROM Competitions ORDER BY Competitions.competitionID ASC;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -84,7 +113,7 @@ app.post('/add-competition-ajax', function(req, res) {
                 // If all went well, send the results of the query back.
                 else
                 {
-                    res.redirect('/competitions');
+                    res.send(rows);
                 }
             });       
         }
@@ -95,19 +124,24 @@ app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let selectCompetition = 'SELECT competitionID,CompetitionName,date,startTime,locationName,locationAddress,locationPhone FROM Competitions WHERE competitionID = ?';
-  let updateCompetition = 'UPDATE Competitions SET CompetitionName = ?, data = ?, startTime = ?, locationName = ?, locationAddress = ?, locationPhone = ? WHERE competitionID = ?';
+  let updateCompetition = `UPDATE Competitions SET competitionName = '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
+  let competitionName = data.competitionNameValue;
+  let date = data.dateValue;
+  let startTime = data.startTimeValue;
+  let locationName = data.locationNameValue;
+  let locationAddress = data.locationAddressValue;
+  let locationPhone = data.locationPhoneValue;
 
   db.pool.query(
     updateCompetition,
     [
-      data['competitionName'],
-      data['date'],
-      data['startTime'],
-      data['locationName'],
-      data['locationAddress'],
-      data['locationPhone'],
       competitionID,
-
+      competitionName,
+      date,
+      startTime,
+      locationName,
+      locationAddress,
+      locationPhone
     ],
     function (error, rows, fields) {
       if (error) {
@@ -136,33 +170,7 @@ app.delete('delete-competition-ajax', function(req, res, next) {
     }
   });
 });
-app.get('/events', function(req, res){
-  res.render('events')
-});
 
-app.get('/athletes', function(req, res){
-  res.render('athletes')
-});
-
-app.get('/athletes-events', function(req, res){
-  res.render('athletes-events')
-});
-
-app.get('/divisions', function(req, res){
-  res.render('divisions')
-});
-
-app.get('/event-levels', function(req, res){
-  res.render('event-levels')
-});
-
-app.get('teams', function(req, res){
-  res.render('teams')
-});
-
-app.get('/project-development', function(req, res){
-  res.render('project-development')
-});
 
 // LISTENER
 

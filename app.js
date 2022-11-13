@@ -64,18 +64,20 @@ app.get('/competitions', function (req, res){
   let query1;
   if (req.query.competitionName === undefined)
   {
-    query1 = "SELECT * FROM Competitions;";
+    query1 = `SELECT Competitions.competitionID, Competitions.competitionName, Competitions.date, Competitions.startTime, Competitions.locationName, Competitions.locationAddress, Competitions.locationPhone FROM Competitions ORDER BY Competitions.competitionID ASC;`;
   }
   else 
   {
-    query1 = `SELECT * FROM Competitons WHERE competitionName LIKE "${req.query.competitionName}%"`;
+    query2 = `SELECT * FROM Competitons`;
   }
 
   db.pool.query(query1, function(error, rows, fields) {
-    let competitionName = rows;
-    return res.render('competitions', {data: competitionName});
-    
-  });
+      let competitionData = rows;
+      db.pool.query(query2, (error, rows, fields) => {
+        let competitions = rows;
+        return res.render('competitions', {data: competitionData, competitions: competitions});
+    })
+})
 });
 
 // Create Competitions
@@ -116,15 +118,14 @@ app.post('/add-competition-ajax', function(req, res) {
                 {
                     res.send(rows);
                 }
-            });       
+            })       
         }
-    });
+    })
   });
 // Update Competition
 app.put('/put-competitions-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
-  let updateCompetition = `UPDATE Competitions SET competitionName = '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
   let competitionName = data.competitionNameValue;
   let date = data.dateValue;
   let startTime = data.startTimeValue;
@@ -132,30 +133,41 @@ app.put('/put-competitions-ajax', function(req, res, next) {
   let locationAddress = data.locationAddressValue;
   let locationPhone = data.locationPhoneValue;
 
-  db.pool.query(
-    updateCompetition,
-    [
-      competitionID,
-      competitionName,
-      date,
-      startTime,
-      locationName,
-      locationAddress,
-      locationPhone
-    ],
+  let updateCompetition = `UPDATE Competitions SET competitionName = '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
+  let selectCompetition = `SELCT * FROM Competitons WHERE competitionID = ?`
+    db.pool.query(
+      updateCompetition,
+      [
+        competitionID,
+        competitionName,
+        date,
+        startTime,
+        locationName,
+        locationAddress,
+        locationPhone
+      ],
     function (error, rows, fields) {
       if (error) {
         console.log(error);
         res.sendStatus(400);
       }
       else {
-        res.send(rows);
-      }
+      db.pool.query(selectCompetition, [competitionID], function(error, rows, fields){
+        if (error) {
+          console.log(error)
+          res.sendStatus(400);
+        }
+        else {
+          res.send(rows);
+        }
+      })
+      
     }
-  );
+  })
 });
+
 // Delete Competition
-app.delete('delete-competition-ajax', function(req, res, next) {
+app.delete('/delete-competition-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let deleteCompetition = 'DELETE FROM Competitions WHERE competitionID = ?';

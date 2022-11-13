@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.get('/', function(req, res)
   {
-    res.render('index');                  
+    return res.render('index');                  
   });   
 
   app.get('/events', function(req, res){

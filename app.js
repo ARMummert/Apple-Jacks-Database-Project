@@ -120,7 +120,7 @@ app.post('/add-competition-ajax', function(req, res) {
     });
   });
 // Update Competition
-app.put('/put-competition-ajax', function(req, res, next) {
+app.put('/put-competitions-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let selectCompetition = 'SELECT competitionID,CompetitionName,date,startTime,locationName,locationAddress,locationPhone FROM Competitions WHERE competitionID = ?';

@@ -73,7 +73,8 @@ app.get('/competitions', function (req, res){
 
   db.pool.query(query1, function(error, rows, fields) {
     let competitionName = rows;
-    res.render('competitions', {data: competitionName});
+    return res.render('competitions', {data: competitionName});
+    
   });
 });
 
@@ -123,7 +124,6 @@ app.post('/add-competition-ajax', function(req, res) {
 app.put('/put-competitions-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
-  let selectCompetition = 'SELECT competitionID,CompetitionName,date,startTime,locationName,locationAddress,locationPhone FROM Competitions WHERE competitionID = ?';
   let updateCompetition = `UPDATE Competitions SET competitionName = '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
   let competitionName = data.competitionNameValue;
   let date = data.dateValue;

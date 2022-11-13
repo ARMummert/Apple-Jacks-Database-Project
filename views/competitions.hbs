@@ -1,22 +1,5 @@
 <!-- competitions.hbs -->
 
-
-
-<head>
-    <html lang="en">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet">    
-    <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" type= 'text/css' href='./css/style.css'>
-    <title>
-       Baton Twirling Competition Entry Form
-    </title>
-</head>
-
 <style>
 body{
         
@@ -303,7 +286,7 @@ footer {
                 <td>{{this.locationName}}</td>
                 <td>{{this.locationAddress}}</td>
                 <td>{{this.locationPhone}}</td>
-                <td><input class="delete-competition-ajax" type="submit" id="delte-competiion-ajax" value="Delete"/>
+                <td><button onClick="deleteCompetition({{this.competitionID}})"/>Delete</button>
                         
             </tr>   
             {{/each}}
@@ -381,7 +364,7 @@ footer {
                 <table class="tablefour">
                     <tr>
                         <td><label for="select-competition id="select-competition">Select Competition to Update:</label></td>
-                        <td><select name="input-competition-name" id="input-competition-name">
+                        <td><select name="select-competition" id="select-competition">
                             <option value="">Select a Competition</option>
                             {{#each data}}
                             <option value="{{this.competitionID}}">{{this.competitionName}}</option>
@@ -439,9 +422,9 @@ footer {
                     </tr>
                     <tr>
                         <td><input
-                            class="delete-competition-ajax"
+                            class="deleteCompetition"
                             type="submit"
-                            id="delete-competition-ajax"
+                            id="deleteCompetition"
                             value="Delete Competition"
                         />
                     <input type="reset" value="Cancel"></a></td>
@@ -452,9 +435,9 @@ footer {
 
 </body>
 
+
 <script src="./js/delete_competition.js"></script>
 <script src="./js/update_competition.js"></script>
 <script src="./js/add_competition.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </html>

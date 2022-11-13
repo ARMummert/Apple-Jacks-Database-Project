@@ -284,9 +284,13 @@ footer {
     <table id="competitions-table" class="tableone" border="1" cellpadding="5" >
         <thead>
             <tr>
-                {{#each data.[0]}}
-                <th>{{@key}}</th>
-                {{/each}}    
+                <th>ID</th>
+                <th>Competition Name</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>Location Name</th>
+                <th>Location Address</th>
+                <th>Location Phone </th>  
             </tr>
         </thead>
         <tbody>
@@ -330,7 +334,7 @@ footer {
 <div id="insert" class="sectionthree">
     <section>
         <h3 class="section-header"> Add Competition </h3>
-        <form id="add-competition-form" method="POST">         
+        <form id="put-competitions-ajax" method="POST">         
             <table class="tablethree">
                 
                 <tr>
@@ -420,7 +424,7 @@ footer {
 <div id="delete">
     <section class="sectionfive">
         <h3 class="section-header">Delete Competition</h3>
-            <form id="deleteCompetitionForm" method="DELETE">
+            <form id="delete-competition-ajax" method="DELETE">
                 <table class="tablefive">
                     <tr>
                         <td><select>
@@ -435,9 +439,9 @@ footer {
                     </tr>
                     <tr>
                         <td><input
-                            class="deleteButton"
+                            class="delete-competition-ajax"
                             type="submit"
-                            id="deleteCompetition"
+                            id="delete-competition-ajax"
                             value="Delete Competition"
                         />
                     <input type="reset" value="Cancel"></a></td>

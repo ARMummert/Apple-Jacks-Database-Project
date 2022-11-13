@@ -44,7 +44,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
       locationAddress:competitionAddressValue,
       LocationPhone:competitionPhoneValue
     };
-    
+    update-compeittionName
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-competitions-ajax", true);

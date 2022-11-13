@@ -24,6 +24,9 @@ addCompetitionForm.addEventListener("submit", function (e) {
     let locationAddressValue = inputlocationAddress.value;
     let locationPhoneValue = inputlocationPhone.value;
 
+    if (competitionNameValue, dateValue, startTimeValue, locationNameValue, locationAddressValue, locationPhoneValue === '') {
+        return;
+    }
     // Put our data we want to send in a javascript object
     let data = {
       competitionName:competitionNameValue,
@@ -37,7 +40,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", 'add-competition-ajax', true);
+    xhttp.open("POST", 'add-competition-form', true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -46,21 +49,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             addRowToTable(xhttp.response);
-
-            // Clear the input fields for another transaction
-            //competitionName:nameValue = '';
-            //date:dateValue ='';
-            //startTime:startTimeValue = '';
-            //locationName:locationNameValue ='';
-            //locationAddress:competitionAddressValue = '';
-            //LocationPhone:competitionPhone = '';
-            
-            inputCompetitionName.value = '';
-            inputDate.value = '';
-            inputstartTime.value = '';
-            inputlocationName.value = '';
-            inputlocationAddress.value = '';
-            inputlocationPhone.value = '';
+            addCompetitonForm.reset();
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -70,7 +59,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
     // Reload the page
-    location.reload();
+    addCompetitionForm.reset();
 
 })
 
@@ -117,6 +106,8 @@ addRowToTable = (data) => {
     row.appendChild(locationNameCell);
     row.appendChild(locationAddressCell);
     row.appendChild(locationPhoneCell);
+
+    row.setAttribute('data value', newRow.competitionID)
   
     // Add the row to the table
     currentTable.appendChild(row);

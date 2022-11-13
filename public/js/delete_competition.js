@@ -12,7 +12,7 @@ function deleteCompetition(competitionID) {
         id: competitionID
     };
     var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/delete-competition-ajax", true);
+    xhttp.open("DELETE", "delete-competition-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve

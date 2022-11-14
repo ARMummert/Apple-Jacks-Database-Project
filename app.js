@@ -3,10 +3,12 @@
 
 var express = require('express');   
 var app     = express();    
-PORT = 4448;
+PORT = 4024;
 
 // Database
 var db = require('./database/db-connector')
+
+
 
 // Express Handlebars
 const { engine } = require('express-handlebars');
@@ -28,7 +30,10 @@ app.get('/', function(req, res)
   {
     return res.render('index');                  
   });   
-
+app.get('/competitions', function(req, res)
+{
+  return res.render('competitions')
+});
   app.get('/events', function(req, res){
     res.render('events')
   });
@@ -49,7 +54,7 @@ app.get('/', function(req, res)
     res.render('event-levels')
   });
   
-  app.get('teams', function(req, res){
+  app.get('/teams', function(req, res){
     res.render('teams')
   });
   
@@ -64,11 +69,11 @@ app.get('/competitions', function (req, res){
   let query1;
   if (req.query.competitionName === undefined)
   {
-    query1 = `SELECT Competitions.competitionID, Competitions.competitionName, Competitions.date, Competitions.startTime, Competitions.locationName, Competitions.locationAddress, Competitions.locationPhone FROM Competitions ORDER BY Competitions.competitionID ASC;`;
+    query1 = "SELECT * FROM Competitions;";
   }
   else 
   {
-    query2 = `SELECT * FROM Competitons`;
+    query2 = `SELECT * FROM Competitons WHERE competitionID LIKE "${req.query.competitionID}%"`;
   }
 
   db.pool.query(query1, function(error, rows, fields) {
@@ -187,8 +192,6 @@ app.delete('/delete-competition-ajax', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
-
-
 

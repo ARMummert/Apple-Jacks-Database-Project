@@ -30,60 +30,18 @@ app.get('/', function(req, res)
   {
     return res.render('index');                  
   });   
-app.get('/competitions', function(req, res)
-{
-  return res.render('competitions')
-});
-  app.get('/events', function(req, res){
-    res.render('events')
-  });
-  
-  app.get('/athletes', function(req, res){
-    res.render('athletes')
-  });
-  
-  app.get('/athletes-events', function(req, res){
-    res.render('athletes-events')
-  });
-  
-  app.get('/divisions', function(req, res){
-    res.render('divisions')
-  });
-  
-  app.get('/event-levels', function(req, res){
-    res.render('event-levels')
-  });
-  
-  app.get('/teams', function(req, res){
-    res.render('teams')
-  });
-  
-  app.get('/project-development', function(req, res){
-    res.render('project-development')
-  });
 
 // Competitions
 
-app.get('/competitions', function (req, res){
-  //Search
-  let query1;
-  if (req.query.competitionName === undefined)
+app.get('/competitions', function (req, res)
   {
-    query1 = "SELECT * FROM Competitions;";
-  }
-  else 
-  {
-    query2 = `SELECT * FROM Competitons WHERE competitionID LIKE "${req.query.competitionID}%"`;
-  }
-
-  db.pool.query(query1, function(error, rows, fields) {
+    let query1 = `SELECT competitionID, competitionName, date, startTime, locationName, locationAddress, locationPhone FROM Competitions ORDER BY Competitions.competitionID DSC;`;
+  
+    db.pool.query(query1, function(error, rows, fields) {
       let competitionData = rows;
-      db.pool.query(query2, (error, rows, fields) => {
-        let competitions = rows;
-        return res.render('competitions', {data: competitionData, competitions: competitions});
-    })
-})
-});
+    res.render('competitions', {data: competitionData});
+  })
+  });
 
 // Create Competitions
 app.post('/add-competition-ajax', function(req, res) {
@@ -122,13 +80,14 @@ app.post('/add-competition-ajax', function(req, res) {
                 else
                 {
                     res.send(rows);
+                    res.redirect('/competitions');
                 }
             })       
         }
     })
   });
 // Update Competition
-app.put('/put-competitions-ajax', function(req, res, next) {
+app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let competitionName = data.competitionNameValue;

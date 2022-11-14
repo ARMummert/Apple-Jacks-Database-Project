@@ -278,7 +278,7 @@ footer {
 <h3 class=padtop >Competitions</h3>
 
 <section class="sectionone">
-    <table id="competitions-table" class="tableone" border="1" cellpadding="5" >
+    <table id="copetitions-table" class="tableone" border="1" cellpadding="5" >
         <thead>
               <tr>
                 {{#each data.[0]}}
@@ -418,10 +418,10 @@ footer {
             <form id="delete-competition-ajax" method="DELETE">
                 <table class="tablefive">
                     <tr>
-                        <td><select>
+                        <td><select name="select-competition">
                             <option value="">Select a Competition</option>
                             {{#each data}}
-                            <option value="{{this.competitionID}}">{{this.competitionName}}</option>
+                            <option value="{{this.competitionID}}">{{this.competitionID}} - {{this.competitionName}}</option>
                             {{/each}}
                         </select></td>
                     </tr>

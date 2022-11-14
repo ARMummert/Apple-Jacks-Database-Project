@@ -8,12 +8,12 @@ addCompetitionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputcompetitionName = document.getElementById("inputcompetitionName");
-    let inputdate = document.getElementById("inputDate");
-    let inputstartTime = document.getElementById("inputstartTime");
-    let inputlocationName = document.getElementById("inputLocationName");
-    let inputlocationAddress = document.getElementById("inputLocationAddress");
-    let inputlocationPhone = document.getlElementbyID("inputLocationPhone");
+    let inputcompetitionName = document.getElementById("input-competition-name");
+    let inputdate = document.getElementById("input-date");
+    let inputstartTime = document.getElementById("input-start-time");
+    let inputlocationName = document.getElementById("input-location-name");
+    let inputlocationAddress = document.getElementById("input-location-address");
+    let inputlocationPhone = document.getlElementbyID("input-location-phone");
     
 
     // Get the values from the form fields
@@ -40,7 +40,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", 'add-competition-form', true);
+    xhttp.open("POST", 'add-competition-ajax', true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve

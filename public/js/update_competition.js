@@ -7,28 +7,28 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputCompetitionID = document.getElementbyId("mySelect");
-    let inputCompetitionName = document.getElementById("update-competition-name");
-    let inputCompetitionDate = document.getElementById("input-competition-date");
-    let inputCompetitonStartTime = document.getElementById("input-competition-start-time");
-    let inputCompetitionLocationName = document.getElementById("input-competition-location-name");
-    let inputCompetitionAddress = document.getElementById("input-competition-location-address");
-    let inputCompetitionPhone = document.getlElementbyID("input-competition-phone");
+    let inputcompetitionID = document.getElementbyId("mySelect");
+    let inputcompetitionName = document.getElementById("update-competition-name");
+    let inputdate = document.getElementById("update-date");
+    let inputstartTime = document.getElementById("update-start-time");
+    let inputlocationName = document.getElementById("update-location-name");
+    let inputlocationAddress = document.getElementById("update-location-address");
+    let inputlocationPhone = document.getlElementbyID("update-competition-phone");
     
 
     // Get the values from the form fields
-    let competitionIDValue =  inputCompetitionID.value
-    let nameValue = inputCompetitionName.value;
-    let dateValue = inputCompetitionDate.value;
-    let startTimeValue = inputCompetitonStartTime.value;
-    let locationNameValue = inputCompetitionLocationName.value;
-    let competitionAddressValue = inputCompetitionAddress.value;
-    let competitionPhoneValue = inputCompetitionPhone.value;
+    let competitionIDValue =  inputcompetitionID.value
+    let competitionNameValue = inputcompetitionName.value;
+    let dateValue = inputdate.value;
+    let startTimeValue = inputstartTime.value;
+    let locationNameValue = inputlocationName.value;
+    let locationAddressValue = inputlocationAddress.value;
+    let locationPhoneValue = inputlocationPhone.value;
     
     // currently the database table for competitions does not allow  updating some values to NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(nameValue) || isNan(locationNameValue) || isNan(competitionAddressValue)) 
+    if (isNaN(competitionNameValue) || isNan(locationNameValue) || isNan(locationAddressValue)) 
     {
         return;
     }
@@ -37,17 +37,17 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
       competitionID:competitionIDValue,
-      competitionName:nameValue,
+      competitionName:competitionNameValue,
       date:dateValue,
       startTime:startTimeValue,
       locationName:locationNameValue,
-      locationAddress:competitionAddressValue,
-      LocationPhone:competitionPhoneValue
+      locationAddress:locationAddressValue,
+      LocationPhone:locationPhoneValue
     };
-    update-compeittionName
+    
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", "/put-competitions-ajax", true);
+    xhttp.open("PUT", "/put-competition-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -72,7 +72,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
 function updateRow(data, competitionID){
     let parsedData = JSON.parse(data);
     
-    let table = document.getElementById("competitions-table");
+    let table = document.getElementById('competitions-table');
 
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows

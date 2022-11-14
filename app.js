@@ -3,7 +3,9 @@
 
 var express = require('express');   
 var app     = express();    
-PORT = 4024;
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+PORT = 6484;
 
 // Database
 var db = require('./database/db-connector')
@@ -20,8 +22,7 @@ app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'));
 
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+
 
 
 // Routes
@@ -31,16 +32,18 @@ app.get('/', function(req, res)
     return res.render('index');                  
   });   
 
+
+
 // Competitions
 
 app.get('/competitions', function (req, res)
   {
-    let query1 = `SELECT competitionID, competitionName, date, startTime, locationName, locationAddress, locationPhone FROM Competitions ORDER BY Competitions.competitionID DSC;`;
+    let query1 = "SELECT * FROM Competitions;";
   
-    db.pool.query(query1, function(error, rows, fields) {
-      let competitionData = rows;
-    res.render('competitions', {data: competitionData});
-  })
+        db.pool.query(query1, function(error, rows, fields) {
+        let competitionData = rows;
+        return res.render('competitions', {data: competitionData});
+    })
   });
 
 // Create Competitions
@@ -98,7 +101,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
   let locationPhone = data.locationPhoneValue;
 
   let updateCompetition = `UPDATE Competitions SET competitionName = '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
-  let selectCompetition = `SELCT * FROM Competitons WHERE competitionID = ?`
+  let selectCompetition = `SELECT * FROM Competitons WHERE competitionID = ?`
     db.pool.query(
       updateCompetition,
       [
@@ -134,15 +137,16 @@ app.put('/put-competition-ajax', function(req, res, next) {
 app.delete('/delete-competition-ajax', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
-  let deleteCompetition = 'DELETE FROM Competitions WHERE competitionID = ?';
+  let deleteCompetitions = 'DELETE FROM Competitions WHERE competitionID = ?';
 
-  db.pool.query(deleteCompetition, [competitionID], function(error, rows, fields) {
+  db.pool.query(deleteCompetitions, [competitionID], function(error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
     }
     else {
       res.sendStatus(204);
+      
     }
   });
 });

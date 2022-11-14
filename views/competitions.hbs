@@ -1,5 +1,8 @@
 <!-- competitions.hbs -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+
 <head>
     <html lang="en">
     <meta charset="utf-8">
@@ -9,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet">    
     <link href="https://fonts.googleapis.com/css?family=Cormorant+SC&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href='./css/style.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+
     <title>
        Baton Twirling Competition Entry Form
     </title>
@@ -272,13 +276,17 @@ footer {
 </style>
 <body>
 
-<div id="browse">
+
 
 
 <h3 class=padtop >Competitions</h3>
 
 <section class="sectionone">
+{{! Create a table }}
+
     <table id="copetitions-table" class="tableone" border="1" cellpadding="5" >
+        {{! Header section }}
+
         <thead>
               <tr>
                 {{#each data.[0]}}
@@ -286,6 +294,7 @@ footer {
                 {{/each}}    
             </tr>
         </thead>
+        {{! Body section }}
         <tbody>
             {{#each data}}
             <tr data-value={{this.competitionID}}>
@@ -303,14 +312,14 @@ footer {
         </tbody>
     </table>
 </section>   
-</div>
-<div id="search" class="sectiontwo">
-    <section>
+
+
+    <section class="sectiontwo">
         <h3 class="section-header">Search By Competition Name</h3>
-        <form id="add-competition-form" method='GET'>
+        <form id="search-competition-name" method='GET'>
             <table class="tabletwo">
                 <tr>
-                    <td><input type="text" name="inputCompetitionName" id="inputCompetitionName" placeholder="Competition Name..."></td>
+                    <td><input type="text" name="competitionName" id="input-competition-name" placeholder="Competition Name..."></td>
                 </tr>
             </table>
             <div class="tabletwo">
@@ -320,40 +329,40 @@ footer {
             
         </form>
     </section>
-</div>
+
         
-<div id="insert" class="sectionthree">
-    <section>
+
+    <section class="sectionthree">
         <h3 class="section-header"> Add Competition </h3>
         <form id="put-competitions-ajax" method="POST">         
             <table class="tablethree">
                 
                 <tr>
-                    <td><label for="inputcompetitionName">Name</label></td> 
-                    <td><input type="text" name="inputcompetitionName" id="inputcompetitionName" required  placeholder="Competition Name"></td>
+                    <td><label for="input-competition-name">Name</label></td> 
+                    <td><input type="text" name="input-competition-name" id="input-competition-name" required  placeholder="Competition Name"></td>
                        
                 </tr>
                 <tr>
-                    <td><label for="inputdate">Date</label></td> 
-                    <td><input type="date" name="inputdate" id="inputdate" required placeholder="Date"></td>
+                    <td><label for="input-date">Date</label></td> 
+                    <td><input type="date" name="input-date" id="input-date" required placeholder="Date"></td>
                         
                 </tr>
                 <tr>
-                    <td><label for="inputstartTime">Start Time</label></td> 
-                    <td><input type="time" name="inputstartTime" id="inputstartTime" required placeholder="Start Time"></td>     
+                    <td><label for="input-start-time">Start Time</label></td> 
+                    <td><input type="time" name="input-start-time" id="input-start-time" required placeholder="Start Time"></td>     
                 </tr>
                 <tr>
-                    <td><label for="inputlocationName">Location Name </label></td> 
-                    <td><input type="text" name="inputlocationName" id="inputlocationName" required placeholder="Location Name"></td>
+                    <td><label for="input-location-name">Location Name </label></td> 
+                    <td><input type="text" name="input-location-name" id="input-location-name" required placeholder="Location Name"></td>
                 </tr>
                 <tr>
-                    <td><label for="inputlocationAddress">Address </label></td> 
-                    <td><input type="text" name="inputlocationAddress" id="inputlocationAddress" required placeholder="Location Address"></td>
+                    <td><label for="input-location-address">Address </label></td> 
+                    <td><input type="text" name="input-location-address" id="input-location-address" required placeholder="Location Address"></td>
                         
                 </tr>
                 <tr>
-                    <td><label for="inputlocationPhone">Phone</label></td> 
-                    <td><input type="text" name="inputlocationPhone" id="inputlocationPhone" required placeholder="Location Phone"></td>
+                    <td><label for="input-location-phone">Phone</label></td> 
+                    <td><input type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
                 </tr>
                 <tr>
                     <td><input type="submit" value="Add"></td>
@@ -362,17 +371,17 @@ footer {
             </table>
         </form>
     </section>
-</div>
+
         
         
-<div id="update" class="sectionfour">
-    <section>
-        <form id="add-competition-ajax" method="POST">
+
+    <section class="sectionfour">
+        <form id="put-competition-ajax" method="POST">
             <h3 class="section-header"> Update Competition </h3>
                 <table class="tablefour">
                     <tr>
-                        <td><label for="select-competition id="select-competition">Select Competition to Update:</label></td>
-                        <td><select name="select-competition" id="select-competition">
+                        <td><label>Select Competition to Update:</label></td>
+                        <td><select>
                             <option value="">Select a Competition</option>
                             {{#each data}}
                             <option value="{{this.competitionID}}">{{this.competitionName}}</option>
@@ -381,28 +390,28 @@ footer {
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="inputCompetitionName">Name:</label></td>
-                        <td><input type="text" name="inputCompetitionName" id="inputcompetitionName" placeholder="Competition Name"></td>     
+                        <td><label for="update-competition-name">Name:</label></td>
+                        <td><input type="text" name="update-competition-name" id="update-competition-name" placeholder="Competition Name"></td>     
                     </tr>
                     <tr>
-                        <td><label for="inputdate" >Date: </label></td>
-                        <td><input type="text" name="inputdate" id="inputdate" placeholder="Date"></td>
+                        <td><label for="update-date" >Date: </label></td>
+                        <td><input type="text" name="update-date" id="update-date" placeholder="Date"></td>
                     </tr>
                     <tr>
-                        <td><label for="inputstartTime" >Start Time: </label></td>
-                        <td><input type="text" name="inputstartTime" id="inputstartTime" placeholder="Start Time"></td>
+                        <td><label for="update-start-time" >Start Time: </label></td>
+                        <td><input type="text" name="update-start-time" id="update-start-time" placeholder="Start Time"></td>
                     </tr>
                     <tr>
-                        <td><label for="inputlocationName" >Location Name: </label></td>
-                        <td><input type="text" name="inputlocationName" id="inputlocationName" placeholder="Location Name"></td>
+                        <td><label for="update-location-name" >Location Name: </label></td>
+                        <td><input type="text" name="update-location-name" id="update-location-name" placeholder="Location Name"></td>
                     </tr>
                     <tr>
-                        <td><label for="inputlocationAddress" >Address:</label></td>
-                        <td><input type="text" name="inputlocationAddress" id="inputlocationAddress" placeholder="Address"></td>
+                        <td><label for="update-location-address" >Address:</label></td>
+                        <td><input type="text" name="update-location-address" id="update-location-address" placeholder="Address"></td>
                     </tr>
                     <tr>
-                        <td><label for="inputlocationPhone" >Phone: </label></td>
-                        <td><input type="text" name="inputlocationPhone" id="inputlocationPhone" placeholder="Phone"></td>
+                        <td><label for="update-location-phone" >Phone: </label></td>
+                        <td><input type="text" name="update-location-phone" id="update-location-phone" placeholder="Phone"></td>
                     </tr>
                     <tr>
                         <td><input class='btn' type="submit" value="Update Competition"></td>
@@ -412,13 +421,13 @@ footer {
         </form>
     </section>
             
-<div id="delete">
+
     <section class="sectionfive">
         <h3 class="section-header">Delete Competition</h3>
             <form id="delete-competition-ajax" method="DELETE">
                 <table class="tablefive">
                     <tr>
-                        <td><select name="select-competition">
+                        <td><select>
                             <option value="">Select a Competition</option>
                             {{#each data}}
                             <option value="{{this.competitionID}}">{{this.competitionID}} - {{this.competitionName}}</option>
@@ -439,13 +448,14 @@ footer {
                     </tr>
                 </table>
             </form> 
-</div>
+
 
 </body>
 
-<script src="./js/delete_competition.js"></script>
-<script src="./js/update_competition.js"></script>
-<script src="./js/add_competition.js"></script>
+</script>
+<script src="../js/delete_competition.js"></script>
+<script src="../js/update_competition.js"></script>
+<script src="../js/add_competition.js"></script>
 
 
 

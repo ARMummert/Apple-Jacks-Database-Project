@@ -62,7 +62,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
             console.log("There was an error with the input.")
         }
     }
-
+    updateCompetitionForm.reset();
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 

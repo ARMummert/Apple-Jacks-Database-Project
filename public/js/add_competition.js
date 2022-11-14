@@ -40,7 +40,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", 'add-competition-ajax', true);
+    xhttp.open("POST", '/add-competition-ajax', true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -49,7 +49,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             addRowToTable(xhttp.response);
-            addCompetitonForm.reset();
+            
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -112,9 +112,7 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
-    let selectCompetition = document.getElementById("select-competition");
-    let option = document.createElement("option")
-    option.text = newRow.competitionID + ' - ' + newRow.competitionName
-    option.value = newRow.id;
-    selectCompetition.add(option);
+    
 }
+
+

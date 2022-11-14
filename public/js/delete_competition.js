@@ -4,7 +4,7 @@ function deleteCompetition(competitionID) {
         id: competitionID
     };
     var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/delete-competition-ajax", true);
+    xhttp.open("DELETE", '/delete-competition-ajax', true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -12,7 +12,7 @@ function deleteCompetition(competitionID) {
         if (xhttp.readyState == 4 && xhttp.status == 204) {
 
             // Add the new data to the table
-            deleteCompetitionRow(competitionID);
+            deletenRow(competitionID);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {
@@ -25,15 +25,14 @@ function deleteCompetition(competitionID) {
     location.reload();
 }
 
-function deleteCompetitionRow(competitionID){
+function deleteRow(competitionID){
 
-    let table = document.getElementById("competitions-data");
+    let table = document.getElementById("competitions-table");
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.row[i].getAttribute("data-value") == competitionID) {
             table.deleteRow(i);
-            deleteDropDown(competitionID);
             break;
        }
     }

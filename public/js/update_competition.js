@@ -1,5 +1,5 @@
 // Get the objects we need to modify
-let updateCompetitionForm = document.getElementById('update-competition-form');
+let updateCompetitionForm = document.getElementById('update-competition-form-ajax');
 
 // Modify the objects we need
 updateCompetitionForm.addEventListener("submit", function (e) {
@@ -62,9 +62,8 @@ updateCompetitionForm.addEventListener("submit", function (e) {
             console.log("There was an error with the input.")
         }
     }
-    updateCompetitionForm.reset();
     // Send the request and wait for the response
-    xhttp.send(JSON.stringify(data));
+xhttp.send(JSON.stringify(data));
 
 })
 
@@ -72,7 +71,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
 function updateRow(data, competitionID){
     let parsedData = JSON.parse(data);
     
-    let table = document.getElementById('competitions-table');
+    let table = document.getElementById("competitions-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows

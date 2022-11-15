@@ -155,6 +155,6 @@ app.delete('/delete-competition-ajax', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
 });
 

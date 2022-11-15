@@ -1,5 +1,5 @@
 // Get the objects we need to modify
-let addCompetitonForm = document.getElementById('add-competition-form');
+let addCompetitionForm = document.getElementById('add-competition-form');
 
 // Modify the objects we need
 addCompetitionForm.addEventListener("submit", function (e) {
@@ -13,14 +13,14 @@ addCompetitionForm.addEventListener("submit", function (e) {
     let inputstartTime = document.getElementById("input-start-time");
     let inputlocationName = document.getElementById("input-location-name");
     let inputlocationAddress = document.getElementById("input-location-address");
-    let inputlocationPhone = document.getlElementbyID("input-location-phone");
+    let inputlocationPhone = document.getElementById("input-location-phone");
     
 
     // Get the values from the form fields
     let competitionNameValue = inputcompetitionName.value;
     let dateValue = inputdate.value;
     let startTimeValue= inputstartTime.value;
-    let locatioNameValue = inputlocationName.value;
+    let locationNameValue = inputlocationName.value;
     let locationAddressValue = inputlocationAddress.value;
     let locationPhoneValue = inputlocationPhone.value;
 
@@ -32,7 +32,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
       competitionName:competitionNameValue,
       date:dateValue,
       startTime:startTimeValue,
-      locatioName:locatioNameValue,
+      locationName:locationNameValue,
       locationAddress:locationAddressValue,
       locationPhone:locationPhoneValue 
       
@@ -88,7 +88,8 @@ addRowToTable = (data) => {
     let locationNameCell = document.createElement("TD");
     let locationAddressCell = document.createElement("TD");
     let locationPhoneCell = document.createElement("TD");
-    
+    let deleteCell = document.createElement("ID");
+
     // Fill the cells with correct data
     idCell.innerText = newRow.competitionID;
     competitionNameCell.innerText = newRow.competitionName;
@@ -97,6 +98,12 @@ addRowToTable = (data) => {
     locationNameCell.innerText = newRow.locationName;
     locationAddressCell.innerText = newRow.locationAddress;
     locationPhoneCell.innnerText =newRow.locationPhone;
+
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteCompetition(newRow.competitionID);
+    }
   
     // Add the cells to the row 
     row.appendChild(idCell);
@@ -107,7 +114,7 @@ addRowToTable = (data) => {
     row.appendChild(locationAddressCell);
     row.appendChild(locationPhoneCell);
 
-    row.setAttribute('data value', newRow.competitionID)
+    row.setAttribute('data-value', newRow.competitionID)
   
     // Add the row to the table
     currentTable.appendChild(row);

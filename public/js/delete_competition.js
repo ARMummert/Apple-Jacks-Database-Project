@@ -1,28 +1,17 @@
 function deleteCompetition(competitionID) {
-    
+    let link = '/delete-competition/'
     let data = {
         id: competitionID
     };
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", '/delete-competition-ajax', true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-
-    // Tell our AJAX request how to resolve
-    xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 4 && xhttp.status == 204) {
-
-            // Add the new data to the table
-            deletenRow(competitionID);
-
+    $.ajax({
+        url: link,
+        type:'DELETE',
+        data:JSON.stringify(data),
+        contentType: "application/json; charset=utf=8",
+        success: function(result){
+            deleteRow(competitionID);
         }
-        else if (xhttp.readyState == 4 && xhttp.status != 204) {
-            console.log("There was an error with the input.")
-        }
-    // Send the request and wait for the response
-    xhttp.send(JSON.stringify(data));
-    }
-    // Reload the page
-    location.reload();
+    });
 }
 
 function deleteRow(competitionID){

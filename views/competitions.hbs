@@ -5,7 +5,7 @@
 <h3 class=padtop >Competitions</h3>
 
 <section class="sectionone">
-{{! Create a table }}
+    {{! Create a table }}
 
     <table id="competitions-table" class="tableone" border="1" cellpadding="5" >
         {{! Header section }}
@@ -14,7 +14,8 @@
               <tr>
                 {{#each data.[0]}}
                 <th>{{@key}}</th>
-                {{/each}}    
+                {{/each}}
+                <th>delete</th>    
             </tr>
         </thead>
         {{! Body section }}
@@ -28,8 +29,12 @@
                 <td>{{this.locationName}}</td>
                 <td>{{this.locationAddress}}</td>
                 <td>{{this.locationPhone}}</td>
+<<<<<<< HEAD
                 <td><button onclick="deleteCompetition({{this.competitionID}})">Delete</button></td>
                         
+=======
+                <td><button onClick="deleteCompetition({{this.competitionID}})"/>Delete</button><td>            
+>>>>>>> d012b759c3550888ae0884383551aa33d81a7f10
             </tr>   
             {{/each}}
         </tbody>
@@ -37,27 +42,28 @@
 </section>   
 <script src="./js/delete_competition.js"></script>
 
-    <section class="sectiontwo">
+<section class="sectiontwo">
         <h3 class="section-header">Search By Competition Name</h3>
-        <form id='competitions' method='GET'>
+        <form id='competitions' method='GET' action ='/competitions'>
             <table class="tabletwo">
-                <tr>
-                    <td><input type="text" name="competitionName" id="input-competition-name" placeholder="Competition Name..."></td>
-                </tr>
+        
+                <td><input type="text" name="competitionName" id="input-competition-name" placeholder="Competition Name..."></td>
+            
             </table>
-            <div class="tabletwo">
+            <div class="tabletwo"><a href='/'><button>Reset</button></a>
                 <input type="submit" value="Search">
                 <input type="reset" value="Cancel">
+                <a href='/competitions'><button>Reset</button></a>
             </div>
             
         </form>
-    </section>
+</section>
 
         
 
-    <section class="sectionthree">
+<section class="sectionthree">
         <h3 class="section-header"> Add Competition </h3>
-        <form id="add-competition-ajax" method="POST">         
+        <form id="add-competition-form">         
             <table class="tablethree">
                 
                 <tr>
@@ -88,18 +94,27 @@
                     <td><input type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
                 </tr>
                 <tr>
+<<<<<<< HEAD
                     <td> <td><button onclick="addCompetitionForm({{this.competitionID}})">Add</button></td>
+=======
+                    <td><input onclick-"addCompetitionForm()" type="submit" value="Add"></td>
+>>>>>>> d012b759c3550888ae0884383551aa33d81a7f10
                     <td><input type="reset" value="Cancel"></td>
                 </tr>
             </table>
         </form>
-    </section>
+</section>
 
     <script src="./js/add_competition.js"></script>    
         
 
+<<<<<<< HEAD
     <section class="sectionfour">
         <form id="/put-competition-ajax" method="PUT">
+=======
+<section class="sectionfour">
+        <form id="update-competition-form">
+>>>>>>> d012b759c3550888ae0884383551aa33d81a7f10
             <h3 class="section-header"> Update Competition </h3>
                 <table class="tablefour">
                     <tr>
@@ -142,8 +157,9 @@
                     </tr>
                 </table>
         </form>
-    </section>
+</section>
             
+<<<<<<< HEAD
     <script src="./js/update_competition.js"></script>
     <section class="sectionfive">
         <h3 class="section-header">Delete Competition</h3>
@@ -179,6 +195,32 @@
 
 
 
+=======
+</body>
+<script>
+  function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateCompetitionForm(competitionID)
+    };
+      function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateCompetitionForm(update-competition-form)
+    };
+
+    const btn = document.getElementById('btn');
+
+   function showForm() {
+        document.getElementById("showtable").style.display = "block";
+    };
+
+</script>
+
+<script src="./js/delete_competition.js"></script>
+<script src="./js/update_competition.js"></script>
+<script src="./js/add_competition.js"></script>
+>>>>>>> d012b759c3550888ae0884383551aa33d81a7f10
 
 
 

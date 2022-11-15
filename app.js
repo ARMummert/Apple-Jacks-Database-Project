@@ -5,7 +5,7 @@ var express = require('express');
 var app     = express();    
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT = 6484;
+PORT = 4460;
 
 // Database
 var db = require('./database/db-connector')
@@ -27,7 +27,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Routes
 
-app.get('/', function(req, res)
+app.get('/index', function(req, res)
   {
     return res.render('index');                  
   });   
@@ -36,15 +36,21 @@ app.get('/', function(req, res)
 
 // Competitions
 
-app.get('/competitions', function (req, res)
-  {
-    let query1 = "SELECT * FROM Competitions;";
-  
-        db.pool.query(query1, function(error, rows, fields) {
-        let competitionData = rows;
-        return res.render('competitions', {data: competitionData});
-    })
-  });
+app.get('/competitions', function (req, res){
+let competitions;
+if (req.query.competitionName === undefined)
+{
+  competitions = `SELECT * FROM Competitions;`;
+}
+else 
+{
+  competitions = `SELECT * FROM Competitons WHERE CompetitionName LIKE "${req.query.competitionName}%"`
+}
+
+db.pool.query(competitions, function(error, rows, fields) {
+  return res.render('competitions', {data: rows});
+});
+});
 
 // Create Competitions
 app.post('/add-competition-ajax', function(req, res) {
@@ -134,7 +140,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
 });
 
 // Delete Competition
-app.delete('/delete-competition-ajax', function(req, res, next) {
+app.delete('/delete-competition/', function(req, res, next) {
   let data = req.body;
   let competitionID = parseInt(data.id);
   let deleteCompetitions = 'DELETE FROM Competitions WHERE competitionID = ?';

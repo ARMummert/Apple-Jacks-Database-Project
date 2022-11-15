@@ -1,7 +1,5 @@
 <!-- competitions.hbs -->
 
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-
 <body>
 
 <h3 class=padtop >Competitions</h3>
@@ -30,14 +28,14 @@
                 <td>{{this.locationName}}</td>
                 <td>{{this.locationAddress}}</td>
                 <td>{{this.locationPhone}}</td>
-                <td><button onClick="deleteCompetition()"/>Delete</button>
+                <td><button onclick="deleteCompetition({{this.competitionID}})">Delete</button></td>
                         
             </tr>   
             {{/each}}
         </tbody>
     </table>
 </section>   
-
+<script src="./js/delete_competition.js"></script>
 
     <section class="sectiontwo">
         <h3 class="section-header">Search By Competition Name</h3>
@@ -90,18 +88,18 @@
                     <td><input type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Add"></td>
+                    <td> <td><button onclick="addCompetitionForm({{this.competitionID}})">Add</button></td>
                     <td><input type="reset" value="Cancel"></td>
                 </tr>
             </table>
         </form>
     </section>
 
-        
+    <script src="./js/add_competition.js"></script>    
         
 
     <section class="sectionfour">
-        <form id="updateCompetitionForm" method="PUT">
+        <form id="/put-competition-ajax" method="PUT">
             <h3 class="section-header"> Update Competition </h3>
                 <table class="tablefour">
                     <tr>
@@ -146,7 +144,7 @@
         </form>
     </section>
             
-
+    <script src="./js/update_competition.js"></script>
     <section class="sectionfive">
         <h3 class="section-header">Delete Competition</h3>
             <form id="delete-competition-ajax" method="DELETE">
@@ -166,7 +164,7 @@
                         <td><input
                             class="deleteCompetition"
                             type="submit"
-                            id="deleteCompetition"
+                            
                             value="Delete Competition"
                         />
                     <input type="reset" value="Cancel"></a></td>
@@ -174,30 +172,13 @@
                 </table>
             </form> 
 </body>
-<script>
-  function formFill(data) {
-    // Update the form with the selected customer's data
-    var id = data.value;
-    updateCompetitionForm(competitionID)
-    };
-      function formFill(data) {
-    // Update the form with the selected customer's data
-    var id = data.value;
-    updateCompetitionForm(update-competition-form)
-    };
 
-    const btn = document.getElementById('btn');
+}
 
-   function showForm() {
-        document.getElementById("showtable").style.display = "block";
-    }
-});
 
-</script>
-</script>
-<script src="./js/delete_competition.js"></script>
-<script src="./js/update_competition.js"></script>
-<script src="./js/add_competition.js"></script>
+
+
+
 
 
 

@@ -1,16 +1,14 @@
 // APP.JS SETUP
-// Express
 
+// Express
 var express = require('express');   
 var app     = express();    
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT = 4460;
+PORT = 6484;
 
 // Database
 var db = require('./database/db-connector')
-
-
 
 // Express Handlebars
 const { engine } = require('express-handlebars');
@@ -18,21 +16,15 @@ var exphbs = require('express-handlebars');
 //Sets handlebars configurations
 app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs'); 
-
+//Serving static files
 app.use(express.static(__dirname + '/public'));
 
+// Routes 
 
-
-
-
-// Routes
-
-app.get('/index', function(req, res)
+app.get('/', function(req, res)
   {
     return res.render('index');                  
   });   
-
-
 
 // Competitions
 
@@ -58,8 +50,8 @@ app.post('/add-competition-ajax', function(req, res) {
   
   // Create Competitions Query
  
-  query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
-  VALUES (
+    query1 = `INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
+    VALUES (
       '${data.competitionName}',
       '${data.date}',
       '${data.startTime}',
@@ -89,7 +81,7 @@ app.post('/add-competition-ajax', function(req, res) {
                 else
                 {
                     res.send(rows);
-                    res.redirect('/competitions');
+                    
                 }
             })       
         }
@@ -106,19 +98,32 @@ app.put('/put-competition-ajax', function(req, res, next) {
   let locationAddress = data.locationAddressValue;
   let locationPhone = data.locationPhoneValue;
 
-  let updateCompetition = `UPDATE Competitions SET competitionName = '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
+  //let updateCompetition = `UPDATE Competitions SET competitionName = 
+  // '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
+  
+  let updateCompetition = `UPDATE Competitions SET competitionName = ?, date = ?, startTime = ?, locationName = ?, locationAddress = ?, locationPhone = ?`;
   let selectCompetition = `SELECT * FROM Competitons WHERE competitionID = ?`
     db.pool.query(
       updateCompetition,
+
       [
-        competitionID,
-        competitionName,
-        date,
-        startTime,
-        locationName,
-        locationAddress,
-        locationPhone
+        data['competitionName'],
+        data['date'],
+        data['startTime'],
+        data['locationName'],
+        data['locationAddress'],
+        data['locationPhone'],
+        competitionID
       ],
+//     [
+//        competitionID,
+ //       competitionName,
+ //       date,
+  //      startTime,
+    //    locationName,
+      //  locationAddress,
+      //  locationPhone
+ //     ],
     function (error, rows, fields) {
       if (error) {
         console.log(error);
@@ -132,6 +137,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
         }
         else {
           res.send(rows);
+          res.redirect('/competitions');
         }
       })
       
@@ -161,6 +167,5 @@ app.delete('/delete-competition/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
-

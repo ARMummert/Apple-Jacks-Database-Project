@@ -1,0 +1,167 @@
+<!--events.hbs-->
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+<body>
+
+<h3 class=padtop >Events</h3>
+
+<section class="sectionone">
+    {{! Create a table }}
+
+    <table id="events-table" class="tableone" border="1" cellpadding="5" >
+        {{! Header section }}
+
+        <thead>
+              <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+                <th>delete</th>    
+            </tr>
+        </thead>
+        {{! Body section }}
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.id}}>
+                <td>{{this.competitionID}}</td>
+                <td>{{this.divisionID}}</td>
+                <td>{{this.event-level}}</td>
+                <td>{{this.eventName}}</td>
+                <td><button onClick="deleteCompetition({{this.competitionID}})"/>Delete</button><td>            
+            </tr>   
+            {{/each}}
+        </tbody>
+    </table>
+</section>   
+
+
+<section class="sectiontwo">
+        <h3 class="section-header">Search By Competition Name</h3>
+        <form id='competitions' method='GET' action ='/competitions'>
+            <table class="tabletwo">
+        
+                <td><input type="text" name="competitionName" id="input-competition-name" placeholder="Competition Name..."></td>
+            
+            </table>
+            <div class="tabletwo"><a href='/'><button>Reset</button></a>
+                <input type="submit" value="Search">
+                <input type="reset" value="Cancel">
+                <a href='/competitions'><button>Reset</button></a>
+            </div>
+            
+        </form>
+</section>
+
+        
+
+<section class="sectionthree">
+        <h3 class="section-header"> Add Competition </h3>
+        <form id="add-competition-form">         
+            <table class="tablethree">
+                
+                <tr>
+                    <td><label for="input-competition-name">Name</label></td> 
+                    <td><input type="text" name="input-competition-name" id="input-competition-name" required  placeholder="Competition Name"></td>
+                       
+                </tr>
+                <tr>
+                    <td><label for="input-date">Date</label></td> 
+                    <td><input type="date" name="input-date" id="input-date" required placeholder="Date"></td>
+                        
+                </tr>
+                <tr>
+                    <td><label for="input-start-time">Start Time</label></td> 
+                    <td><input type="time" name="input-start-time" id="input-start-time" required placeholder="Start Time"></td>     
+                </tr>
+                <tr>
+                    <td><label for="input-location-name">Location Name </label></td> 
+                    <td><input type="text" name="input-location-name" id="input-location-name" required placeholder="Location Name"></td>
+                </tr>
+                <tr>
+                    <td><label for="input-location-address">Address </label></td> 
+                    <td><input type="text" name="input-location-address" id="input-location-address" required placeholder="Location Address"></td>
+                        
+                </tr>
+                <tr>
+                    <td><label for="input-location-phone">Phone</label></td> 
+                    <td><input type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
+                </tr>
+                <tr>
+                    <td><input onclick-"addCompetitionForm()" type="submit" value="Add"></td>
+                    <td><input type="reset" value="Cancel"></td>
+                </tr>
+            </table>
+        </form>
+</section>
+
+        
+        
+
+<section class="sectionfour">
+        <form id="update-competition-form">
+            <h3 class="section-header"> Update Competition </h3>
+                <table class="tablefour">
+                    <tr>
+                        <td><label>Select Competition to Update:</label></td>
+                        <td><select>
+                            <option value="">Select a Competition</option>
+                            {{#each data}}
+                            <option value="{{this.competitionID}}">{{this.competitionName}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="update-competition-name">Name:</label></td>
+                        <td><input type="text" name="update-competition-name" id="update-competition-name" placeholder="Competition Name"></td>     
+                    </tr>
+                    <tr>
+                        <td><label for="update-date" >Date: </label></td>
+                        <td><input type="text" name="update-date" id="update-date" placeholder="Date"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="update-start-time" >Start Time: </label></td>
+                        <td><input type="text" name="update-start-time" id="update-start-time" placeholder="Start Time"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="update-location-name" >Location Name: </label></td>
+                        <td><input type="text" name="update-location-name" id="update-location-name" placeholder="Location Name"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="update-location-address" >Address:</label></td>
+                        <td><input type="text" name="update-location-address" id="update-location-address" placeholder="Address"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="update-location-phone" >Phone: </label></td>
+                        <td><input type="text" name="update-location-phone" id="update-location-phone" placeholder="Phone"></td>
+                    </tr>
+                    <tr>
+                        <td><input onclick-"updateCompetitionForm()" type="submit" value="Update Competition"></td>
+                        <td><a href='/competitions'><input type="reset" value="Cancel"></a></td>
+                    </tr>
+                </table>
+        </form>
+</section>
+            
+</body>
+<script>
+  function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateCompetitionForm(competitionID)
+    };
+      function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateCompetitionForm(update-competition-form)
+    };
+    const btn = document.getElementById('btn');
+   function showForm() {
+        document.getElementById("showtable").style.display = "block";
+    };
+</script>
+
+<script src="./js/delete_competition.js"></script>
+<script src="./js/update_competition.js"></script>
+<script src="./js/add_competition.js"></script>

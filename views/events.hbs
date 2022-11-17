@@ -1,0 +1,218 @@
+<!--events.hbs-->
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+<body>
+
+<h3 class=padtop >Events</h3>
+
+<section class="sectionone">
+    {{! Create a table }}
+
+    <table id="events-table" class="tableone" border="1" cellpadding="5" >
+        {{! Header section }}
+
+        <thead>
+              <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+                <th>delete</th>    
+            </tr>
+        </thead>
+        {{! Body section }}
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.id}}>
+                <td>{{this.competitionID}}</td>
+                <td>{{this.divisionID}}</td>
+                <td>{{this.event-level}}</td>
+                <td>{{this.eventName}}</td>
+                <td><button onClick="deleteEvent({{this.competitionID}})"/>Delete</button><td>            
+            </tr>   
+            {{/each}}
+        </tbody>
+    </table>
+</section>   
+
+
+<section class="sectiontwo">
+        <h3 class="section-header">Search by Event Name: </h3>
+        <form id='search-events' method='GET' action ='/events'>
+            <table class="tabletwo">
+        
+                <td><input type="text" name="eventName" id="input-event-search" placeholder="Event Name..."></td>
+            
+            </table>
+            <div class="tabletwo">
+                <input type="submit" value="Search"/>
+                <input type="reset" value="Cancel"/>
+                
+            </div>
+            
+        </form>
+</section>
+
+        
+
+<section class="sectionthree">
+        <h3 class="section-header"> Add Event </h3>
+        <form id="add-event-form" method="POST" action="/add-event-form">         
+            <table class="tablethree">
+                
+                <tr>
+                <select
+                    name="input-competition-name"
+                    id="update-competition-name"
+                    onChange="formFill(this)"
+                    required>
+                    <option value="test">
+                    Select a Competition
+                    </option>
+                    {{#each data}}
+                    <option value="{{this.id}}">
+                    {{this.comepetitionName}}
+                    </option>
+                {{/each}}
+                </select>
+                </tr>
+                <tr>
+                     <select
+                    name="input-division-name"
+                    id="update-division-name"
+                    onChange="formFill(this)"
+                    required>
+                    <option value="test">
+                    Select a Division
+                    </option>
+                    {{#each data}}
+                    <option value="{{this.id}}">
+                    {{this.divisionName}}
+                    </option>
+                {{/each}}
+                </select>
+                </tr>
+                <tr>
+                    <select
+                    name="input-event-level-name"
+                    id="update-event-level-name"
+                    onChange="formFill(this)"
+                    required>
+                    <option value="test">
+                    Select an Event Level
+                    </option>
+                    {{#each data}}
+                    <option value="{{this.id}}">
+                    {{this.eventName}}
+                    </option>
+                {{/each}}
+                </select>
+                </tr>
+                <tr>
+                    <td><label for="input-event-name">Event Name </label></td> 
+                    <td><input type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
+                </tr>
+            </table>
+        </form>
+</section>
+
+<section class="sectionfour">
+        <form id="update-event-form">
+            <h3 class="section-header"> Update Event </h3>
+                <table class="tablefour">
+                    <tr>
+                        <td><label>Select an Event to Update:</label></td>
+                        <td>
+                        <select
+                            name="input-event-name"
+                            id="update-event-name"
+                            onChange="formFill(this)"
+                            required>
+                            <option value="test">
+                            Select an Event to Update
+                            </option>
+                            {{#each data}}
+                            <option value="{{this.id}}">
+                            {{this.eventName}}
+                        </option>
+                        {{/each}}
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                    <select
+                        name="input-competition-name"
+                        id="update-competition-name"
+                        onChange="formFill(this)"
+                        required>
+                        <option value="test">
+                        Select a Competition
+                        </option>
+                        {{#each data}}
+                        <option value="{{this.id}}">
+                        {{this.comepetitionName}}
+                        </option>
+                    {{/each}}
+                    </select>
+                  </tr>
+                    <tr>
+                    <select
+                        name="input-division-name"
+                        id="update-division-name"
+                        onChange="formFill(this)"
+                        required>
+                        <option value="test">
+                        Select a Division
+                        </option>
+                        {{#each data}}
+                        <option value="{{this.id}}">
+                        {{this.divisionName}}
+                        </option>
+                    {{/each}}
+                    </select>  
+                    </tr>
+                    <tr>
+                    <select
+                        name="input-event-level-name"
+                        id="update-event-level-name"
+                        onChange="formFill(this)"
+                        required>
+                        <option value="test">
+                        Select an Event Level
+                        </option>
+                        {{#each data}}
+                        <option value="{{this.id}}">
+                        {{this.eventName}}
+                        </option>
+                    {{/each}}
+                    </select>
+                    </tr>
+                    <tr>
+                        <td><label for="update-event-name" >New Event Name </label></td>
+                        <td><input type="text" name="update-event-name" id="update-event-name" placeholder="Enter New Event Name"></td>
+                    </tr>
+                </table>
+        </form>
+</section>
+            
+</body>
+<script>
+  function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateEventForm(eventID)
+    };
+      function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    addEventForm(eventID)
+    };
+    const btn = document.getElementById('btn');
+   function showForm(btn) {
+        document.getElementById("showtable").style.display = "block";
+    };
+</script>
+
+<script src="./js/delete_competition.js"></script>
+<script src="./js/update_competition.js"></script>
+<script src="./js/add_competition.js"></script>

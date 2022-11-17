@@ -7,8 +7,6 @@ SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, start
 locationAddress as `Location Address`,locationPhone as `Location Phone` FROM Competitions
 Where competitionName = :Search_input_field;
 
-
-
 --add a new competition
 INSERT INTO Competitions(competitionName,date,startTime,locationName,locationAddress,LocationPhone)
     VALUES(:CompetitionNameInput,:dateInput,:startTimeInput,:locationNameInput,:locationAddressInput,

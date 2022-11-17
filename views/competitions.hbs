@@ -41,16 +41,16 @@
 
 <section class="sectiontwo">
         <h3 class="section-header">Search By Competition Name</h3>
-        <form id='competitions' method='GET' action ='/competitions'>
+        <form id='search-competitions' method='GET' action ='/competitions'>
             <table class="tabletwo">
         
-                <td><input type="text" name="competitionName" id="input-competition-name" placeholder="Competition Name..."></td>
+                <td><input type="text" name="competitionName" id="input-competition-search" placeholder="Competition Name..."></td>
             
             </table>
-            <div class="tabletwo"><a href='/'><button>Reset</button></a>
+            <div class="tabletwo">
                 <input type="submit" value="Search">
                 <input type="reset" value="Cancel">
-                <a href='/competitions'><button>Reset</button></a>
+               
             </div>
             
         </form>
@@ -157,10 +157,10 @@
       function formFill(data) {
     // Update the form with the selected customer's data
     var id = data.value;
-    updateCompetitionForm(update-competition-form)
+    addCompetitionForm(competitionID)
     };
     const btn = document.getElementById('btn');
-   function showForm() {
+    function showForm(btn) {
         document.getElementById("showtable").style.display = "block";
     };
 </script>

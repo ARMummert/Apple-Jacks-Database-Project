@@ -5,7 +5,7 @@ var express = require('express');
 var app     = express();    
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT = 6484;
+PORT = 4460;
 
 // Database
 var db = require('./database/db-connector')
@@ -32,11 +32,14 @@ app.get('/competitions', function (req, res){
 let competitions;
 if (req.query.competitionName === undefined)
 {
-  competitions = `SELECT * FROM Competitions;`;
+  competitions = `SELECT competitionID as ID, competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
+  locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions;`;
 }
 else 
 {
-  competitions = `SELECT * FROM Competitons WHERE CompetitionName LIKE "${req.query.competitionName}%"`
+  competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
+  locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions
+  Where competitionName LIKE "${req.query.competitionName}%";`;
 }
 
 db.pool.query(competitions, function(error, rows, fields) {

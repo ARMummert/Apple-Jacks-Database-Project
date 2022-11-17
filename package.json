@@ -23,5 +23,11 @@
     "forever": "^4.0.3",
     "mysql": "^2.18.1",
     "stable": "^0.1.8"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
   }
 }

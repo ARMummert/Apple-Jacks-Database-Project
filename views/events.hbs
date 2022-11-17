@@ -24,9 +24,9 @@
         <tbody>
             {{#each data}}
             <tr data-value={{this.id}}>
-                <td>{{this.competitionID}}</td>
-                <td>{{this.divisionID}}</td>
-                <td>{{this.event-level}}</td>
+                <td>{{this.competitionName}}</td>
+                <td>{{this.divisionName}}</td>
+                <td>{{this.eventlevelName}}</td>
                 <td>{{this.eventName}}</td>
                 <td><button onClick="deleteEvent({{this.competitionID}})"/>Delete</button><td>            
             </tr>   

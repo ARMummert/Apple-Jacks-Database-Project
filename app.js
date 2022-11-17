@@ -26,23 +26,24 @@ app.get('/', function(req, res)
     return res.render('index');                  
   });   
 
-// Competitions
+// Routes - Competitions
 
 app.get('/competitions', function (req, res){
-let competitions;
+let query1;
 if (req.query.competitionName === undefined)
 {
-  competitions = `SELECT competitionID as ID, competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
-  locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions;`;
+  query1 = `SELECT competitionID as 'ID', competitionName as 'Competition Name', Date, startTime as 'Start Time', locationName as 'Location Name',
+  locationAddress as 'Location Address',locationPhone as 'Location Phone' FROM Competitions;`;
 }
 else 
 {
-  competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
-  locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions
-  Where competitionName LIKE "${req.query.competitionName}%";`;
-}
+  query1 = `SELECT competitionID as 'ID', competitionName as 'Competition Name', Date, startTime as 'Start Time', locationName as 'Location Name',
+  locationAddress as 'Location Address',locationPhone as 'Location Phone' FROM Competitions
+  WHERE competitionName = :Search_input_field;`;
+   }    
 
-db.pool.query(competitions, function(error, rows, fields) {
+db.pool.query(query1, function(error, rows, fields) {
+  
   return res.render('competitions', {data: rows});
 });
 });
@@ -164,6 +165,34 @@ app.delete('/delete-competition/', function(req, res, next) {
     }
   });
 });
+
+// Routes - Events
+app.get('/events', function (req, res){
+  let query1;
+  if (req.query.eventName === undefined)
+  {
+    query1 = `SELECT eventID as 'ID',eventName as 'Event Name', Competitions.competitionName as Competition,
+    Divisions.divisionName as Divsion, EventLevels.eventlevelName as 'Event Level'
+    FROM Events
+    INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
+    INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
+    INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;`;
+  }
+  else 
+  {
+    query1 = `SELECT eventID as 'ID',eventName as 'Event Name', Competitions.competitionName as Competition,
+    Divisions.divisionName as Divsion, EventLevels.eventlevelName as 'Event Level'
+    FROM Events
+    INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
+    INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
+    INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
+    WHERE eventName = :Search_input_field;`;
+     }       
+  db.pool.query(query1, function(error, rows, fields) {
+      
+      return res.render('events', {data: rows});
+  });
+  });
 
 
 // LISTENER

@@ -25,8 +25,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     let locationAddressValue = inputlocationAddress.value;
     let locationPhoneValue = inputlocationPhone.value;
     
-    // currently the database table for competitions does not allow  updating some values to NULL
-    // so we must abort if being bassed NULL for homeworld
+    // Must abort if being bassed NULL for competitions
 
     if (isNaN(competitionNameValue) || isNan(locationNameValue) || isNan(locationAddressValue)) 
     {
@@ -91,33 +90,33 @@ function updateRow(data, competitionID){
             // Reassign competition Name to value we updated to
             td1.innerHTML = parasedData[1]
           
-             // Get td of competition Name Value
+             // Get td of date Value
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
           
-            // Reassign competition Name to value we updated to
+            // Reassign date to value we updated to
             td2.innerHTML = parasedData[2]
             
-            // Get td of competition Name Value
+            // Get td of start time Value
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
           
-            // Reassign competition Name to value we updated to
+            // Reassign start time to value we updated to
             td3.innerHTML = parasedData[3]
          
-            // Get td of competition Name Value
+            // Get td of location Name Value
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
           
-            // Reassign competition Name to value we updated to
+            // Reassign location Name to value we updated to
             td4.innerHTML = parasedData[4]
          
-            // Get td of competition Name Value
+            // Get td of location Address Value
             let td5 = updateRowIndex.getElementsByTagName("td")[5];
           
-            // Reassign competition Name to value we updated to
+            // Reassign location Address to value we updated to
             td5.innerHTML = parasedData[5]
-            // Get td of competition Name Value
+            // Get td of location Phone Value
             let td6 = updateRowIndex.getElementsByTagName("td")[6];
           
-            // Reassign competition Name to value we updated to
+            // Reassign location Phone to value we updated to
             td6.innerHTML = parasedData[6]
                   
        }

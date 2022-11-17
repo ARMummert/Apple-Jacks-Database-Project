@@ -9,13 +9,22 @@ addEventForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputeventName = document.getElementById("input-event-name");
-    
+    let inputcompetitionID = document.getElementById("input-competition-ID")
+    let inputdivisionID = document.getElementById("input-division-ID")
+    let inputeventlevelID = document.getElementById("input-event-level-ID")
+
     // Get the values from the form fields
     let eventNameValue = inputeventName.value;
+    let competitionIDValue = inputcompetitionID.value
+    let divisionIDValue = inputdivisionID.value
+    let eventlevelIDValue = inputeventlevelID.value
 
     // Put our data we want to send in a javascript object
     let data = {
         eventName: eventNameValue,
+        competitionID: competitionIDValue,
+        divisionID: divisionIDValue,
+        eventlevelID: eventlevelIDValue
     }
     
     // Setup our AJAX request
@@ -32,6 +41,9 @@ addEventForm.addEventListener("submit", function (e) {
 
             // Clear the input fields for another transaction
             inputeventName.value = '';
+            inputcompetitionID.value = '';
+            inputdivisionID.value = '';
+            inputeventlevelID.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -50,7 +62,7 @@ addEventForm.addEventListener("submit", function (e) {
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("event-table");
+    let currentTable = document.getElementById("events-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -71,10 +83,10 @@ addRowToTable = (data) => {
 
     // Fill the cells with correct data
     idCell.innerText = newRow.id;
-    competitionIDCell.innerText = newRow.fname;
-    divisionIDCell.innerText = newRow.lname;
-    eventlevelIDCell.innerText = newRow.homeworld;
-    eventNameCell.innerText = newRow.age;
+    competitionIDCell.innerText = newRow.competitionID;
+    divisionIDCell.innerText = newRow.divisionID;
+    eventlevelIDCell.innerText = newRow.eventlevelID;
+    eventNameCell.innerText = newRow.eventName;
     
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";

@@ -17,7 +17,7 @@ function deleteCompetition(competitionID) {
 function deleteRow(competitionID){
 
     let table = document.getElementById("competitions-table");
-    for (let i = 1, row; row = table.rows[i]; i++) {
+    for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
        if (row.getAttribute("data-value") == competitionID) {
@@ -26,6 +26,7 @@ function deleteRow(competitionID){
        }
     }
 }
+
 
 function deleteDropDown(competitionID) {
     let selectCompetition = document.getElementById("select-competition")

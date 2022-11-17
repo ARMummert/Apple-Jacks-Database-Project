@@ -124,4 +124,4 @@ addRowToTable = (data) => {
     option.text = newRow.competitionID + ' ' +  newRow.competitionName;
     option.value = newRow.id;
     selectMenu.add(option);
-}  
+}   

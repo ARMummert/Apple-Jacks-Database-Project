@@ -16,11 +16,12 @@
     "url": "https://github.com/MummertAR/Apple-Jacks-Database-Project/issues"
   },
   "homepage": "https://github.com/MummertAR/Apple-Jacks-Database-Project#readme",
-  "dependencies": {
-    "express": "^4.18.2",
+  "dependecies": {
+    "16": "^0.0.2",
+    "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "forever": "^4.0.3",
     "mysql": "^2.18.1",
-    "promisify": "^0.0.3"
+    "stable": "^0.1.8"
   }
 }

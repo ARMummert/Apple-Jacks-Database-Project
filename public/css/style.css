@@ -253,3 +253,10 @@ footer {
 .padtop{
     padding-top: 80px;
 }
+
+#mySelect #mySelectupdate .dropdown select{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-left: 300px;
+}

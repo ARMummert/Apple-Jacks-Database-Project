@@ -65,7 +65,8 @@
                 <tr>
                     <select
                     name="input-competition-name"
-                    id="update-competition-name"
+                    id="mySelect"
+                    class="dropdown"
                     onChange="formFill(this)"
                     required>
                     <option value="test">
@@ -81,7 +82,8 @@
                 <tr>
                     <select
                     name="input-division-name"
-                    id="update-division-name"
+                    id="mySelect"
+                    class="dropdown"
                     onChange="formFill(this)"
                     required>
                     <option value="test">
@@ -97,7 +99,8 @@
                 <tr>
                     <select
                     name="input-event-level-name"
-                    id="update-event-level-name"
+                    id="mySelect"
+                    class="dropdown"
                     onChange="formFill(this)"
                     required>
                     <option value="test">
@@ -115,7 +118,7 @@
                     <td><input type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
                 </tr>
                  <tr>
-                    <td><input onclick-"addCompetitionForm()" type="submit" value="Add"></td>
+                    <td><input onclick-"addEventForm()" type="submit" value="Add"></td>
                     <td><input type="reset" value="Cancel"></td>
                 </tr>
             </table>
@@ -142,7 +145,8 @@
                     <tr>
                         <select
                             name="input-event-name"
-                            id="update-event-name"
+                            id="mySelectupdate"
+                            class="dropdown"
                             onChange="formFill(this)"
                             required>
                             <option value="test">
@@ -158,7 +162,8 @@
                     <tr>
                          <select
                         name="input-competition-name"
-                        id="update-competition-name"
+                        id="mySelectudpate"
+                        class="dropdown"
                         onChange="formFill(this)"
                         required>
                         <option value="test">
@@ -174,7 +179,8 @@
                     <tr>
                          <select
                             name="input-division-name"
-                            id="update-division-name"
+                            id="mySelectupdate"
+                            class="dropdown"
                             onChange="formFill(this)"
                             required>
                             <option value="test">
@@ -190,7 +196,8 @@
                     <tr>
                         <select
                         name="input-event-level-name"
-                        id="update-event-level-name"
+                        id="mySelectupdate"
+                        class="dropdown"
                         onChange="formFill(this)"
                         required>
                         <option value="test">
@@ -209,7 +216,7 @@
                         <td><input type="text" name="update-event-name" id="update-event-name" placeholder="Enter New Event Name"></td>
                     </tr>
                     <tr>
-                        <td><input onclick-"updateCompetitionForm()" type="submit" value="Update Competition"></td>
+                        <td><input onclick-"updateEventForm()" type="submit" value="Update Competition"></td>
                         <td><a href='/competitions'><input type="reset" value="Cancel"></a></td>
                     </tr>
                 </table>

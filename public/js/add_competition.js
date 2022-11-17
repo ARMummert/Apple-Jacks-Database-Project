@@ -1,5 +1,5 @@
 // Get the objects we need to modify
-let addCompetitonForm = document.getElementById('add-competition-form');
+let addCompetitionForm = document.getElementById('add-competition-form');
 
 // Modify the objects we need
 addCompetitionForm.addEventListener("submit", function (e) {
@@ -13,23 +13,26 @@ addCompetitionForm.addEventListener("submit", function (e) {
     let inputstartTime = document.getElementById("input-start-time");
     let inputlocationName = document.getElementById("input-location-name");
     let inputlocationAddress = document.getElementById("input-location-address");
-    let inputlocationPhone = document.getlElementbyID("input-location-phone");
+    let inputlocationPhone = document.getElementById("input-location-phone");
     
 
     // Get the values from the form fields
     let competitionNameValue = inputcompetitionName.value;
     let dateValue = inputdate.value;
     let startTimeValue= inputstartTime.value;
-    let locatioNameValue = inputlocationName.value;
+    let locationNameValue = inputlocationName.value;
     let locationAddressValue = inputlocationAddress.value;
     let locationPhoneValue = inputlocationPhone.value;
 
+    if (competitionNameValue, dateValue, startTimeValue, locationNameValue, locationAddressValue, locationPhoneValue === '') {
+        return;
+    }
     // Put our data we want to send in a javascript object
     let data = {
       competitionName:competitionNameValue,
       date:dateValue,
       startTime:startTimeValue,
-      locatioName:locatioNameValue,
+      locationName:locationNameValue,
       locationAddress:locationAddressValue,
       locationPhone:locationPhoneValue 
       
@@ -46,14 +49,6 @@ addCompetitionForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             addRowToTable(xhttp.response);
-
-            //Clear input fields
-            inputcompetitionName.value = '';
-            inputdate.value = '';
-            inputstartTime.value = '';
-            inputlocationName.value = '';
-            inputlocationAddress.value = '';
-            inputlocationPhone.value = '';
             
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -63,8 +58,11 @@ addCompetitionForm.addEventListener("submit", function (e) {
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
+    // Reload the page
+    addCompetitionForm.reset();
 
 })
+
 
 // Creates a single row from an Object representing a single record from 
 // Competitions
@@ -79,9 +77,9 @@ addRowToTable = (data) => {
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
+    console.log("newRow" + newRow)
 
-    
-    // Create a row 
+    // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let competitionNameCell = document.createElement("TD");
@@ -90,10 +88,10 @@ addRowToTable = (data) => {
     let locationNameCell = document.createElement("TD");
     let locationAddressCell = document.createElement("TD");
     let locationPhoneCell = document.createElement("TD");
-    let deleteCell = document.createElement("TD");
+    let deleteCell = document.createElement("ID");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.id;
+    idCell.innerText = newRow.competitionID;
     competitionNameCell.innerText = newRow.competitionName;
     dateCell.innerText = newRow.date;
     startTimeCell.innerText = newRow.startTime;
@@ -104,8 +102,9 @@ addRowToTable = (data) => {
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteCompetition(newRow.id);
-    };
+        deleteCompetition(newRow.competitionID);
+    }
+  
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(competitionNameCell);
@@ -115,20 +114,10 @@ addRowToTable = (data) => {
     row.appendChild(locationAddressCell);
     row.appendChild(locationPhoneCell);
 
-    row.setAttribute('data value', newRow.id);
+    row.setAttribute('data-value', newRow.competitionID)
   
     // Add the row to the table
     currentTable.appendChild(row);
 
-    // Find drop down menu, create a new option, fill data in the option (full name, id),
-    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
-    let selectMenu = document.getElementById("mySelect");
-    let option = document.createElement("option");
-    option.text = newRow.competitionName + ' ' +  newRow.date + ' ' + newRow.startTime + ' ' + newRow.locatioName + ' ' + newRow.locationAddress + ' ' + newRow.locationPhone;
-    option.value = newRow.id;
-    selectMenu.add(option);
     
-}
-
-
-
+}  

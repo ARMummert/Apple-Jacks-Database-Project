@@ -98,10 +98,9 @@ app.put('/put-competition-ajax', function(req, res, next) {
   let locationAddress = data.locationAddressValue;
   let locationPhone = data.locationPhoneValue;
 
-  //let updateCompetition = `UPDATE Competitions SET competitionName = 
-  // '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
+  let updateCompetition = `UPDATE Competitions SET competitionName = 
+   '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
   
-  let updateCompetition = `UPDATE Competitions SET competitionName = ?, date = ?, startTime = ?, locationName = ?, locationAddress = ?, locationPhone = ?`;
   let selectCompetition = `SELECT * FROM Competitons WHERE competitionID = ?`
     db.pool.query(
       updateCompetition,

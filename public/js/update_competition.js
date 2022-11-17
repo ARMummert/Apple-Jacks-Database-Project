@@ -55,17 +55,21 @@ updateCompetitionForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, competitionIDValue);
+            updateRow(xhttp.response, competitionIDValue); 
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
-    }
+      }
+    //xhttp.onload = function () { // added this
+    //    location.reload()
+    //};
     // Send the request and wait for the response
-xhttp.send(JSON.stringify(data));
-
-})
+    xhttp.send(JSON.stringify(data));
+    updateCompetitionForm.reset();
+  
+    })
 
 
 function updateRow(data, competitionID){
@@ -119,4 +123,3 @@ function updateRow(data, competitionID){
        }
     }
 } 
-    

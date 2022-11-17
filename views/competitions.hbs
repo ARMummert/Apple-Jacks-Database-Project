@@ -1,8 +1,8 @@
 <!-- competitions.hbs -->
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<body>
 
 <h3 class=padtop >Competitions</h3>
 
@@ -23,15 +23,15 @@
         {{! Body section }}
         <tbody>
             {{#each data}}
-            <tr data-value={{this.id}}>
-                <td>{{this.competitionID}}</td>
-                <td>{{this.competitionName}}</td>
-                <td>{{this.date}}</td>
-                <td>{{this.startTime}}</td>
-                <td>{{this.locationName}}</td>
-                <td>{{this.locationAddress}}</td>
-                <td>{{this.locationPhone}}</td>
-                <td><button onClick="deleteCompetition({{this.competitionID}})"/>Delete</button><td>            
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Competition}}</td>
+                <td>{{this.Date}}</td>
+                <td>{{this.Time}}</td>
+                <td>{{this.Location}}</td>
+                <td>{{this.Address}}</td>
+                <td>{{this.Phone}}</td>
+                <td><button onClick="deleteCompetition({{this.ID}})">Delete</button><td>            
             </tr>   
             {{/each}}
         </tbody>
@@ -110,7 +110,7 @@
                         <td><select>
                             <option value="">Select a Competition</option>
                             {{#each data}}
-                            <option value="{{this.competitionID}}">{{this.competitionName}}</option>
+                            <option value="{{this.ID}}">{{this.Competition}}</option>
                             {{/each}}
                         </select>
                         </td>
@@ -147,7 +147,7 @@
         </form>
 </section>
             
-</body>
+
 <script>
   function formFill(data) {
     // Update the form with the selected customer's data

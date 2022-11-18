@@ -1,0 +1,78 @@
+<!-- competitions.hbs -->
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+<h3 class=padtop >Event Levels</h3>
+
+<section class="sectionone">
+    {{! Create a table }}
+
+    <table id="event-levels-table" class="tableone" border="1" cellpadding="5" >
+        {{! Header section }}
+
+        <thead>
+              <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+                <th>delete</th>    
+            </tr>
+        </thead>
+        {{! Body section }}
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Event-Level}}</td>
+                <td><button onClick="deleteEvent-Level({{this.ID}})">Delete</button><td>            
+            </tr>   
+            {{/each}}
+        </tbody>
+    </table>
+</section>   
+
+
+<section class="sectiontwo">        
+</section>
+
+        
+
+<section class="sectionthree">
+        <h3 class="section-header"> Add Competition </h3>
+        <form id="add-event-levels-form">         
+            <table class="tablethree">
+                
+                <tr>
+                    <td><label for="input-event-levels-name">Name</label></td> 
+                    <td><input type="text" name="input-event-levels-name" id="input-event-levels-name" required  placeholder="Event Level Name"></td>
+                       
+                </tr>
+                
+                <tr>
+                    <td><input onclick-"addeventlevelsForm()" type="submit" value="Add"></td>
+                    <td><input type="reset" value="Cancel"></td>
+                </tr>
+            </table>
+        </form>
+</section>
+
+        
+        
+
+<section class="sectionfour">
+</section>
+            
+
+<script>
+
+    const btn = document.getElementById('btn');
+    function showForm(btn) {
+        document.getElementById("showtable").style.display = "block";
+    };
+</script>
+
+<script src="./js/delete_event-levels.js"></script>
+
+<script src="./js/add_event-levels.js"></script>

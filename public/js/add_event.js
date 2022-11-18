@@ -9,16 +9,19 @@ addEventForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputeventName = document.getElementById("input-event-name");
-    let inputcompetitionID = document.getElementById("input-competition-ID")
-    let inputdivisionID = document.getElementById("input-division-ID")
-    let inputeventlevelID = document.getElementById("input-event-level-ID")
+    let inputcompetitionID = document.getElementById("input-competition-ID");
+    let inputdivisionID = document.getElementById("input-division-ID");
+    let inputeventlevelID = document.getElementById("input-event-level-ID");
 
     // Get the values from the form fields
     let eventNameValue = inputeventName.value;
-    let competitionIDValue = inputcompetitionID.value
-    let divisionIDValue = inputdivisionID.value
-    let eventlevelIDValue = inputeventlevelID.value
+    let competitionIDValue = inputcompetitionID.value;
+    let divisionIDValue = inputdivisionID.value;
+    let eventlevelIDValue = inputeventlevelID.value;
 
+    if (eventNameValue, competitionIDValue, divisionIDValue, eventlevelIDValue  === '') {
+        return;
+    }
     // Put our data we want to send in a javascript object
     let data = {
         eventName: eventNameValue,
@@ -26,8 +29,7 @@ addEventForm.addEventListener("submit", function (e) {
         divisionID: divisionIDValue,
         eventlevelID: eventlevelIDValue
     }
-    
-    // Setup our AJAX request
+  //Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-event-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -39,11 +41,6 @@ addEventForm.addEventListener("submit", function (e) {
             // Add the new data to the table
             addRowToTable(xhttp.response);
 
-            // Clear the input fields for another transaction
-            inputeventName.value = '';
-            inputcompetitionID.value = '';
-            inputdivisionID.value = '';
-            inputeventlevelID.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -70,6 +67,7 @@ addRowToTable = (data) => {
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
+    console.log("newRow" + newRow)
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
@@ -82,7 +80,7 @@ addRowToTable = (data) => {
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.id;
+    idCell.innerText = newRow.eventID;
     competitionIDCell.innerText = newRow.competitionID;
     divisionIDCell.innerText = newRow.divisionID;
     eventlevelIDCell.innerText = newRow.eventlevelID;
@@ -91,7 +89,7 @@ addRowToTable = (data) => {
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deletePerson(newRow.id);
+        deleteEvent(newRow.eventID);
     };
 
 
@@ -105,7 +103,7 @@ addRowToTable = (data) => {
     row.appendChild(deleteCell);
     
     // Add a custom row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.id);
+    row.setAttribute('data-value', newRow.eventID);
 
     // Add the row to the table
     currentTable.appendChild(row);
@@ -117,7 +115,7 @@ addRowToTable = (data) => {
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
     option.text = newRow.eventID + ' ' +  newRow.eventName;
-    option.value = newRow.id;
+    option.value = newRow.eventID;
     selectMenu.add(option);
    
 }

@@ -1,5 +1,5 @@
 // Get all objects we need to modify
-let updateEventForm = document.getElementById('update-event-form-ajax')
+let updateEventForm = document.getElementById('update-event-form')
 
 // Modify the objects we need
 updateEventForm.addEventListener("submit", function(e) {

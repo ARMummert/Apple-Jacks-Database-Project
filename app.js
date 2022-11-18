@@ -180,7 +180,7 @@ app.get('/events', function (req, res){
     INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
     WHERE eventName = "${req.query.eventName}%"`;
      }       
-  db.pool.query(query1, function(error, rows, fields) {
+  db.pool.query(events, function(error, rows, fields) {
       
       return res.render('events', {data: rows});
   });

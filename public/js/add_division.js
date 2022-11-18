@@ -19,7 +19,7 @@ addDivisionForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        divisionName: divisionNameValue,
+        divisionName: divisionNameValue
     }
     
     // Setup our AJAX request
@@ -59,7 +59,7 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length - 1]
+    let newRow = parsedData[parsedData.length -1]
     console.log("newRow" + newRow)
 
     // Create a row and 4 cells

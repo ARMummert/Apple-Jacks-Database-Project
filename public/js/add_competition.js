@@ -114,7 +114,7 @@ addRowToTable = (data) => {
     row.appendChild(locationAddressCell);
     row.appendChild(locationPhoneCell);
     row.appendChild(deleteCell);
-    row.setAttribute('data-value', newRow.competitionID)
+    row.setAttribute('data-value', newRow.competitionID);
   
     // Add the row to the table
     currentTable.appendChild(row);

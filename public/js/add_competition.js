@@ -76,7 +76,7 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length]
+    let newRow = parsedData[parsedData.length -1]
     console.log("newRow" + newRow)
 
     // Create a row and 4 cells
@@ -114,7 +114,7 @@ addRowToTable = (data) => {
     row.appendChild(locationAddressCell);
     row.appendChild(locationPhoneCell);
     row.appendChild(deleteCell);
-    row.setAttribute('data-value', newRow.competitionID)
+    row.setAttribute('data-value', newRow.competitionID);
   
     // Add the row to the table
     currentTable.appendChild(row);
@@ -122,6 +122,6 @@ addRowToTable = (data) => {
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
     option.text = newRow.competitionID + ' ' +  newRow.competitionName;
-    option.value = newRow.id;
+    option.value = newRow.competitionID;
     selectMenu.add(option);
 }   

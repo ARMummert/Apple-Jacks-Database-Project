@@ -1,15 +1,15 @@
-<!-- competitions.hbs -->
+<!-- divisions.hbs -->
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
-<h3 class=padtop >Event Levels</h3>
+<h3 class=padtop >Divisions</h3>
 
 <section class="sectionone">
     {{! Create a table }}
 
-    <table id="event-level-table" class="tableone" border="1" cellpadding="5" >
+    <table id="divisions-table" class="tableone" border="1" cellpadding="5" >
         {{! Header section }}
 
         <thead>
@@ -17,7 +17,7 @@
                 {{#each data.[0]}}
                 <th>{{@key}}</th>
                 {{/each}}
-                <th>delete</th>    
+                <th>Delete</th>    
             </tr>
         </thead>
         {{! Body section }}
@@ -25,51 +25,39 @@
             {{#each data}}
             <tr data-value={{this.ID}}>
                 <td>{{this.ID}}</td>
-                <td>{{this.Event-Level}}</td>
-                <td><button onClick="deleteEvent-Level({{this.ID}})">Delete</button><td>            
+                <td>{{this.Division}}</td>
+                <td><button onClick="deleteDivision({{this.ID}})">Delete</button><td>            
             </tr>   
             {{/each}}
         </tbody>
     </table>
 </section>   
 
-
-<section class="sectiontwo">        
-</section>
-
-        
-
 <section class="sectionthree">
-        <h3 class="section-header"> Add Competition </h3>
-        <form id="add-event-level-form">         
+        <h3 class="section-header"> Add Division </h3>
+        <form id="add-division-form">         
             <table class="tablethree">
                 
                 <tr>
-                    <td><label for="input-event-level-name">Name</label></td> 
-                    <td><input type="text" name="input-event-level-name" id="input-event-level-name" required  placeholder="Event Level Name"></td>
+                    <td><label for="input-division-name">Name</label></td> 
+                    <td><input type="text" name="input-division-name" id="input-division-name" required  placeholder="Division Name"></td>
                        
                 </tr>
                 
                 <tr>
-                    <td><input onclick-"addeventlevelForm()" type="submit" value="Add"></td>
+                    <td><input onclick-"addDivisionForm()" type="submit" value="Add"></td>
                     <td><input type="reset" value="Cancel"></td>
                 </tr>
             </table>
         </form>
 </section>
-
-        
-        
-
-<section class="sectionfour">
-</section>
             
 
 <script>
-  function formFill(data) {
-    // Update the form with the selected customer's data
+
+    function formFill(data) {
     var id = data.value;
-    addEventLevelForm(competitionID)
+    addDivisionForm(divisionID)
     };
     const btn = document.getElementById('btn');
     function showForm(btn) {
@@ -77,6 +65,5 @@
     };
 </script>
 
-<script src="./js/delete_event-levels.js"></script>
-
-<script src="./js/add_event-levels.js"></script>
+<script src="./js/delete_division.js"></script>
+<script src="./js/add_division.js"></script>

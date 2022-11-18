@@ -1,31 +1,30 @@
 // Get the objects we need to modify
-let addEventLevelForm = document.getElementById('add-event-level-form');
+let addDivisionForm = document.getElementById('add-division-form');
 
 // Modify the objects we need
-addEventLevelForm.addEventListener("submit", function (e) {
+addDivisionForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputeventlevelName = document.getElementById("input-event-level-name");
+    let inputdivisionName = document.getElementById("input-division-name");
     
-
     // Get the values from the form fields
-    let eventlevelNameValue = inputeventlevelName.value;
-    
+    let divisionNameValue = inputdivisionName.value;
 
-    if (eventlevelNameValue === '') {
+    if (divisionNameValue === '') {
         return;
     }
+
     // Put our data we want to send in a javascript object
     let data = {
-      eventlevelName:eventlevelNameValue,  
-    };
+        divisionName: divisionNameValue
+    }
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/add-event-level-ajax', true);
+    xhttp.open("POST", "/add-division-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -34,7 +33,7 @@ addEventLevelForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             addRowToTable(xhttp.response);
-            
+           
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -43,57 +42,61 @@ addEventLevelForm.addEventListener("submit", function (e) {
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-    // Reload the page
-    addEventLevelForm.reset();
-
+    //
+    addDivisionForm.reset();
 })
 
 
 // Creates a single row from an Object representing a single record from 
-// Competitions
+// bsg_people
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("event-level-table");
+    let currentTable = document.getElementById("divisions-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length - 1]
+    let newRow = parsedData[parsedData.length -1]
     console.log("newRow" + newRow)
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
-    let eventlevelNameCell = document.createElement("TD");
-    let deleteCell = document.createElement("ID");
+    let divisionNameCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.eventlevelID;
-    eventlevelNameCell.innerText = newRow.eventlevelName;
+    idCell.innerText = newRow.divisionID;
+    divisionNameCell.innerText = newRow.divisionName;
     
-
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteEventLevel(newRow.eventlevelID);
-    }
-  
+        deleteDivision(newRow.divisionID);
+    };
+
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(eventlevelNameCell);
+    row.appendChild(divisionNameCell);
     row.appendChild(deleteCell);
+    
+    // Add a custom row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.divisionID);
 
-    row.setAttribute('data-value', newRow.eventlevelID)
-  
     // Add the row to the table
     currentTable.appendChild(row);
 
+    // Start of new Step 8 code for adding new data to the dropdown menu for updating people
+    
+    // Find drop down menu, create a new option, fill data in the option (full name, id),
+    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
-    option.text = newRow.eventlevelID + ' ' +  newRow.eventlevelName;
-    option.value = newRow.eventlevelID;
+    option.text = newRow.divisionID + ' ' +  newRow.divisionName;
+    option.value = newRow.divisionID;
     selectMenu.add(option);
-}   
+   
+}

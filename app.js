@@ -5,7 +5,7 @@ var express = require('express');
 var app     = express();    
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT = 4460;
+PORT = 6484;
 
 // Database
 var db = require('./database/db-connector')
@@ -301,7 +301,7 @@ app.post('/add-event-levels-ajax', function(req, res) {
     VALUES (
       '${data.eventLevelName}')`;
     
- 
+    });
 // Routes - Divisions
 app.get('/divisions', function (req, res){
   let divisions;
@@ -327,9 +327,10 @@ app.post('/add-division-ajax', function(req, res) {
   
   // Create Divisions Query
  
-    query1 = `INSERT INTO Divisions(divisionName)
+    query1 = `INSERT INTO Divisions(divisionID, divisionName)
     VALUES (
-      '${data.divisionName}',
+      '${data.divisionID}',
+      '${data.divisionName}'
     )`;
   
   db.pool.query(query1, function(error, rows, fields) {
@@ -372,9 +373,9 @@ app.delete('/delete-event-levels/', function(req, res, next) {
                     
                 }
             })       
-        }
-    })
-  });
+        })
+    });
+
 
 // Delete Division
 app.delete('/delete-division/', function(req, res, next) {
@@ -396,5 +397,5 @@ app.delete('/delete-division/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip1.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });

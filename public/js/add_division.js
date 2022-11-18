@@ -1,31 +1,30 @@
 // Get the objects we need to modify
-let addEventLevelsForm = document.getElementById('add-event-levels-form');
+let addDivisionForm = document.getElementById('add-division-form');
 
 // Modify the objects we need
-addEventLevelsForm.addEventListener("submit", function (e) {
+addDivisionForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputeventlevelName = document.getElementById("input-event-levels-name");
+    let inputdivisionName = document.getElementById("input-division-name");
     
-
     // Get the values from the form fields
-    let eventlevelsNameValue = inputeventlevelName.value;
-    
+    let divisionNameValue = inputdivisionName.value;
 
-    if (eventlevelsNameValue === '') {
+    if (divisionNameValue === '') {
         return;
     }
+
     // Put our data we want to send in a javascript object
     let data = {
-      eventlevelsName:eventlevelsNameValue,  
-    };
+        divisionName: divisionNameValue,
+    }
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/add-event-levels-ajax', true);
+    xhttp.open("POST", "/add-division-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -34,7 +33,7 @@ addEventLevelsForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             addRowToTable(xhttp.response);
-            
+           
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -43,18 +42,17 @@ addEventLevelsForm.addEventListener("submit", function (e) {
 
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-    // Reload the page
-    addEventLevelsForm.reset();
-
+    //
+    addDivisionForm.reset();
 })
 
 
 // Creates a single row from an Object representing a single record from 
-// Competitions
+// bsg_people
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("event-levels-table");
+    let currentTable = document.getElementById("divisions-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -67,33 +65,38 @@ addRowToTable = (data) => {
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
-    let eventlevelNameCell = document.createElement("TD");
-    let deleteCell = document.createElement("ID");
+    let divisionNameCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.eventlevelID;
-    eventlevelNameCell.innerText = newRow.eventlevelName;
+    idCell.innerText = newRow.divisionID;
+    divisionNameCell.innerText = newRow.divisionName;
     
-
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteEventLevel(newRow.eventlevelID);
-    }
-  
+        deleteDivision(newRow.divisionID);
+    };
+
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(eventlevelNameCell);
+    row.appendChild(divisionNameCell);
     row.appendChild(deleteCell);
+    
+    // Add a custom row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.divisionID);
 
-    row.setAttribute('data-value', newRow.eventlevelID)
-  
     // Add the row to the table
     currentTable.appendChild(row);
 
+    // Start of new Step 8 code for adding new data to the dropdown menu for updating people
+    
+    // Find drop down menu, create a new option, fill data in the option (full name, id),
+    // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
-    option.text = newRow.competitionID + ' ' +  newRow.competitionName;
-    option.value = newRow.id;
+    option.text = newRow.divisionID + ' ' +  newRow.divisionName;
+    option.value = newRow.divisionID;
     selectMenu.add(option);
-}   
+   
+}

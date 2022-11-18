@@ -178,7 +178,7 @@ app.get('/events', function (req, res){
     INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
     INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
     INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
-    WHERE eventName = :Search_input_field;`;
+    WHERE eventName = "${req.query.eventName}%"`;
      }       
   db.pool.query(query1, function(error, rows, fields) {
       
@@ -197,8 +197,7 @@ app.post('/add-event-ajax', function(req, res) {
       '${data.competitionID}',
       '${data.divisionID}',
       '${data.eventlevelID}',
-      '${data.eventName}',
-      `;
+      '${data.eventName}')`;
     
     
   db.pool.query(query1, function(error, rows, fields) {
@@ -279,9 +278,62 @@ app.delete('/delete-event/', function(req, res, next) {
     }
   });
 });
+
+// Routes - event-levels
+app.get('/event-levels', function (req, res){
+  
+  query1 = `SELECT eventlevelID as 'ID', eventLevelName as 'Event-Level' FROM EventLevels;`;
+      
+  db.pool.query(query1, function(error, rows, fields) {
+      
+      return res.render('event-levels', {data: rows});
+  });
+  });
+
+  // Create Event-levels
+app.post('/add-event-levels-ajax', function(req, res) {
+  let data = req.body;
+  
+  // Create Events Query
+ 
+    query1 = `INSERT INTO EventLevels (eventLevelName)   
+    VALUES (
+      '${data.eventLevelName}')`;
     
+    
+  db.pool.query(query1, function(error, rows, fields) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400);
+    }
+    else
+    {
+      res.send(rows);
+                    
+    }
+    })
+  });    
+ 
+  
+// Delete Event-Levels
+app.delete('/delete-event-levels/', function(req, res, next) {
+  let data = req.body;
+  let eventlevelID = parseInt(data.id);
+  let deleteEvents = 'DELETE FROM Events WHERE Events.eventlevelID = ?';
+
+  db.pool.query(deleteEvents, [eventlevelID], function(error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    }
+    else {
+      res.sendStatus(204);
+      
+    }
+  });
+});
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip1.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });

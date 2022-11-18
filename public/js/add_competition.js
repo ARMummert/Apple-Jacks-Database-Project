@@ -76,7 +76,7 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length - 1]
+    let newRow = parsedData[parsedData.length]
     console.log("newRow" + newRow)
 
     // Create a row and 4 cells
@@ -113,7 +113,7 @@ addRowToTable = (data) => {
     row.appendChild(locationNameCell);
     row.appendChild(locationAddressCell);
     row.appendChild(locationPhoneCell);
-
+    row.appendChild(deleteCell);
     row.setAttribute('data-value', newRow.competitionID)
   
     // Add the row to the table

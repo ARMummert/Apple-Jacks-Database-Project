@@ -36,26 +36,7 @@
         </tbody>
     </table>
 </section>   
-
-
-<section class="sectiontwo">
-        <h3 class="section-header">Search By Event Name</h3>
-        <form id='search-events' method='GET' action ='/events'>
-            <table class="tabletwo">
-        
-                <td><input type="text" name="eventName" id="input-event-search" placeholder="Event Name..."></td>
-            
-            </table>
-            <div class="tabletwo">
-                <input type="submit" value="Search">
-                <input type="reset" value="Cancel">
-               
-            </div>
-            
-        </form>
-</section>
-
-        
+       
 
 <section class="sectionthree">
         <h3 class="section-header"> Add Event </h3>
@@ -216,8 +197,8 @@
                         <td><input type="text" name="update-event-name" id="update-event-name" placeholder="Enter New Event Name"></td>
                     </tr>
                     <tr>
-                        <td><input onclick-"updateEventForm()" type="submit" value="Update Competition"></td>
-                        <td><a href='/competitions'><input type="reset" value="Cancel"></a></td>
+                        <td><input onclick-"updateEventForm()" type="submit" value="Update Event"></td>
+                        <td><a href='/events'><input type="reset" value="Cancel"></a></td>
                     </tr>
                 </table>
         </form>
@@ -228,12 +209,12 @@
   function formFill(data) {
     // Update the form with the selected customer's data
     var id = data.value;
-    updateEventForm(competitionID)
+    updateEventForm(eventID)
     };
       function formFill(data) {
     // Update the form with the selected customer's data
     var id = data.value;
-    addEventForm(competitionID)
+    addEventForm(eventID)
     };
     const btn = document.getElementById('btn');
     function showForm(btn) {

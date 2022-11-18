@@ -394,6 +394,236 @@ app.delete('/delete-division/', function(req, res, next) {
     }
   });
 });
+
+// Routes - Athletes
+
+app.get('/athletes', function (req, res){
+  let athletes;
+  if (req.query.athleteName === undefined)
+  {
+    athletes = `SELECT Athletes.athleteID as 'ID',Teams.teamName as 'Team', Divisions.divisionName as 'Division', athleteName as 'Athlete',
+    athletePhone as 'Athlete-Phone', athleteEmail as 'Athlete-Email', athleteAddress as 'Athlete-Address',
+    athleteDOB as 'DOB', athleteAge as 'Age'
+    FROM Athletes
+    INNER JOIN Teams ON Athletes.teamID = Teams.teamID
+    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID`;
+  }
+  else 
+  {
+    athletes = `SELECT Athletes.athleteID as 'ID',Teams.teamName as 'Team', Divisions.divisionName as 'Division', athleteName as 'Athlete-Name',
+    athletePhone as 'Athlete-Phone', athleteEmail as 'Athlete-Email', athleteAddress as 'Athlete-Address',
+    athleteDOB as 'DOB', athleteAge as 'Age'
+    FROM Athletes
+    INNER JOIN Teams ON Athletes.teamID = Teams.teamID
+    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID WHERE athleteName LIKE "${req.query.athleteName}%";`;
+  }
+  
+  db.pool.query(athletes, function(error, rows, fields) {
+    return res.render('athletes', {data: rows});
+  });
+  });
+  
+
+// Create Athletes
+app.post('/add-athletes-ajax', function(req, res) {
+  let data = req.body;
+  
+  // Create Athletes Query
+ 
+    query1 = `INSERT INTO Athletes(teamID,divisionID,athleteName, athletePhone, athleteEmail, athleteAddress, athleteDOB, athleteAge)
+    VALUES (
+      '${data.teamID}',
+      '${data.competitionID}',
+      '${data.athleteName}',
+      '${data.athletePhone}',
+      '${data.athleteEmail}',
+      '${data.athleteAddress},
+      '${data.athleteDOB}
+      '${data.athleteAge}')`;
+  
+    
+  db.pool.query(query1, function(error, rows, fields) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400);
+    }
+    else
+        {
+            // If there was no error, perform a SELECT all from Competitions
+            query2 = `SELECT Athletes.athleteID, Athletes.athleteName FROM Athletes ORDER BY Athletes.athleteID ASC;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                    
+                }
+            })       
+        }
+    })
+  });
+// Update Athlete
+app.put('/put-athlete-ajax', function(req, res, next) {
+  let data = req.body;
+  let athleteID = parseInt(data.id);
+  let teamID = data.teamIDValue;
+  let competitionID = data.competitionIDValue;
+  let athleteName= data.athleteNameValue;
+  let athletePhone = data.athletePhoneValue;
+  let athleteEmail = data.athleteEmailValue;
+  let athleteAddress = data.athleteAddressValue;
+  let athleteDOB = data.athleteDOBValue;
+  let athleteAge = data.athleteAgeValue;
+
+  let updateAthlete = `UPDATE athletes SET teamID = '${data.teamID}', divisionID = '${data.divisionID}', athleteName = '${data.athleteName}', athletePhone= '${data.athletePhone}',
+  athleteEmail = '${data.athleteEmail}', athleteAddress = '${data.athleteAddress}', athleteAge = '${data.athleteAge}' WHERE athleteID = ?;`
+  
+  let selectAthlete = `SELECT athleteID, teamID, divisionID, athleteName,AthletePhone, athleteEmail,athleteAddress,athleteAge
+  FROM Athletes
+  WERE Athletes.athleteID = ?`
+    db.pool.query(
+      updateAthlete,
+
+        [
+        athleteID,
+        teamID,
+        competitionID,
+        athleteName,
+        athletePhone,
+        athleteEmail,
+        athleteAddress,
+        athleteDOB,
+        athleteAge
+       ],
+
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+        res.sendStatus(400);
+      }
+      else {
+      db.pool.query(selectAthlete, [athleteID], function(error, rows, fields){
+        if (error) {
+          console.log(error)
+          res.sendStatus(400);
+        }
+        else {
+          res.send(rows);
+          res.redirect('/athletes');
+        }
+      })
+      
+    }
+  })
+});
+
+// Delete Athlete
+app.delete('/delete-athlete/', function(req, res, next) {
+  let data = req.body;
+  let athleteID = parseInt(data.id);
+  let deleteAthletes = 'DELETE FROM Athletes WHERE athleteID = ?';
+
+  db.pool.query(deleteAthletes, [athleteID], function(error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    }
+    else {
+      res.sendStatus(204);
+      
+    }
+  });
+});
+
+// Routes - Teams
+
+app.get('/teams', function (req, res){
+  let teams;
+  if (req.query.teamName === undefined)
+  {
+    teams = `SELECT teamID as 'ID', teamName as 'Team', coachName as 'Coach-Name', coachPhone as 'Coach-Phone', 
+    coachEmail as 'Coach-Email' FROM Teams;`;
+  }
+  else 
+  {
+    teams = `SELECT teamID as 'ID', teamName as 'Team', coachName as 'Coach-Name', coachPhone as 'Coach-Phone', 
+    coachEmail as 'Coach-Email' FROM Teams WHERE teamName =  LIKE "${req.query.teamName}%";`;
+  }
+  
+  db.pool.query(teams, function(error, rows, fields) {
+    return res.render('teams', {data: rows});
+  });
+  });
+  
+
+// Create Teams
+app.post('/add-teams-ajax', function(req, res) {
+  let data = req.body;
+  
+  // Create Teams Query
+ 
+    query1 = `INSERT INTO Teams(teamID, teamName,coachName,coachPhone,CoachEmail)
+    VALUES (
+      '${data.teamID}',
+      '${data.teamName}',
+      '${data.coachName}',
+      '${data.coachPhone}',
+      '${data.coachEmail}',
+      )`;
+  
+    
+  db.pool.query(query1, function(error, rows, fields) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400);
+    }
+    else
+        {
+            // If there was no error, perform a SELECT all from Competitions
+            query2 = `SELECT Teams.teamID, Teams.teamName, Teams.coachName, Teams.coachPhone, Teams.coachEmail FROM Teams ORDER BY Teams.teamID ASC;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                    
+                }
+            })       
+        }
+    })
+  });
+
+// Delete Team
+app.delete('/delete-team/', function(req, res, next) {
+  let data = req.body;
+  let teamID = parseInt(data.id);
+  let deleteTeams = 'DELETE FROM Teams WHERE teamID = ?';
+
+  db.pool.query(deleteTeams, [teamID], function(error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    }
+    else {
+      res.sendStatus(204);
+      
+    }
+  });
+});
 // LISTENER
 
 app.listen(PORT, function () {

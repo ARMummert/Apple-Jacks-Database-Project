@@ -1,31 +1,31 @@
 // Get the objects we need to modify
-let addEventLevelsForm = document.getElementById('add-event-levels-form');
+let addEventLevelForm = document.getElementById('add-event-level-form');
 
 // Modify the objects we need
-addEventLevelsForm.addEventListener("submit", function (e) {
+addEventLevelForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputeventlevelName = document.getElementById("input-event-levels-name");
+    let inputeventlevelName = document.getElementById("input-event-level-name");
     
 
     // Get the values from the form fields
-    let eventlevelsNameValue = inputeventlevelName.value;
+    let eventlevelNameValue = inputeventlevelName.value;
     
 
-    if (eventlevelsNameValue === '') {
+    if (eventlevelNameValue === '') {
         return;
     }
     // Put our data we want to send in a javascript object
     let data = {
-      eventlevelsName:eventlevelsNameValue,  
+      eventlevelName:eventlevelNameValue,  
     };
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", '/add-event-levels-ajax', true);
+    xhttp.open("POST", '/add-event-level-ajax', true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -44,7 +44,7 @@ addEventLevelsForm.addEventListener("submit", function (e) {
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
     // Reload the page
-    addEventLevelsForm.reset();
+    addEventLevelForm.reset();
 
 })
 
@@ -54,7 +54,7 @@ addEventLevelsForm.addEventListener("submit", function (e) {
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("event-levels-table");
+    let currentTable = document.getElementById("event-level-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -93,7 +93,7 @@ addRowToTable = (data) => {
 
     let selectMenu = document.getElementById("mySelect");
     let option = document.createElement("option");
-    option.text = newRow.competitionID + ' ' +  newRow.competitionName;
-    option.value = newRow.id;
+    option.text = newRow.eventlevelID + ' ' +  newRow.eventlevelName;
+    option.value = newRow.eventlevelID;
     selectMenu.add(option);
 }   

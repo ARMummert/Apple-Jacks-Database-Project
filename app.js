@@ -160,10 +160,10 @@ app.delete('/delete-competition/', function(req, res, next) {
 
 // Routes - Events
 app.get('/events', function (req, res){
-  let query1;
+  let events;
   if (req.query.eventName === undefined)
   {
-    query1 = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
+    events = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
     Divisions.divisionName as 'Divsion', EventLevels.eventlevelName as 'Event-Level'
     FROM Events
     INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
@@ -172,7 +172,7 @@ app.get('/events', function (req, res){
   }
   else 
   {
-    query1 = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
+    events = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
     Divisions.divisionName as 'Divsion', EventLevels.eventlevelName as 'Event-Level'
     FROM Events
     INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
@@ -279,6 +279,7 @@ app.delete('/delete-event/', function(req, res, next) {
   });
 });
 
+
 // Routes - event-levels
 app.get('/event-levels', function (req, res){
   
@@ -300,13 +301,44 @@ app.post('/add-event-levels-ajax', function(req, res) {
     VALUES (
       '${data.eventLevelName}')`;
     
-    
+ 
+// Routes - Divisions
+app.get('/divisions', function (req, res){
+  let divisions;
+  if (req.query.divisionName === undefined)
+  {
+    divisions = `SELECT divisionID as 'ID', divisionName as 'Division' FROM Divisions;`;
+  }
+  else 
+  {
+    divisions = `SELECT divisionID as 'ID', divisionName as 'Division' FROM Divisions
+    WHERE divisionName = ?;`;
+  }
+  
+  db.pool.query(divisions, function(error, rows, fields) {
+    return res.render('divisions', {data: rows});
+  });
+  });
+  
+
+// Create Divisions
+app.post('/add-division-ajax', function(req, res) {
+  let data = req.body;
+  
+  // Create Divisions Query
+ 
+    query1 = `INSERT INTO Divisions(divisionName)
+    VALUES (
+      '${data.divisionName}',
+    )`;
+  
   db.pool.query(query1, function(error, rows, fields) {
     if (error) {
       console.log(error)
       res.sendStatus(400);
     }
     else
+
     {
       res.send(rows);
                     
@@ -321,7 +353,36 @@ app.delete('/delete-event-levels/', function(req, res, next) {
   let eventlevelID = parseInt(data.id);
   let deleteEvents = 'DELETE FROM Events WHERE Events.eventlevelID = ?';
 
-  db.pool.query(deleteEvents, [eventlevelID], function(error, rows, fields) {
+  db.pool.query(deleteEvents, [eventlevelID], function(error, rows, fields) 
+        {
+            // If there was no error, perform a SELECT all from Divisions
+            query2 = `SELECT divisionID.divisionName FROM Divisions ASC;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                    
+                }
+            })       
+        }
+    })
+  });
+
+// Delete Division
+app.delete('/delete-division/', function(req, res, next) {
+  let data = req.body;
+  let divisionID = parseInt(data.id);
+  let deleteDivisions = 'DELETE FROM Divisions WHERE divisionID = ?';
+
+  db.pool.query(deleteDivisions, [divisionID], function(error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);

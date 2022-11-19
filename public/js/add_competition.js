@@ -88,7 +88,7 @@ addRowToTable = (data) => {
     let locationNameCell = document.createElement("TD");
     let locationAddressCell = document.createElement("TD");
     let locationPhoneCell = document.createElement("TD");
-    let deleteCell = document.createElement("ID");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.competitionID;

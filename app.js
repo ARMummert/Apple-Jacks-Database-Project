@@ -303,12 +303,12 @@ app.post('/add-event-levels-ajax', function(req, res) {
     query1 = `INSERT INTO EventLevels (eventLevelName)   
     VALUES ('${data.eventLevelName}')`;
     });
-    
+
   // Delete Event Level
 app.delete('/delete-event-level/', function(req, res, next) {
   let data = req.body;
   let eventlevelID = parseInt(data.id);
-  let deleteEventLevel = 'DELETE EventLevels WHERE eventlevelID = ?';
+  let deleteEventLevel = 'DELETE FROM EventLevels WHERE eventlevelID = ?';
 
   db.pool.query(deleteEventLevel, [eventlevelID], function(error, rows, fields) {
     if (error) {

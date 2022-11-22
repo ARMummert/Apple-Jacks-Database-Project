@@ -119,7 +119,7 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
-    let selectMenu = document.getElementById("mySelect");
+    let selectMenu = document.getElementById("select-competition");
     let option = document.createElement("option");
     option.text = newRow.competitionID + ' ' +  newRow.competitionName;
     option.value = newRow.competitionID;

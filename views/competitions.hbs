@@ -32,6 +32,9 @@
                 <td>{{this.Address}}</td>
                 <td>{{this.Phone}}</td>
                 <td><button onClick="deleteCompetition({{this.ID}})">Delete</button><td>            
+                <td><input onclick-"addCompetitionForm()" type="submit" value="Update"></td>
+                           
+          
             </tr>   
             {{/each}}
         </tbody>
@@ -107,7 +110,7 @@
                 <table class="tablefour">
                     <tr>
                         <td><label>Select Competition to Update:</label></td>
-                        <td><select>
+                        <td><select id='select-competition' onChange="formFill(this)">
                             <option value="">Select a Competition</option>
                             {{#each data}}
                             <option value="{{this.ID}}">{{this.Competition}}</option>
@@ -154,10 +157,15 @@
     var id = data.value;
     updateCompetitionForm(competitionID)
     };
-      function formFill(data) {
+function formFill(data) {
     // Update the form with the selected customer's data
     var id = data.value;
     addCompetitionForm(competitionID)
+    };
+function formFill(data) {
+    // Update the form with the selected customer's data
+    var id = data.value;
+    updateCompetition(id)
     };
     const btn = document.getElementById('btn');
     function showForm(btn) {

@@ -5,11 +5,13 @@ var express = require('express');
 var app     = express();    
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT = 6484;
+PORT = 8040;
 
 // Database
 var db = require('./database/db-connector')
-
+// Body Parser
+var bodyParser = require('body-parser'); //Added bodyparser for POST
+app.use(bodyParser.json());
 // Express Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     
@@ -94,6 +96,7 @@ app.post('/add-competition-ajax', function(req, res) {
 // Update Competition
 app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
+  
   let competitionID = parseInt(data.id);
   let competitionName = data.competitionNameValue;
   let date = data.dateValue;
@@ -116,7 +119,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
         startTime,
         locationName,
         locationAddress,
-        locationPhone
+        locationPhone,
        ],
 
     function (error, rows, fields) {
@@ -132,7 +135,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
         }
         else {
           res.send(rows);
-          res.redirect('/competitions');
+          
         }
       })
       
@@ -603,5 +606,5 @@ app.delete('/delete-team/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip1.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });

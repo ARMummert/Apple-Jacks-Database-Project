@@ -7,13 +7,13 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputcompetitionID = document.getElementbyId("mySelect");
+    let inputcompetitionID = document.getElementById("select-competition");
     let inputcompetitionName = document.getElementById("update-competition-name");
     let inputdate = document.getElementById("update-date");
     let inputstartTime = document.getElementById("update-start-time");
     let inputlocationName = document.getElementById("update-location-name");
     let inputlocationAddress = document.getElementById("update-location-address");
-    let inputlocationPhone = document.getlElementbyID("update-competition-phone");
+    let inputlocationPhone = document.getlElementByID("update-competition-phone");
     
 
     // Get the values from the form fields
@@ -54,21 +54,19 @@ updateCompetitionForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response); 
+            updateRow(xhttp.response, inputcompetitionID); 
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
       }
-    //xhttp.onload = function () { // added this
-    //    location.reload()
-    //};
+    
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-    updateCompetitionForm.reset();
+   
   
-    })
+    });
 
 
 function updateRow(data, competitionID){
@@ -88,37 +86,40 @@ function updateRow(data, competitionID){
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
           
             // Reassign competition Name to value we updated to
-            td1.innerHTML = parasedData[1]
+            td1.innerHTML = parsedData[0].competitionName;
           
              // Get td of date Value
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
           
             // Reassign date to value we updated to
-            td2.innerHTML = parasedData[2]
+            td2.innerHTML = parsedData[0].date
             
             // Get td of start time Value
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
           
             // Reassign start time to value we updated to
-            td3.innerHTML = parasedData[3]
+            td3.innerHTML = parsedData[0].startTime
          
             // Get td of location Name Value
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
           
             // Reassign location Name to value we updated to
-            td4.innerHTML = parasedData[4]
+            td4.innerHTML = parsedData[0].locationName
          
             // Get td of location Address Value
             let td5 = updateRowIndex.getElementsByTagName("td")[5];
           
             // Reassign location Address to value we updated to
-            td5.innerHTML = parasedData[5]
+            td5.innerHTML = parsedData[0].locationAddress
             // Get td of location Phone Value
             let td6 = updateRowIndex.getElementsByTagName("td")[6];
           
             // Reassign location Phone to value we updated to
-            td6.innerHTML = parasedData[6]
+            td6.innerHTML = parsedData[0].LocationPhone
                   
-       }
-    }
-} 
+      }
+      location.reload();
+      }
+
+};
+

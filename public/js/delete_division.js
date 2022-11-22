@@ -22,6 +22,7 @@ function deleteRow(divisionID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (row.getAttribute("data-value") == divisionID) {
             table.deleteRow(i);
+            table.deleteDropDown(i);
             break;
        }
     }

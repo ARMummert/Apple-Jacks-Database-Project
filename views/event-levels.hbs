@@ -17,7 +17,7 @@
                 {{#each data.[0]}}
                 <th>{{@key}}</th>
                 {{/each}}
-                <th>delete</th>    
+                <th>Delete</th>    
             </tr>
         </thead>
         {{! Body section }}
@@ -26,7 +26,7 @@
             <tr data-value={{this.ID}}>
                 <td>{{this.ID}}</td>
                 <td>{{this.Event-Level}}</td>
-                <td><button onClick="deleteEvent-Level({{this.ID}})">Delete</button><td>            
+                <td><button onClick="deleteEventLevel({{this.ID}})">Delete</button><td>            
             </tr>   
             {{/each}}
         </tbody>
@@ -40,7 +40,7 @@
         
 
 <section class="sectionthree">
-        <h3 class="section-header"> Add Competition </h3>
+        <h3 class="section-header"> Add Event Level </h3>
         <form id="add-event-level-form">         
             <table class="tablethree">
                 
@@ -51,25 +51,18 @@
                 </tr>
                 
                 <tr>
-                    <td><input onclick-"addeventlevelForm()" type="submit" value="Add"></td>
+                    <td><input onclick-"addEventLevelForm()" type="submit" value="Add"></td>
                     <td><input type="reset" value="Cancel"></td>
                 </tr>
             </table>
         </form>
-</section>
-
-        
-        
-
-<section class="sectionfour">
-</section>
-            
+</section>         
 
 <script>
   function formFill(data) {
     // Update the form with the selected customer's data
     var id = data.value;
-    addEventLevelForm(competitionID)
+    addEventLevelForm(eventlevelID)
     };
     const btn = document.getElementById('btn');
     function showForm(btn) {
@@ -78,5 +71,4 @@
 </script>
 
 <script src="./js/delete_event-levels.js"></script>
-
 <script src="./js/add_event-levels.js"></script>

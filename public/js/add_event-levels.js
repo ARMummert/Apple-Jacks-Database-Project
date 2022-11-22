@@ -20,7 +20,7 @@ addEventLevelForm.addEventListener("submit", function (e) {
     }
     // Put our data we want to send in a javascript object
     let data = {
-      eventlevelName:eventlevelNameValue,  
+      eventlevelName: eventlevelNameValue
     };
     
     // Setup our AJAX request
@@ -68,7 +68,7 @@ addRowToTable = (data) => {
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let eventlevelNameCell = document.createElement("TD");
-    let deleteCell = document.createElement("ID");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.eventlevelID;
@@ -86,12 +86,12 @@ addRowToTable = (data) => {
     row.appendChild(eventlevelNameCell);
     row.appendChild(deleteCell);
 
-    row.setAttribute('data-value', newRow.eventlevelID)
+    row.setAttribute('data-value', newRow.eventlevelID);
   
     // Add the row to the table
     currentTable.appendChild(row);
 
-    let selectMenu = document.getElementById("mySelect");
+    let selectMenu = document.getElementById("select-event-level");
     let option = document.createElement("option");
     option.text = newRow.eventlevelID + ' ' +  newRow.eventlevelName;
     option.value = newRow.eventlevelID;

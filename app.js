@@ -295,15 +295,27 @@ app.get('/event-levels', function (req, res){
   });
 
   // Create Event-levels
-app.post('/add-event-levels-ajax', function(req, res) {
+app.post('/add-event-level-ajax', function(req, res) {
   let data = req.body;
   
   // Create Events Query
  
-    query1 = `INSERT INTO EventLevels (eventLevelName)   
+    query1 = `INSERT INTO EventLevels(eventLevelName)   
     VALUES ('${data.eventLevelName}')`;
-    });
+    
 
+  db.pool.query(query1, function(error, rows, fields) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400);
+    }
+    else 
+    {
+        res.send(rows);
+        }
+        })
+       }
+  );  
   // Delete Event Level
 app.delete('/delete-event-level/', function(req, res, next) {
   let data = req.body;

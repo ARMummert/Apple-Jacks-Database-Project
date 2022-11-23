@@ -13,6 +13,7 @@ addEventForm.addEventListener("submit", function (e) {
     let inputdivisionName = document.getElementById("input-divsion-name");
     let inputeventlevelName = document.getElementById("input-event-level-name");
 
+
     // Get the values from the form fields
     let eventNameValue = inputeventName.value;
     let competitionNameValue = inputcompetitionName.value;
@@ -29,6 +30,7 @@ addEventForm.addEventListener("submit", function (e) {
         divisionName: divisionNameValue,
         eventlevelName: eventlevelNameValue
     }
+    console.log(data)
   //Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-event-ajax", true);
@@ -78,13 +80,14 @@ addRowToTable = (data) => {
     let eventNameCell = document.createElement("TD");
 
     let deleteCell = document.createElement("TD");
-
+    
     // Fill the cells with correct data
-    idCell.innerText = newRow.eventID;
-    competitionNameCell.innerText = newRow.competitionName;
-    divisionNameCell.innerText = newRow.divisionName;
-    eventlevelNameCell.innerText = newRow.eventlevelName;
-    eventNameCell.innerText = newRow.eventName;
+    idCell.innerText = newRow.ID;
+    competitionIDCell.innerText = newRow.Competition
+    divisionIDCell.innerText = newRow.Division;
+    eventlevelIDCell.innerText = newRow.EventLevel;
+    eventNameCell.innerText = newRow.Event;
+
     
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
@@ -96,10 +99,10 @@ addRowToTable = (data) => {
 
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(competitionNameCell);
-    row.appendChild(divisionNameCell);
-    row.appendChild(eventlevelNameCell);
     row.appendChild(eventNameCell);
+    row.appendChild(competitionIDCell);
+    row.appendChild(divisionIDCell);
+    row.appendChild(eventlevelIDCell);
     row.appendChild(deleteCell);
     
     // Add a custom row attribute so the deleteRow function can find a newly added row

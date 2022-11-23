@@ -73,21 +73,17 @@ app.post('/add-competition-ajax', function(req, res) {
     }
     else
         {
-            // If there was no error, perform a SELECT all from Competitions
             query2 = `SELECT Competitions.competitionID, Competitions.competitionName, Competitions.date, Competitions.startTime, Competitions.locationName, Competitions.locationAddress, Competitions.locationPhone FROM Competitions ORDER BY Competitions.competitionID ASC;`;
             db.pool.query(query2, function(error, rows, fields){
 
-                // If there was an error on the second query, send a 400
+                
                 if (error) {                    
-                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
-                    
                 }
             })       
         }
@@ -195,12 +191,13 @@ app.post('/add-event-ajax', function(req, res) {
   
   // Create Events Query
  
-    query1 = `INSERT INTO Events(competitionID,divisionID,eventlevelID,eventName)
+    query1 = `INSERT INTO Events(Event, Competition, Division, Event-Level)
     VALUES (
-      '${data.competitionID}',
-      '${data.divisionID}',
-      '${data.eventlevelID}',
-      '${data.eventName}')`;
+      '${data.eventName}',
+      '${data.competitionName}',
+      '${data.divisionName}',
+      '${data.eventlevelName}'
+      )`;
     
     
   db.pool.query(query1, function(error, rows, fields) {
@@ -210,12 +207,22 @@ app.post('/add-event-ajax', function(req, res) {
     }
     else
     {
-      res.send(rows);
+      query2 = `SELECT Events.eventID, Events.eventName, Competitions.ID, Divisions.ID, EventLevels.eventlevelID FROM Events ORDER BY Events.eventID ASC;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                if (error) {                    
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else
+                {
+                    res.send(rows);
                     
-    }
+                }
+            })       
+        }
     })
-  });    
- 
+  })
   // Update Event
 app.put('/put-event-ajax', function(req, res, next) {
   let data = req.body;
@@ -229,7 +236,7 @@ app.put('/put-event-ajax', function(req, res, next) {
   let updateEvent = `UPDATE Events SET competitionID = 
    '${data.competitionID}', divisionID = '${data.divisionID}', eventlevelID = '${data.eventlevelID}', eventName = '${data.eventName}' WHERE eventID = ?;`
   
-  let selectEvent = `SELECT EventID,competitionID,DivisionID,eventlevelID,eventName from Events
+  let selectEvent = `SELECT EventID,competitionID,DivisionID,eventlevelID,eventName FROM Events
   WHERE eventID =  ?`
     db.pool.query(
       updateEvent,
@@ -256,7 +263,7 @@ app.put('/put-event-ajax', function(req, res, next) {
         }
         else {
           res.send(rows);
-          res.redirect('/events')
+          
         }
       })
       

@@ -10,7 +10,7 @@ addEventForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     let inputeventName = document.getElementById("input-event-name");
     let inputcompetitionName = document.getElementById("input-competition-name");
-    let inputdivisionName = document.getElementById("input-divsion-name");
+    let inputdivisionName = document.getElementById("input-division-name");
     let inputeventlevelName = document.getElementById("input-event-level-name");
 
 
@@ -69,7 +69,7 @@ addRowToTable = (data) => {
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
-    console.log("newRow" + newRow)
+    console.log(newRow)
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
@@ -83,16 +83,16 @@ addRowToTable = (data) => {
     
     // Fill the cells with correct data
     idCell.innerText = newRow.ID;
-    competitionIDCell.innerText = newRow.Competition
-    divisionIDCell.innerText = newRow.Division;
-    eventlevelIDCell.innerText = newRow.EventLevel;
+    competitionNameCell.innerText = newRow.Competition
+    divisionNameCell.innerText = newRow.Division;
+    eventlevelNameCell.innerText = newRow.EventLevel;
     eventNameCell.innerText = newRow.Event;
 
     
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteEvent(newRow.eventID);
+        deleteEvent(newRow.ID);
     };
 
 
@@ -100,13 +100,13 @@ addRowToTable = (data) => {
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(eventNameCell);
-    row.appendChild(competitionIDCell);
-    row.appendChild(divisionIDCell);
-    row.appendChild(eventlevelIDCell);
+    row.appendChild(competitionNameCell);
+    row.appendChild(divisionNameCell);
+    row.appendChild(eventlevelNameCell);
     row.appendChild(deleteCell);
     
     // Add a custom row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.eventID);
+    row.setAttribute('data-value', newRow.ID);
 
     // Add the row to the table
     currentTable.appendChild(row);

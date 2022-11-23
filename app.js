@@ -5,7 +5,7 @@ var express = require('express');
 var app     = express();    
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT = 8040;
+PORT = 4060;
 
 // Database
 var db = require('./database/db-connector')
@@ -185,7 +185,7 @@ app.get('/events', function (req, res){
 
   let divisions = `SELECT divisionID as 'ID', divisionName as 'Division' FROM Divisions;`;
   
-  let eventlevels = `SELECT eventlevelID as 'ID', eventLevelName as 'Event-Level' FROM EventLevels;`;
+  let eventlevels = `SELECT eventlevelID as 'ID', eventLevelName as 'EventLevel' FROM EventLevels;`;
   db.pool.query(events, function(error, rows, fields) {
       
       let eventsdata = rows;
@@ -215,7 +215,7 @@ app.post('/add-event-ajax', function(req, res) {
   
   // Create Events Query
  
-    query1 = `INSERT INTO Events(Event, Competition, Division, Event-Level)
+    query1 = `INSERT INTO Events(eventName, competitionID, divisionID, eventlevelID)
     VALUES (
       '${data.eventName}',
       '${data.competitionName}',
@@ -689,7 +689,7 @@ app.delete('/delete-team/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

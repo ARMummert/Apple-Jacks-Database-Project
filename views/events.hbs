@@ -27,7 +27,7 @@
                 <td>{{this.ID}}</td>
                 <td>{{this.Event}}</td>
                 <td>{{this.Competition}}</td>
-                <td>{{this.ID}}</td>
+                <td>{{this.Division}}</td>
                 <td>{{this.Event-Level}}</td>
                
                 <td><button onClick="deleteEvent({{this.ID}})">Delete</button><td>            
@@ -84,7 +84,7 @@
                     </option>
                     {{#each eventlevelsdata}}
                     <option value="{{this.ID}}">
-                    {{this.Event-Level}}
+                    {{this.EventLevel}}
                     </option>
                 {{/each}}
                 </select>
@@ -94,7 +94,7 @@
                     <td><input type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
                 </tr>
                  <tr>
-                    <td><input onclick="addEventForm({{this.ID}})" type="submit" value="Add"></td>
+                    <td><input onclick-"addEventForm()" type="submit" value="Add"></td>
                     <td><input type="reset" value="Cancel"></td>
                 </tr>
             </table>

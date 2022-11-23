@@ -160,10 +160,11 @@ app.delete('/delete-competition/', function(req, res, next) {
 // Routes - Events
 app.get('/events', function (req, res){
   let events;
+  
   if (req.query.eventName === undefined)
   {
     events = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
-    Divisions.divisionName as 'Divsion', EventLevels.eventlevelName as 'Event-Level'
+    Divisions.divisionName as 'Division', EventLevels.eventlevelName as 'Event-Level'
     FROM Events
     INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
     INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
@@ -172,16 +173,39 @@ app.get('/events', function (req, res){
   else 
   {
     events = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
-    Divisions.divisionName as 'Divsion', EventLevels.eventlevelName as 'Event-Level'
+    Divisions.divisionName as 'Division', EventLevels.eventlevelName as 'Event-Level'
     FROM Events
     INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
     INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
     INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
     WHERE eventName = "${req.query.eventName}%"`;
-     }       
+     }      
+  let competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
+  locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions;`;
+
+  let divisions = `SELECT divisionID as 'ID', divisionName as 'Division' FROM Divisions;`;
+  
+  let eventlevels = `SELECT eventlevelID as 'ID', eventLevelName as 'Event-Level' FROM EventLevels;`;
   db.pool.query(events, function(error, rows, fields) {
       
-      return res.render('events', {data: rows});
+      let eventsdata = rows;
+
+      db.pool.query(competitions,function(error, rows, fields){
+
+        let competitions = rows;
+
+          db.pool.query(divisions,function(error, rows, fieldss){
+
+            let divisions = rows;
+
+              db.pool.query(eventlevels,function(error, rows, fields){
+
+                let eventlevels = rows;
+                return res.render('events', {data: eventsdata, competitionsdata:competitions, divisionsdata: divisions, eventlevelsdata: eventlevels});
+              })
+          })
+      })
+      
   });
   });
 
@@ -207,20 +231,25 @@ app.post('/add-event-ajax', function(req, res) {
     }
     else
     {
-      query2 = `SELECT Events.eventID, Events.eventName, Competitions.ID, Divisions.ID, EventLevels.eventlevelID FROM Events ORDER BY Events.eventID ASC;`;
-            db.pool.query(query2, function(error, rows, fields){
 
-                if (error) {                    
-                    console.log(error);
-                    res.sendStatus(400);
-                }
-                else
-                {
-                    res.send(rows);
-                    
-                }
-            })       
+      query2 = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
+      Divisions.divisionName as 'Division', EventLevels.eventlevelName as 'EventLevel'
+      FROM Events
+      INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
+      INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
+      INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;`;
+      db.pool.query(query2,function(error,rows,fields){
+        if (error) {                    
+          // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+          console.log(error);
+          res.sendStatus(400);
         }
+        else
+      {
+      res.send(rows);            
+    }
+    })
+    }
     })
   })
   // Update Event

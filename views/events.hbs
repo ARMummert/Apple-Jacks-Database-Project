@@ -45,15 +45,14 @@
                 
                 <tr>
                     <select
-                    name="select-event"
+
+                    name="input-competition-name"
                     id="input-competition-name"
-                    class="dropdown"
-                    onChange="formFill(this)"
                     required>
                     <option value="">
                     Select a Competition
                     </option>
-                    {{#each data}}
+                    {{#each competitionsdata}}
                     <option value="{{this.ID}}">
                     {{this.Competition}}
                     </option>
@@ -62,32 +61,28 @@
                 </tr>
                 <tr>
                     <select
-                    name="select-event"
+                    name="input-division-name"
                     id="input-division-name"
-                    class="dropdown"
-                    onChange="formFill(this)"
                     required>
                     <option value="">
                     Select a Division
                     </option>
-                    {{#each data}}
+                    {{#each divisionsdata}}
                     <option value="{{this.ID}}">
-                    {{this.ID}}
+                    {{this.Division}}
                     </option>
                 {{/each}}
                 </select> 
                 </tr>
                 <tr>
                     <select
-                    name="select-event"
+                    name="input-event-level-name"
                     id="input-event-level-name"
-                    class="dropdown"
-                    onChange="formFill(this)"
                     required>
                     <option value="">
                     Select an Event Level
                     </option>
-                    {{#each data}}
+                    {{#each eventlevelsdata}}
                     <option value="{{this.ID}}">
                     {{this.Event-Level}}
                     </option>
@@ -204,24 +199,6 @@
         </form>
 </section>
             
-
-<script>
-function formFill(data) {
-   
-    var id = data.value;
-    updateEventForm(eventID)
-    };
-function formFill(data) {
-    
-    var id = data.value;
-    addEventForm(eventID)
-    };
-    const btn = document.getElementById('btn');
-    function showForm(btn) {
-        document.getElementById("showtable").style.display = "block";
-    };
-</script>
-
 <script src="./js/delete_event.js"></script>
 <script src="./js/update_event.js"></script>
 <script src="./js/add_event.js"></script>

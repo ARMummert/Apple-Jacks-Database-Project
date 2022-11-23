@@ -17,7 +17,7 @@
                 {{#each data.[0]}}
                 <th>{{@key}}</th>
                 {{/each}}
-                <th>delete</th>    
+                <th>Delete</th>    
             </tr>
         </thead>
         {{! Body section }}
@@ -27,7 +27,7 @@
                 <td>{{this.ID}}</td>
                 <td>{{this.Event}}</td>
                 <td>{{this.Competition}}</td>
-                <td>{{this.Division}}</td>
+                <td>{{this.ID}}</td>
                 <td>{{this.Event-Level}}</td>
                
                 <td><button onClick="deleteEvent({{this.ID}})">Delete</button><td>            
@@ -45,16 +45,16 @@
                 
                 <tr>
                     <select
-                    name="input-competition-name"
-                    id="mySelect"
+                    name="select-event"
+                    id="input-competition-name"
                     class="dropdown"
                     onChange="formFill(this)"
                     required>
-                    <option value="test">
+                    <option value="">
                     Select a Competition
                     </option>
                     {{#each data}}
-                    <option value="{{this.id}}">
+                    <option value="{{this.ID}}">
                     {{this.Competition}}
                     </option>
                 {{/each}}
@@ -62,33 +62,33 @@
                 </tr>
                 <tr>
                     <select
-                    name="input-division-name"
-                    id="mySelect"
+                    name="select-event"
+                    id="input-division-name"
                     class="dropdown"
                     onChange="formFill(this)"
                     required>
-                    <option value="test">
+                    <option value="">
                     Select a Division
                     </option>
                     {{#each data}}
-                    <option value="{{this.id}}">
-                    {{this.Division}}
+                    <option value="{{this.ID}}">
+                    {{this.ID}}
                     </option>
                 {{/each}}
                 </select> 
                 </tr>
                 <tr>
                     <select
-                    name="input-event-level-name"
-                    id="mySelect"
+                    name="select-event"
+                    id="input-event-level-name"
                     class="dropdown"
                     onChange="formFill(this)"
                     required>
-                    <option value="test">
+                    <option value="">
                     Select an Event Level
                     </option>
                     {{#each data}}
-                    <option value="{{this.id}}">
+                    <option value="{{this.ID}}">
                     {{this.Event-Level}}
                     </option>
                 {{/each}}
@@ -99,7 +99,7 @@
                     <td><input type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
                 </tr>
                  <tr>
-                    <td><input onclick-"addEventForm()" type="submit" value="Add"></td>
+                    <td><input onclick="addEventForm({{this.ID}})" type="submit" value="Add"></td>
                     <td><input type="reset" value="Cancel"></td>
                 </tr>
             </table>
@@ -126,11 +126,11 @@
                     <tr>
                         <select
                             name="input-event-name"
-                            id="mySelectupdate"
+                            id="select-event"
                             class="dropdown"
                             onChange="formFill(this)"
                             required>
-                            <option value="test">
+                            <option value="">
                             Select an Event to Update
                             </option>
                             {{#each data}}
@@ -143,11 +143,11 @@
                     <tr>
                          <select
                         name="input-competition-name"
-                        id="mySelectudpate"
+                        id="select-event"
                         class="dropdown"
                         onChange="formFill(this)"
                         required>
-                        <option value="test">
+                        <option value="">
                         Select a Competition
                         </option>
                         {{#each data}}
@@ -159,17 +159,17 @@
                     </tr>
                     <tr>
                          <select
-                            name="input-division-name"
-                            id="mySelectupdate"
+                            name="select-event"
+                            id="input-division-name"
                             class="dropdown"
                             onChange="formFill(this)"
                             required>
-                            <option value="test">
+                            <option value="">
                             Select a Division
                             </option>
                             {{#each data}}
                             <option value="{{this.id}}">
-                            {{this.Division}}
+                            {{this.ID}}
                         </option>
                         {{/each}}
                         </select>
@@ -177,11 +177,11 @@
                     <tr>
                         <select
                         name="input-event-level-name"
-                        id="mySelectupdate"
+                        id="select-event"
                         class="dropdown"
                         onChange="formFill(this)"
                         required>
-                        <option value="test">
+                        <option value="">
                         Select an Event Level
                         </option>
                         {{#each data}}
@@ -206,13 +206,13 @@
             
 
 <script>
-  function formFill(data) {
-    // Update the form with the selected customer's data
+function formFill(data) {
+   
     var id = data.value;
     updateEventForm(eventID)
     };
-      function formFill(data) {
-    // Update the form with the selected customer's data
+function formFill(data) {
+    
     var id = data.value;
     addEventForm(eventID)
     };

@@ -9,25 +9,25 @@ addEventForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputeventName = document.getElementById("input-event-name");
-    let inputcompetitionID = document.getElementById("input-competition-ID");
-    let inputdivisionID = document.getElementById("input-division-ID");
-    let inputeventlevelID = document.getElementById("input-event-level-ID");
+    let inputcompetitionName = document.getElementById("input-competition-name");
+    let inputdivisionName = document.getElementById("input-divsion-name");
+    let inputeventlevelName = document.getElementById("input-event-level-name");
 
     // Get the values from the form fields
     let eventNameValue = inputeventName.value;
-    let competitionIDValue = inputcompetitionID.value;
-    let divisionIDValue = inputdivisionID.value;
-    let eventlevelIDValue = inputeventlevelID.value;
+    let competitionNameValue = inputcompetitionName.value;
+    let divisionNameValue = inputdivisionName.value;
+    let eventlevelNameValue = inputeventlevelName.value;
 
-    if (eventNameValue, competitionIDValue, divisionIDValue, eventlevelIDValue  === '') {
+    if (eventNameValue, competitionNameValue, divisionNameValue, eventlevelNameValue  === '') {
         return;
     }
     // Put our data we want to send in a javascript object
     let data = {
         eventName: eventNameValue,
-        competitionID: competitionIDValue,
-        divisionID: divisionIDValue,
-        eventlevelID: eventlevelIDValue
+        competitionName: competitionNameValue,
+        divisionName: divisionNameValue,
+        eventlevelName: eventlevelNameValue
     }
   //Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -72,18 +72,18 @@ addRowToTable = (data) => {
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
-    let competitionIDCell = document.createElement("TD");
-    let divisionIDCell = document.createElement("TD");
-    let eventlevelIDCell = document.createElement("TD");
+    let competitionNameCell = document.createElement("TD");
+    let divisionNameCell = document.createElement("TD");
+    let eventlevelNameCell = document.createElement("TD");
     let eventNameCell = document.createElement("TD");
 
     let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.eventID;
-    competitionIDCell.innerText = newRow.competitionID;
-    divisionIDCell.innerText = newRow.divisionID;
-    eventlevelIDCell.innerText = newRow.eventlevelID;
+    competitionNameCell.innerText = newRow.competitionName;
+    divisionNameCell.innerText = newRow.divisionName;
+    eventlevelNameCell.innerText = newRow.eventlevelName;
     eventNameCell.innerText = newRow.eventName;
     
     deleteCell = document.createElement("button");
@@ -96,9 +96,9 @@ addRowToTable = (data) => {
 
     // Add the cells to the row 
     row.appendChild(idCell);
-    row.appendChild(competitionIDCell);
-    row.appendChild(divisionIDCell);
-    row.appendChild(eventlevelIDCell);
+    row.appendChild(competitionNameCell);
+    row.appendChild(divisionNameCell);
+    row.appendChild(eventlevelNameCell);
     row.appendChild(eventNameCell);
     row.appendChild(deleteCell);
     
@@ -112,9 +112,9 @@ addRowToTable = (data) => {
     
     // Find drop down menu, create a new option, fill data in the option (full name, id),
     // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
-    let selectMenu = document.getElementById("mySelect");
+    let selectMenu = document.getElementById("select-event");
     let option = document.createElement("option");
-    option.text = newRow.eventID + ' ' +  newRow.eventName;
+    option.text = newRow.eventID + ' ' +  newRow.eventName + '' + newRow.competitionName + '' + newRow.divisionName + '' + newRow.eventlevelName;
     option.value = newRow.eventID;
     selectMenu.add(option);
    

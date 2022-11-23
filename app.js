@@ -65,7 +65,7 @@ app.post('/add-competition-ajax', function(req, res) {
       '${data.locationAddress}',
       '${data.locationPhone}')`;
   
-    
+      
   db.pool.query(query1, function(error, rows, fields) {
     if (error) {
       console.log(error)
@@ -300,22 +300,37 @@ app.post('/add-event-level-ajax', function(req, res) {
   
   // Create Events Query
  
-    query1 = `INSERT INTO EventLevels(eventLevelName)   
-    VALUES ('${data.eventLevelName}')`;
-    
+    eventlevelsq = `INSERT INTO EventLevels(eventLevelName)   
+    VALUES (
+      '${data.eventlevelName}')`;
+    console.log(eventlevelsq)
 
-  db.pool.query(query1, function(error, rows, fields) {
+  db.pool.query(eventlevelsq, function(error, rows, fields) {
     if (error) {
       console.log(error)
       res.sendStatus(400);
     }
     else 
     {
+      // If there was no error, perform a SELECT all from Competitions
+      eventlevelsq2 = `SELECT eventlevelID,  eventlevelName FROM EventLevels ORDER BY eventlevelID ASC;`;
+      db.pool.query(eventlevelsq2, function(error, rows, fields){
+
+          // If there was an error on the second query, send a 400
+          if (error) {                    
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+          }
+          else
+          {
         res.send(rows);
         }
         })
        }
-  );  
+      })
+    });
+
   // Delete Event Level
 app.delete('/delete-event-level/', function(req, res, next) {
   let data = req.body;
@@ -479,6 +494,7 @@ app.post('/add-athletes-ajax', function(req, res) {
         }
     })
   });
+
 // Update Athlete
 app.put('/put-athlete-ajax', function(req, res, next) {
   let data = req.body;

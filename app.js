@@ -34,12 +34,12 @@ app.get('/competitions', function (req, res){
   let competitions;
   if (req.query.competitionName === undefined)
   {
-    competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
+    competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', date as 'Date', startTime as 'Time', locationName as 'Location',
     locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions;`;
   }
   else 
   {
-    competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
+    competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', date as 'Date', startTime as 'Time', locationName as 'Location',
     locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions
     Where competitionName LIKE "${req.query.competitionName}%";`;
   }
@@ -93,13 +93,7 @@ app.post('/add-competition-ajax', function(req, res) {
 app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
   
-  let competitionID = parseInt(data.id);
-  let competitionName = data.competitionNameValue;
-  let date = data.dateValue;
-  let startTime = data.startTimeValue;
-  let locationName = data.locationNameValue;
-  let locationAddress = data.locationAddressValue;
-  let locationPhone = data.locationPhoneValue;
+
 
   let updateCompetition = `UPDATE Competitions SET competitionName = 
    '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`

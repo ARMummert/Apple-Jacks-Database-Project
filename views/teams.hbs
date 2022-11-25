@@ -1,0 +1,86 @@
+<!-- teams.hbs -->
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+<h3 class=padtop>Teams</h3>
+
+<section class="sectionone">
+    {{! Create a table }}
+
+    <table id="teams-table" class="tableone" border="1" cellpadding="5" >
+        {{! Header section }}
+
+        <thead>
+              <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+                <th>Delete</th>    
+            </tr>
+        </thead>
+        {{! Body section }}
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Team}}</td>
+                <td>{{this.Coach-Name}}</td>
+                <td>{{this.Coach-Phone}}</td>
+                <td>{{this.Coach-Email}}</td>
+                <td><button onClick="deleteTeams({{this.ID}})">Delete</button><td>            
+            </tr>   
+            {{/each}}
+        </tbody>
+    </table>
+</section>   
+
+<section class="sectionthree">
+        <h3 class="section-header"> Add Team </h3>
+        <form id="add-teams-form">         
+            <table class="tablethree">
+                
+                <tr>
+                    <td><label for="input-team-name">Team Name</label></td> 
+                    <td><input type="text" name="input-team-name" id="input-team-name" required  placeholder="Team Name"></td>
+                       
+                </tr>
+                <tr>
+                    <td><label for="input-coach-name">Coach Name</label></td> 
+                    <td><input type="text" name="input-coach-name" id="input-coach-name" required  placeholder="Coach Name"></td>
+                       
+                </tr>
+                <tr>
+                    <td><label for="input-coach-phone">Coach Phone</label></td> 
+                    <td><input type="text" name="input-coach-phone" id="input-coach-phone" required  placeholder="Coach Phone"></td>
+                       
+                </tr>
+                <tr>
+                    <td><label for="input-coach-email">Coach Email</label></td> 
+                    <td><input type="text" name="input-coach-email" id="input-coach-email" required  placeholder="Coach Email"></td>
+                       
+                </tr>
+                <tr>
+                    <td><input onclick-"addTeamsForm()" type="submit" value="Add"></td>
+                    <td><input type="reset" value="Cancel"></td>
+                </tr>
+            </table>
+        </form>
+</section>
+            
+
+<script>
+
+    function formFill(data) {
+    var id = data.value;
+    addTeamsForm(teamID)
+    };
+    const btn = document.getElementById('btn');
+    function showForm(btn) {
+        document.getElementById("showtable").style.display = "block";
+    };
+</script>
+
+<script src="./js/delete_team.js"></script>
+<script src="./js/add_team.js"></script>

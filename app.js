@@ -625,13 +625,13 @@ app.post('/add-teams-ajax', function(req, res) {
   
   // Create Teams Query
  
-    query1 = `INSERT INTO Teams(teamID, teamName,coachName,coachPhone,CoachEmail)
+    query1 = `INSERT INTO Teams(teamID,teamName,coachName,coachPhone,CoachEmail)
     VALUES (
       '${data.teamID}',
       '${data.teamName}',
       '${data.coachName}',
       '${data.coachPhone}',
-      '${data.coachEmail}',
+      '${data.coachEmail}'
       )`;
   
     
@@ -664,7 +664,7 @@ app.post('/add-teams-ajax', function(req, res) {
   });
 
 // Delete Team
-app.delete('/delete-team/', function(req, res, next) {
+app.delete('/delete-teams/', function(req, res, next) {
   let data = req.body;
   let teamID = parseInt(data.id);
   let deleteTeams = 'DELETE FROM Teams WHERE teamID = ?';

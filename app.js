@@ -246,71 +246,7 @@ app.post('/add-event-ajax', function(req, res) {
     }
     })
   })
-  // Update Event
-app.put('/put-event-ajax', function(req, res, next) {
-  let data = req.body;
-  let eventID = parseInt(data.id);
-  let competitionID = data.competitionIDValue;
-  let divisionID = data.divisionIDValue;
-  let eventlevelID = data.eventlevelIDValue;
-  let eventName = data.eventNameValue;
-  
-
-  let updateEvent = `UPDATE Events SET competitionID = 
-   '${data.competitionID}', divisionID = '${data.divisionID}', eventlevelID = '${data.eventlevelID}', eventName = '${data.eventName}' WHERE eventID = ?;`
-  
-  let selectEvent = `SELECT EventID,competitionID,DivisionID,eventlevelID,eventName FROM Events
-  WHERE eventID =  ?`
-    db.pool.query(
-      updateEvent,
-
-      [
-        eventID,
-        competitionID,
-        divisionID,
-        eventlevelID,
-        eventName
-        
-      ],
-
-    function (error, rows, fields) {
-      if (error) {
-        console.log(error);
-        res.sendStatus(400);
-      }
-      else {
-      db.pool.query(selectEvent, [eventID], function(error, rows, fields){
-        if (error) {
-          console.log(error)
-          res.sendStatus(400);
-        }
-        else {
-          res.send(rows);
-          
-        }
-      })
-      
-    }
-  })
-});
-
-// Delete Event
-app.delete('/delete-event/', function(req, res, next) {
-  let data = req.body;
-  let eventID = parseInt(data.id);
-  let deleteEvents = 'DELETE FROM Events WHERE Events.eventID = ?';
-
-  db.pool.query(deleteEvents, [eventID], function(error, rows, fields) {
-    if (error) {
-      console.log(error);
-      res.sendStatus(400);
-    }
-    else {
-      res.sendStatus(204);
-      
-    }
-  });
-});
+ 
 
 
 // Routes - event-levels
@@ -456,31 +392,46 @@ app.get('/athletes', function (req, res){
   let athletes;
   if (req.query.athleteName === undefined)
   {
-    athletes = `SELECT Athletes.athleteID as 'ID',Teams.teamName as 'Team', Divisions.divisionName as 'Division', athleteName as 'Athlete',
+    athletes = `SELECT Athletes.athleteID as 'ID', athleteName as 'Athlete', Teams.teamName as 'Team', Divisions.divisionName as 'Division', 
     athletePhone as 'Athlete-Phone', athleteEmail as 'Athlete-Email', athleteAddress as 'Athlete-Address',
     athleteDOB as 'DOB', athleteAge as 'Age'
     FROM Athletes
     INNER JOIN Teams ON Athletes.teamID = Teams.teamID
-    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID`;
+    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID ORDER BY athleteID ASC` ;
   }
   else 
   {
-    athletes = `SELECT Athletes.athleteID as 'ID',Teams.teamName as 'Team', Divisions.divisionName as 'Division', athleteName as 'Athlete-Name',
+    athletes = `SELECT Athletes.athleteID as 'ID', athleteName as 'Athlete', Teams.teamName as 'Team', Divisions.divisionName as 'Division',
     athletePhone as 'Athlete-Phone', athleteEmail as 'Athlete-Email', athleteAddress as 'Athlete-Address',
     athleteDOB as 'DOB', athleteAge as 'Age'
     FROM Athletes
     INNER JOIN Teams ON Athletes.teamID = Teams.teamID
     INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID WHERE athleteName LIKE "${req.query.athleteName}%";`;
   }
-  
+
+  let divisions = `SELECT divisionID as 'ID', divisionName as 'Division' FROM Divisions;`;
+  let teams =  `SELECT teamID as 'ID', teamName as 'Team'  FROM Teams;`;
+
   db.pool.query(athletes, function(error, rows, fields) {
-    return res.render('athletes', {data: rows});
+    
+      let athletedata = rows;
+
+      db.pool.query(divisions,function(error,rows,fields){
+
+        let divisions = rows;
+           
+          db.pool.query(teams, function(error,rows,fields){
+
+            let teams = rows;
+            return res.render('athletes', {data: athletedata, divisionsdata: divisions, teamsdata: teams});
+          })
+      })    
   });
   });
   
 
 // Create Athletes
-app.post('/add-athletes-ajax', function(req, res) {
+app.post('/add-athlete-ajax', function(req, res) {
   let data = req.body;
   
   // Create Athletes Query
@@ -488,12 +439,12 @@ app.post('/add-athletes-ajax', function(req, res) {
     query1 = `INSERT INTO Athletes(teamID,divisionID,athleteName, athletePhone, athleteEmail, athleteAddress, athleteDOB, athleteAge)
     VALUES (
       '${data.teamID}',
-      '${data.competitionID}',
+      '${data.divisionID}',
       '${data.athleteName}',
       '${data.athletePhone}',
       '${data.athleteEmail}',
-      '${data.athleteAddress},
-      '${data.athleteDOB}
+      '${data.athleteAddress}',
+      '${data.athleteDOB}',
       '${data.athleteAge}')`;
   
     
@@ -505,7 +456,12 @@ app.post('/add-athletes-ajax', function(req, res) {
     else
         {
             // If there was no error, perform a SELECT all from Competitions
-            query2 = `SELECT Athletes.athleteID, Athletes.athleteName FROM Athletes ORDER BY Athletes.athleteID ASC;`;
+            query2 = `SELECT Athletes.athleteID as 'ID', athleteName as 'Athlete', Teams.teamName as 'Team', Divisions.divisionName as 'Division', 
+            athletePhone as 'AthletePhone', athleteEmail as 'AthleteEmail', athleteAddress as 'AthleteAddress',
+            athleteDOB as 'DOB', athleteAge as 'Age'
+            FROM Athletes
+            INNER JOIN Teams ON Athletes.teamID = Teams.teamID
+            INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -528,16 +484,7 @@ app.post('/add-athletes-ajax', function(req, res) {
 // Update Athlete
 app.put('/put-athlete-ajax', function(req, res, next) {
   let data = req.body;
-  let athleteID = parseInt(data.id);
-  let teamID = data.teamIDValue;
-  let competitionID = data.competitionIDValue;
-  let athleteName= data.athleteNameValue;
-  let athletePhone = data.athletePhoneValue;
-  let athleteEmail = data.athleteEmailValue;
-  let athleteAddress = data.athleteAddressValue;
-  let athleteDOB = data.athleteDOBValue;
-  let athleteAge = data.athleteAgeValue;
-
+  
   let updateAthlete = `UPDATE athletes SET teamID = '${data.teamID}', divisionID = '${data.divisionID}', athleteName = '${data.athleteName}', athletePhone= '${data.athletePhone}',
   athleteEmail = '${data.athleteEmail}', athleteAddress = '${data.athleteAddress}', athleteAge = '${data.athleteAge}' WHERE athleteID = ?;`
   
@@ -625,13 +572,12 @@ app.post('/add-teams-ajax', function(req, res) {
   
   // Create Teams Query
  
-    query1 = `INSERT INTO Teams(teamID,teamName,coachName,coachPhone,CoachEmail)
+    query1 = `INSERT INTO Teams(teamName,coachName,coachPhone,CoachEmail)
     VALUES (
-      '${data.teamID}',
-      '${data.teamName}',
-      '${data.coachName}',
-      '${data.coachPhone}',
-      '${data.coachEmail}'
+      "${data.teamName}",
+      "${data.coachName}",
+      "${data.coachPhone}",
+      "${data.coachEmail}"
       )`;
   
     

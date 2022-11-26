@@ -1,0 +1,163 @@
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+<h3 class=padtop >Athletes</h3>
+
+<section class="sectionone">
+    {{! Create a table }}
+
+    <table id="athletes-table" class="tableone" border="1" cellpadding="5" >
+        {{! Header section }}
+
+        <thead>
+              <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+                <th>delete</th>    
+            </tr>
+        </thead>
+        {{! Body section }}
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Athlete}}</td>
+                <td>{{this.Team}}</td>
+                <td>{{this.Division}}</td>
+                <td>{{this.Athlete-Phone}}</td>
+                <td>{{this.Athlete-Email}}</td>
+                <td>{{this.Athlete-Address}}</td>
+                <td>{{this.DOB}}</td>
+                <td>{{this.Age}}</td>
+                <td><button onClick="deleteCompetition({{this.ID}})">Delete</button><td>            
+                             
+          
+            </tr>   
+            {{/each}}
+        </tbody>
+    </table>
+</section>   
+
+
+<section class="sectiontwo">
+        <h3 class="section-header">Search By Athlete Name</h3>
+        <form id='search-athletes' method='GET' action ='/athletes'>
+            <table class="tabletwo">
+        
+                <td><input type="text" name="athleteName" id="input-athlete-search" placeholder="Athlete Name..."></td>
+            
+            </table>
+            <div class="tabletwo">
+                <input type="submit" value="Search">
+                <input type="reset" value="Cancel">
+               
+            </div>
+            
+        </form>
+</section>
+
+        
+
+<section class="sectionthree">
+        <h3 class="section-header"> Add Athlete </h3>
+        <form id="add-athlete-form">         
+            <table class="tablethree">
+               
+                <tr>
+                    <td><label for="input-athlete-name">Name</label></td> 
+                    <td><input type="text" name="input-athlete-name" id="input-athlete-name" required  placeholder="Athlete Name"></td>  
+                </tr> 
+                <tr>
+                    <select
+                    name="input-team-name"
+                    id="input-team-name"
+                    required>
+                    <option value="">
+                    Select a Team
+                    </option>
+                    {{#each teamsdata}}
+                    <option value="{{this.ID}}">
+                    {{this.Team}}
+                    </option>
+                {{/each}}
+                </select> 
+                </tr>
+                 <tr>
+                    <select
+                    name="input-division-name"
+                    id="input-division-name"
+                    required>
+                    <option value="">
+                    Select a Division
+                    </option>
+                    {{#each divisionsdata}}
+                    <option value="{{this.ID}}">
+                    {{this.Division}}
+                    </option>
+                {{/each}}
+                </select> 
+                </tr>
+                <tr>
+                    <td><label for="input-athlete-phone">Phone</label></td> 
+                    <td><input type="text" name="input-athlete-phone" id="input-athlete-phone" required placeholder="Athlete Phone"></td>
+                </tr> 
+                <tr>
+                    <td><label for="input-athlete-email">Email</label></td> 
+                    <td><input type="text" name="input-athlete-email" id="input-athlete-email" required placeholder="Athlete Email"></td>
+                </tr>
+                <tr>
+                    <td><label for="input-athlete-address">Address </label></td> 
+                    <td><input type="text" name="input-athlete-address" id="input-athlete-address" required placeholder="Athlete Address"></td>  
+                </tr>
+                <tr>
+                    <td><label for="input-athlete-DOB">DOB</label></td> 
+                    <td><input type="date" name="input-athlete-DOB" id="input-athlete-DOB" required placeholder="DOB"></td>
+                        
+                </tr>
+                <tr>
+                    <td><label for="input-athlete-age">Age by August 31st</label></td> 
+                    <td><input type="text" name="input-athlete-age" id="input-athlete-age" required placeholder="Number"></td>
+                        
+                </tr>
+                <tr>
+                    <td><input onclick-"addAthleteForm()" type="submit" value="Add"></td>
+                    <td><input type="reset" value="Cancel"></td>
+                </tr>
+            </table>
+        </form>
+</section>
+
+        
+        
+
+<section class="sectionfour">
+        <form id="update-athlete-form">
+            <h3 class="section-header"> Update Athlete </h3>
+                <table class="tablefour">
+                    <tr>
+                        <td><label>Select Athlete to Update:</label></td>
+                        <td><select id='select-athlete' onChange="formFill(this)">
+                            <option value="">Select a Athlete</option>
+                            {{#each data}}
+                            <option value="{{this.ID}}">{{this.Athlete}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><input onclick-"updateAthleteForm()" type="submit" value="Update Athlete"></td>
+                        <td><a href='/athletes'><input type="reset" value="Cancel"></a></td>
+                    </tr>
+                </table>
+        </form>
+</section>
+            
+
+
+<script src="./js/delete_athlete.js"></script>
+<script src="./js/update_athlete.js"></script>
+<script src="./js/add_athlete.js"></script>

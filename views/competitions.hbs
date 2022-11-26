@@ -32,8 +32,7 @@
                 <td>{{this.Address}}</td>
                 <td>{{this.Phone}}</td>
                 <td><button onClick="deleteCompetition({{this.ID}})">Delete</button><td>            
-                <td><input onclick-"addCompetitionForm()" type="submit" value="Update"></td>
-                           
+                             
           
             </tr>   
             {{/each}}
@@ -151,27 +150,7 @@
 </section>
             
 
-<script>
-  function formFill(data) {
-    // Update the form with the selected customer's data
-    var id = data.value;
-    updateCompetitionForm(competitionID)
-    };
-function formFill(data) {
-    // Update the form with the selected customer's data
-    var id = data.value;
-    addCompetitionForm(competitionID)
-    };
-function formFill(data) {
-    // Update the form with the selected customer's data
-    var id = data.value;
-    updateCompetition(id)
-    };
-    const btn = document.getElementById('btn');
-    function showForm(btn) {
-        document.getElementById("showtable").style.display = "block";
-    };
-</script>
+
 
 <script src="./js/delete_competition.js"></script>
 <script src="./js/update_competition.js"></script>

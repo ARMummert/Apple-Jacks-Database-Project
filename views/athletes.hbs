@@ -16,7 +16,7 @@
                 {{#each data.[0]}}
                 <th>{{@key}}</th>
                 {{/each}}
-                <th>delete</th>    
+                <th>Delete</th>    
             </tr>
         </thead>
         {{! Body section }}
@@ -32,7 +32,7 @@
                 <td>{{this.Athlete-Address}}</td>
                 <td>{{this.DOB}}</td>
                 <td>{{this.Age}}</td>
-                <td><button class="button-62" onClick="deleteCompetition({{this.ID}})">Delete</button></td>    
+                <td><button class="button-62" onClick="deleteAthlete({{this.ID}})">Delete</button></td>    
             </tr>   
             {{/each}}
         </tbody>

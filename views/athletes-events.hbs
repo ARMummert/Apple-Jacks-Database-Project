@@ -26,10 +26,10 @@
             <tr data-value={{this.ID}}>
                 <td>{{this.ID}}</td>
                 <td>{{this.Athlete}}</td>
-                <td>{{this.Event}}</td>
+                <td>{{this.Event-Name}}</td>
                 <td>{{this.Event-Level}}</td>
-                <td>{{this.Division}}</td>
-                <td><button onClick="deleteAtheltesEvents({{this.ID}})">Delete</button></td>          
+                <td>{{this.Athlete-Division}}</td>
+                <td><button class="button-62" onClick="deleteAtheltes_Events({{this.ID}})">Delete</button></td>          
             </tr>   
             {{/each}}
         </tbody>
@@ -38,16 +38,55 @@
 
 
 <section class="sectiontwo">
-        <h3 class="section-header">Search By Athlete Name</h3>
-        <form id='search-athletes' method='GET' action ='/athlets-events'>
-            <table class="tabletwo">
-        
-                <td><input type="text" name="athelteName" id="input-athlete-name" placeholder="Athlete Name..."></td>
+        <h3 class="section-header">Search By</h3>
+        <form id='search-athletes-events' method='GET' action ='/athletes-events'>
+             <table class="addtable">
+                <th>
+                    <select
+                    name="input-athletes-events"
+                    class="button-62"
+                    id="input-athletes-events"
+                    required>
+                    <option class="dropdown" value="">
+                    Search By
+                    </option>
+                    {{#each athleteseventsdata}}
+                    <option class="dropdown" value="{{this.ID}}">
+                    {{this.Athlete}} 
+                    </option>
+                    <option class="dropdown" value="{{this.ID}}">
+                    {{this.Event-Name}}
+                    </option>
+                    <option class="dropdown" value="{{this.ID}}">
+                    {{this.Event-Level}}
+                    </option>
+                    <option class="dropdown" value="{{this.ID}}">
+                    </option>
+                {{/each}}
+                </select> 
+                </th>
+                <th>
+                    <select
+                    name="input-event-name"
+                    class="button-62"
+                    id="input-event-name"
+                    required>
+                    <option class="dropdown" value="">
+                    Select an Event
+                    </option>
+                    {{#each teamsdata}}
+                    <option class="dropdown" value="{{this.ID}}">
+                    {{this.Athlete}}
+                    </option>
+                {{/each}}
+                </select> 
+                </th>
+                <td><input class="search-box" type="text" name="athelteName" id="input-athlete-name" placeholder="Athlete Name..."></td>
             
             </table>
-            <div class="tabletwo">
-                <input type="submit" value="Search">
-                <input type="reset" value="Cancel">
+            <div class="addtable">
+                <input class="button-62" type="submit" value="Search">
+                <input class="button-62" type="reset" value="Cancel">
                
             </div>
             
@@ -59,7 +98,7 @@
 <section class="sectionthree">
         <h3 class="section-header"> Add Athlete Event </h3>
         <form id="add-athletes-events-form">         
-            <table class="tablethree">
+            <table class="addtable">
                 
                 <tr>
                     <td><label for="input-athlete-name">Name</label></td> 
@@ -80,8 +119,8 @@
                     <td><input type="text" name="input-division-name" id="input-division-name" required placeholder="Division Name"></td>
                 </tr>
                 <tr>
-                    <td><input onclick-"addAthletesEventsForm()" type="submit" value="Add"></td>
-                    <td><input type="reset" value="Cancel"></td>
+                    <td><input class="button-62" onclick-"addAthletes_EventsForm()" type="submit" value="Add"></td>
+                    <td><input class="button-62" type="reset" value="Cancel"></td>
                 </tr>
             </table>
         </form>

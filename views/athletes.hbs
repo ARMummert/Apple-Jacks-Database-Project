@@ -32,9 +32,7 @@
                 <td>{{this.Athlete-Address}}</td>
                 <td>{{this.DOB}}</td>
                 <td>{{this.Age}}</td>
-                <td><button onClick="deleteCompetition({{this.ID}})">Delete</button><td>            
-                             
-          
+                <td><button class="button-62" onClick="deleteCompetition({{this.ID}})">Delete</button></td>    
             </tr>   
             {{/each}}
         </tbody>
@@ -45,14 +43,14 @@
 <section class="sectiontwo">
         <h3 class="section-header">Search By Athlete Name</h3>
         <form id='search-athletes' method='GET' action ='/athletes'>
-            <table class="tabletwo">
+            <table class="addtable">
         
-                <td><input type="text" name="athleteName" id="input-athlete-search" placeholder="Athlete Name..."></td>
+                <td><input class="search-box" type="text" name="athleteName" id="input-athlete-search" placeholder="Athlete Name..."></td>
             
             </table>
-            <div class="tabletwo">
-                <input type="submit" value="Search">
-                <input type="reset" value="Cancel">
+            <div class="addtable">
+                <input class="button-62" type="submit" value="Search">
+                <input class="button-62" type="reset" value="Cancel">
                
             </div>
             
@@ -64,67 +62,70 @@
 <section class="sectionthree">
         <h3 class="section-header"> Add Athlete </h3>
         <form id="add-athlete-form">         
-            <table class="tablethree">
+            <table class="addtable">
                
-                <tr>
-                    <td><label for="input-athlete-name">Name</label></td> 
-                    <td><input type="text" name="input-athlete-name" id="input-athlete-name" required  placeholder="Athlete Name"></td>  
-                </tr> 
-                <tr>
+               
+                <th>
                     <select
                     name="input-team-name"
+                    class="button-62"
                     id="input-team-name"
                     required>
-                    <option value="">
+                    <option class="dropdown" value="">
                     Select a Team
                     </option>
                     {{#each teamsdata}}
-                    <option value="{{this.ID}}">
+                    <option class="dropdown" value="{{this.ID}}">
                     {{this.Team}}
                     </option>
                 {{/each}}
                 </select> 
-                </tr>
-                 <tr>
+                </th>
+                 <th>
                     <select
                     name="input-division-name"
+                    class="button-62"
                     id="input-division-name"
                     required>
-                    <option value="">
+                    <option class="dropdown" value="">
                     Select a Division
                     </option>
                     {{#each divisionsdata}}
-                    <option value="{{this.ID}}">
+                    <option class="dropdown" value="{{this.ID}}">
                     {{this.Division}}
                     </option>
                 {{/each}}
                 </select> 
-                </tr>
-                <tr>
-                    <td><label for="input-athlete-phone">Phone</label></td> 
-                    <td><input type="text" name="input-athlete-phone" id="input-athlete-phone" required placeholder="Athlete Phone"></td>
+                </th>
+                 <tr>
+                    <td><p class="inpboxlabel" for="input-athlete-name">Athlete Name</p></td> 
+                    <td><input class="inpbox" type="text" name="input-athlete-name" id="input-athlete-name" required  placeholder="Athlete Name"></td>  
                 </tr> 
                 <tr>
-                    <td><label for="input-athlete-email">Email</label></td> 
-                    <td><input type="text" name="input-athlete-email" id="input-athlete-email" required placeholder="Athlete Email"></td>
+                    <td><p class="inpboxlabel" for="input-athlete-phone">Athlete Phone</p></td> 
+                    <td><input class="inpbox" type="text" name="input-athlete-phone" id="input-athlete-phone" required placeholder="Athlete Phone"></td>
+                </tr> 
+                <tr>
+                    <td><p class="inpboxlabel" for="input-athlete-email">Athlete Email</p></td> 
+                    <td><input class="inpbox" type="text" name="input-athlete-email" id="input-athlete-email" required placeholder="Athlete Email"></td>
                 </tr>
                 <tr>
-                    <td><label for="input-athlete-address">Address </label></td> 
-                    <td><input type="text" name="input-athlete-address" id="input-athlete-address" required placeholder="Athlete Address"></td>  
+                    <td><p class="inpboxlabel" for="input-athlete-address">Athlete Address</p></td> 
+                    <td><input class="inpbox" type="text" name="input-athlete-address" id="input-athlete-address" required placeholder="Athlete Address"></td>  
                 </tr>
                 <tr>
-                    <td><label for="input-athlete-DOB">DOB</label></td> 
-                    <td><input type="date" name="input-athlete-DOB" id="input-athlete-DOB" required placeholder="DOB"></td>
+                    <td><p class="inpboxlabel" for="input-athlete-DOB">Athlete DOB</p></td> 
+                    <td><input class="inpbox"type="date" name="input-athlete-DOB" id="input-athlete-DOB" required placeholder="DOB"></td>
                         
                 </tr>
                 <tr>
-                    <td><label for="input-athlete-age">Age by August 31st</label></td> 
-                    <td><input type="text" name="input-athlete-age" id="input-athlete-age" required placeholder="Number"></td>
+                    <td><p class="inpboxlabel" for="input-athlete-age">Athlete Age By August 31st</p></td> 
+                    <td><input class="inpbox" type="text" name="input-athlete-age" id="input-athlete-age" required placeholder="Age"></td>
                         
                 </tr>
                 <tr>
-                    <td><input onclick-"addAthleteForm()" type="submit" value="Add"></td>
-                    <td><input type="reset" value="Cancel"></td>
+                    <td><input class="button-62" onclick-"addAthleteForm()" type="submit" value="Add"></td>
+                    <td><input class="button-62" type="reset" value="Cancel"></td>
                 </tr>
             </table>
         </form>
@@ -137,21 +138,21 @@
         <form id="update-athlete-form">
             <h3 class="section-header"> Update Athlete </h3>
                 <table class="tablefour">
-                    <tr>
-                        <td><label>Select Athlete to Update:</label></td>
-                        <td><select id='select-athlete' onChange="formFill(this)">
-                            <option value="">Select a Athlete</option>
+                    <th>
+                        <td><p>Select Athlete</p></td>
+                        <td><select class="button-62" id='select-athlete' onChange="formFill(this)">
+                            <option class="dropdown" value="">Select Athlete</option>
                             {{#each data}}
-                            <option value="{{this.ID}}">{{this.Athlete}}</option>
+                            <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}</option>
                             {{/each}}
                         </select>
                         </td>
-                    </tr>
+                    </th>
                     
-                    <tr>
-                        <td><input onclick-"updateAthleteForm()" type="submit" value="Update Athlete"></td>
-                        <td><a href='/athletes'><input type="reset" value="Cancel"></a></td>
-                    </tr>
+                    <th>
+                        <td><input class="button-62"  onclick-"updateAthleteForm()" type="submit" value="Update Athlete"></td>
+                        <td><a href='/athletes'><input class="button-62" type="reset" value="Cancel"></a></td>
+                    </th>
                 </table>
         </form>
 </section>

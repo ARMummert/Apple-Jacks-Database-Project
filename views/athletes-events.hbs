@@ -1,0 +1,146 @@
+<!-- competitions.hbs -->
+
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+<h3 class=padtop >Athletes Events</h3>
+
+<section class="sectionone">
+    {{! Create a table }}
+
+    <table id="athletes-events-table" class="tableone" border="1" cellpadding="5" >
+        {{! Header section }}
+
+        <thead>
+              <tr>
+                {{#each data.[0]}}
+                <th>{{@key}}</th>
+                {{/each}}
+                <th>Delete</th>    
+            </tr>
+        </thead>
+        {{! Body section }}
+        <tbody>
+            {{#each data}}
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Athlete}}</td>
+                <td>{{this.Event}}</td>
+                <td>{{this.Event-Level}}</td>
+                <td>{{this.Division}}</td>
+                <td><button onClick="deleteAtheltesEvents({{this.ID}})">Delete</button></td>          
+            </tr>   
+            {{/each}}
+        </tbody>
+    </table>
+</section>   
+
+
+<section class="sectiontwo">
+        <h3 class="section-header">Search By Athlete Name</h3>
+        <form id='search-athletes' method='GET' action ='/athlets-events'>
+            <table class="tabletwo">
+        
+                <td><input type="text" name="athelteName" id="input-athlete-name" placeholder="Athlete Name..."></td>
+            
+            </table>
+            <div class="tabletwo">
+                <input type="submit" value="Search">
+                <input type="reset" value="Cancel">
+               
+            </div>
+            
+        </form>
+</section>
+
+        
+
+<section class="sectionthree">
+        <h3 class="section-header"> Add Athlete Event </h3>
+        <form id="add-athletes-events-form">         
+            <table class="tablethree">
+                
+                <tr>
+                    <td><label for="input-athlete-name">Name</label></td> 
+                    <td><input type="text" name="input-athlete-name" id="input-athlete-name" required  placeholder="Athlete Name"></td>
+                       
+                </tr>
+                <tr>
+                    <td><label for="input-event-name">Date</Event Name></td> 
+                    <td><input type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
+                        
+                </tr>
+                <tr>
+                    <td><label for="input-event-level">Event Level</label></td> 
+                    <td><input type="text" name="input-event-level" id="input-event-level" required placeholder="Event Level"></td>     
+                </tr>
+                <tr>
+                    <td><label for="input-division-name">Location Name </label></td> 
+                    <td><input type="text" name="input-division-name" id="input-division-name" required placeholder="Division Name"></td>
+                </tr>
+                <tr>
+                    <td><input onclick-"addAthletesEventsForm()" type="submit" value="Add"></td>
+                    <td><input type="reset" value="Cancel"></td>
+                </tr>
+            </table>
+        </form>
+</section>
+
+<section class="sectionfour">
+        <form id="update-athletes-events-form">
+            <h3 class="section-header"> Update Athlete Event </h3>
+                <table class="tablefour">
+                    <tr>
+                        <td><label>Select Athlete to Update:</label></td>
+                        <td><select id='select-athlete' onChange="formFill(this)">
+                            <option value="">Select an Athlete</option>
+                            {{#each athletesdata}}
+                            <option value="{{this.ID}}">{{this.Athlete}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Select Event to Update:</label></td>
+                        <td><select id='select-event' onChange="formFill(this)">
+                            <option value="">Select an Event</option>
+                            {{#each eventsdata}}
+                            <option value="{{this.ID}}">{{this.Event}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Select Event Level:</label></td>
+                        <td><select id='select-event-level' onChange="formFill(this)">
+                            <option value="">Select Event Level </option>
+                            {{#each eventlevelsdata}}
+                            <option value="{{this.ID}}">{{this.Event-Level}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Select Division:</label></td>
+                        <td><select id='select-division' onChange="formFill(this)">
+                            <option value="">Select Division</option>
+                            {{#each divisionsdata}}
+                            <option value="{{this.ID}}">{{this.Division}}</option>
+                            {{/each}}
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input onclick-"updateAthletesEventsForm()" type="submit" value="Update Athlete Event"></td>
+                        <td><a href='/athletes-events'><input type="reset" value="Cancel"></a></td>
+                    </tr>
+                </table>
+        </form>
+</section>
+            
+
+
+
+<script src="./js/delete_athletes-events.js"></script>
+<script src="./js/add_athletes-events.js"></script>

@@ -9,3 +9,40 @@ Citations:
     # Date: 12/02/2020
     # Copied from /OR/ Adapted from /OR/ Based on:
     # Source URL: http://www.oregonstate.edu/mysource
+
+    # Citation for CSS tables
+    # Date: 11/23/2022
+    # Copied from /AND/ Adapted from:
+    # Source URL: https://css-tricks.com/complete-guide-table-element/
+    # Source URL: https://getcssscan.com/css-buttons-examples
+    
+    # Citation for Google Fonts:
+    # Date: 11/23/2022
+    # Copied from:
+    # https://fonts.google.com/
+    
+    # Citations for images:
+    # Date: 11/26/2022
+    # Copied from:
+    # Source URL: https://www.pinterest.com/pin/494973815293900621/
+    # Source URL: https://aaubaton.org/
+    # Source URL: https://hdqwalls.com/dark-blue-green-gradient-4k-wallpaper
+    # Source URL: https://cssgradient.io/
+
+    # Citation for Content Security Policy:
+    # Date: 11/26/2022  
+    # Copied AND Adapted from:
+    # Source URL: https://stackoverflow.com/questions/63643775/content-security-policy-the-page-s-settings-blocked-the-loading-of-a-resource-a
+    # Source URL: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+
+    # Citation for homepage carousel:
+    # Date: 11/27/2022
+    # Copied AND Adapted from:
+    # Source URL: https://codepen.io/onion2k/pen/xxZYBVj
+
+    # Citation for buttons:
+    # Date: 11/27/2022
+    # Copied from:
+    # Source URL: https://getcssscan.com/css-buttons-examples
+    
+    

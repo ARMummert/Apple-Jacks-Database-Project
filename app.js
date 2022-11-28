@@ -781,7 +781,7 @@ app.get('/athletes-events', function (req, res){
 });
 
 // Create Athletes Events
-app.post('/add-athlete-ajax', function(req, res) {
+app.post('/add-athletes-events-ajax', function(req, res) {
   let data = req.body;
   
   // Create Athletes Events Query
@@ -805,13 +805,13 @@ app.post('/add-athlete-ajax', function(req, res) {
         })       
       }
     );
-   // Delete Athlete
-app.delete('/delete-athletes-event/', function(req, res, next) {
+   // Delete Athletes - Events
+app.delete('/delete-athletes-events/', function(req, res, next) {
   let data = req.body;
-  let athleteeventID = parseInt(data.id);
-  let deleteAthletesEvents = 'DELETE FROM Athlete_Events WHERE Athletes_Events.athlete_eventID = ? ';
+  let athlete_eventID = parseInt(data.id);
+  let deleteAthletes_Events = 'DELETE FROM Athletes_Events WHERE Athletes_Events.athlete_eventID = ? ';
 
-  db.pool.query(deleteAthletesEvents, [athleteeventID], function(error, rows, fields) {
+  db.pool.query(deleteAthletes_Events, [athlete_eventID], function(error, rows, fields) {
     if (error) {
       console.log(error);
       res.sendStatus(400);
@@ -826,7 +826,7 @@ app.delete('/delete-athletes-event/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

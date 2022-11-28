@@ -29,7 +29,7 @@
                 <td>{{this.Coach-Name}}</td>
                 <td>{{this.Coach-Phone}}</td>
                 <td>{{this.Coach-Email}}</td>
-                <td><button onClick="deleteTeams({{this.ID}})">Delete</button><td>            
+                <td><button class="button-62" onClick="deleteTeams({{this.ID}})">Delete</button></td>            
             </tr>   
             {{/each}}
         </tbody>
@@ -39,31 +39,31 @@
 <section class="sectionthree">
         <h3 class="section-header"> Add Team </h3>
         <form id="add-teams-form">         
-            <table class="tablethree">
+            <table class="addtable">
                 
                 <tr>
-                    <td><label for="input-team-name">Team Name</label></td> 
-                    <td><input type="text" name="input-team-name" id="input-team-name" required  placeholder="Team Name"></td>
+                    <td><p class="inpboxlabel" for="input-team-name">Team Name</p></td>
+                    <td><input class="inpbox" type="text" name="input-team-name" id="input-team-name" required  placeholder="Team Name"></td>
                        
                 </tr>
                 <tr>
-                    <td><label for="input-coach-name">Coach Name</label></td> 
-                    <td><input type="text" name="input-coach-name" id="input-coach-name" required  placeholder="Coach Name"></td>
+                   <td><p class="inpboxlabel" for="input-coach-name">Coach Name</p></td>
+                    <td><input class="inpbox" type="text" name="input-coach-name" id="input-coach-name" required  placeholder="Coach Name"></td>
                        
                 </tr>
                 <tr>
-                    <td><label for="input-coach-phone">Coach Phone</label></td> 
-                    <td><input type="text" name="input-coach-phone" id="input-coach-phone" required  placeholder="Coach Phone"></td>
+                    <td><p class="inpboxlabel" for="input-coach-phone">Coach Phone</p></td>
+                    <td><input class="inpbox" type="text" name="input-coach-phone" id="input-coach-phone" required  placeholder="Coach Phone"></td>
                        
                 </tr>
                 <tr>
-                    <td><label for="input-coach-email">Coach Email</label></td> 
-                    <td><input type="text" name="input-coach-email" id="input-coach-email" required  placeholder="Coach Email"></td>
+                     <td><p class="inpboxlabel" for="input-coach-email">Coach Email</p></td>
+                    <td><input class="inpbox" type="text" name="input-coach-email" id="input-coach-email" required  placeholder="Coach Email"></td>
                        
                 </tr>
                 <tr>
-                    <td><input onclick-"addTeamsForm()" type="submit" value="Add"></td>
-                    <td><input type="reset" value="Cancel"></td>
+                    <td><input class="button-62" onclick-"addTeamsForm()" type="submit" value="Add"></td>
+                    <td><input class="button-62" type="reset" value="Cancel"></td>
                 </tr>
             </table>
         </form>

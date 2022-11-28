@@ -5,7 +5,8 @@ var express = require('express');
 var app     = express();    
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-PORT = 4060;
+
+PORT = 8800;
 
 // Database
 var db = require('./database/db-connector')
@@ -15,18 +16,96 @@ app.use(bodyParser.json());
 // Express Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     
+const { argvOptions } = require('forever/lib/forever/cli');
 //Sets handlebars configurations
 app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs'); 
 //Serving static files
 app.use(express.static(__dirname + '/public'));
 
+// Express Middleware for Security
+// Content Security Policy
+const helmet = require("helmet");
+
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: false,
+    "block-all-mixed-content": false,
+    "upgrade-insecure-requests": true,
+    'script-src-attr': null,
+    directives: {
+      "default-src": [
+          "'self'",
+          "blob:", 
+          "data:", 
+          "gap:",
+          'unsafe-inline'
+      ],
+      "base-uri": "'self'",
+      "font-src": [
+          "'self'",
+          "https:",
+          "data:",
+          "https://fonts.gstatic.com"
+      ],
+      "frame-ancestors": [
+          "'self'"
+      ],
+      "img-src": [
+          "'self'",
+          "data:"
+      ],
+      "object-src": [
+          "'none'"
+      ],
+      "form-action": [
+        "'self'"
+      ],
+      "script-src": [
+          "'self'",
+          "data:",
+          "https:",
+          "'unsafe-inline'",
+          "http://code.jquery.com/jquery-latest.min.js",
+          "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+
+      ],
+      "style-src": [
+          "'self'",
+          "data:",
+          "'unsafe-inline'",
+          "https://fonts.googleapis.com"
+      ],
+    },
+  }),
+  helmet.dnsPrefetchControl({
+      allow: true
+  }),
+  helmet.frameguard({
+      action: "deny"
+  }),
+  helmet.hidePoweredBy(),
+  helmet.hsts({
+      maxAge: 123456,
+      includeSubDomains: false
+  }),
+  helmet.ieNoOpen(),
+  helmet.noSniff(),
+  helmet.referrerPolicy({
+      policy: [ "origin", "unsafe-url" ]
+  }),
+  helmet.xssFilter()
+);
 // Routes 
 
 app.get('/', function(req, res)
   {
     return res.render('index');                  
   });   
+
+app.get('/project-development', function(req, res) {
+    return res.render('project-development');
+});
 
 // Routes - Competitions
 
@@ -247,7 +326,23 @@ app.post('/add-event-ajax', function(req, res) {
     })
   })
  
+// Delete Event
+app.delete('/delete-event/', function(req, res, next) {
+  let data = req.body;
+  let eventID = parseInt(data.id);
+  let deleteEvent = 'DELETE FROM Events WHERE eventID = ?';
 
+  db.pool.query(deleteEvent, [eventID], function(error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    }
+    else {
+      res.sendStatus(204);
+      
+    }
+  });
+});
 
 // Routes - event-levels
 app.get('/event-levels', function (req, res){
@@ -629,7 +724,7 @@ app.delete('/delete-teams/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

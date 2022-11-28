@@ -30,83 +30,79 @@
                 <td>{{this.Division}}</td>
                 <td>{{this.Event-Level}}</td>
                
-                <td><button onClick="deleteEvent({{this.ID}})">Delete</button><td>            
+                <td><button class="button-62" onClick="deleteEvent({{this.ID}})">Delete</button></td>            
             </tr>   
             {{/each}}
         </tbody>
+       
     </table>
 </section>   
        
 
 <section class="sectionthree">
         <h3 class="section-header"> Add Event </h3>
-        <form id="add-event-form">         
-            <table class="tablethree">
+        <form id="add-event-form" class="sectionthree">         
+            <table class="addtable">
                 
-                <tr>
+                <th>
                     <select
-
                     name="input-competition-name"
+                    class="button-62"
                     id="input-competition-name"
                     required>
-                    <option value="">
+                    <option class="dropdown" value="">
                     Select a Competition
                     </option>
                     {{#each competitionsdata}}
-                    <option value="{{this.ID}}">
+                    <option  class="dropdown" value="{{this.ID}}">
                     {{this.Competition}}
                     </option>
                 {{/each}}
                 </select>
-                </tr>
-                <tr>
+                </th>
+                <th>
                     <select
                     name="input-division-name"
+                    class="button-62"
                     id="input-division-name"
                     required>
-                    <option value="">
+                    <option class="dropdown" value="">
                     Select a Division
                     </option>
                     {{#each divisionsdata}}
-                    <option value="{{this.ID}}">
+                    <option class="dropdown" value="{{this.ID}}">
                     {{this.Division}}
                     </option>
                 {{/each}}
                 </select> 
-                </tr>
-                <tr>
+                </th>
+                <th>
                     <select
                     name="input-event-level-name"
+                    class="button-62"
                     id="input-event-level-name"
                     required>
-                    <option value="">
+                    <option  class="dropdown" value="">
                     Select an Event Level
                     </option>
                     {{#each eventlevelsdata}}
-                    <option value="{{this.ID}}">
+                    <option  class="dropdown" value="{{this.ID}}">
                     {{this.EventLevel}}
                     </option>
                 {{/each}}
                 </select>
-                </tr>
-                <tr>
-                    <td><label for="input-event-name">Event Name </label></td> 
-                    <td><input type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
-                </tr>
-                 <tr>
-                    <td><input onclick-"addEventForm()" type="submit" value="Add"></td>
-                    <td><input type="reset" value="Cancel"></td>
-                </tr>
+                </th>
+               <th>
+                    <td><p class="inpboxlabel" for="input-event-name">New Event Name</p></td> 
+                    <td><input class="inpbox" type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
+                </th>
+                 <th>
+                    <td><input class="button-62" onclick-"addEventForm()" type="submit" value="Add"></td>
+                    <td><input class="button-62" type="reset" value="Cancel"></td>
+                </th>
             </table>
         </form>
 </section>
-
-        
-        
-
-<section class="sectionfour">
-       
-</section>
-            
+         
 <script src="./js/delete_event.js"></script>
 <script src="./js/add_event.js"></script>

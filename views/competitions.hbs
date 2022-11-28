@@ -17,7 +17,7 @@
                 {{#each data.[0]}}
                 <th>{{@key}}</th>
                 {{/each}}
-                <th>delete</th>    
+                <th>Delete</th>    
             </tr>
         </thead>
         {{! Body section }}
@@ -31,9 +31,7 @@
                 <td>{{this.Location}}</td>
                 <td>{{this.Address}}</td>
                 <td>{{this.Phone}}</td>
-                <td><button onClick="deleteCompetition({{this.ID}})">Delete</button><td>            
-                             
-          
+                <td><button class="button-62" onClick="deleteCompetition({{this.ID}})">Delete</button></td>          
             </tr>   
             {{/each}}
         </tbody>
@@ -44,71 +42,67 @@
 <section class="sectiontwo">
         <h3 class="section-header">Search By Competition Name</h3>
         <form id='search-competitions' method='GET' action ='/competitions'>
-            <table class="tabletwo">
+            <table class="addtable">
         
-                <td><input type="text" name="competitionName" id="input-competition-search" placeholder="Competition Name..."></td>
+                <td><input class="search-box" type="text" name="competitionName" id="input-competition-search" placeholder="Competition Name..."></td>
             
             </table>
-            <div class="tabletwo">
-                <input type="submit" value="Search">
-                <input type="reset" value="Cancel">
+            <div class="addtable">
+                <input class="button-62" type="submit" value="Search">
+                <input class="button-62" type="reset" value="Cancel">
                
             </div>
             
         </form>
 </section>
 
-        
-
 <section class="sectionthree">
         <h3 class="section-header"> Add Competition </h3>
-        <form id="add-competition-form">         
-            <table class="tablethree">
-                
+        <form id="add-competition-form" class="addtable">         
+            <table class="addtable">
+           
                 <tr>
-                    <td><label for="input-competition-name">Name</label></td> 
-                    <td><input type="text" name="input-competition-name" id="input-competition-name" required  placeholder="Competition Name"></td>
+                    <td><p class="inpboxlabel" for="input-competition-name">Competition Name</p></td>
+                    <td><input class="inpbox" type="text" name="input-competition-name" id="input-competition-name" required  placeholder="Competition Name"></td>
                        
                 </tr>
                 <tr>
-                    <td><label for="input-date">Date</label></td> 
-                    <td><input type="date" name="input-date" id="input-date" required placeholder="Date"></td>
+                    <td><p class="inpboxlabel" for="input-date">Date</p></td> 
+                    <td><input class="inpbox" type="date" name="input-date" id="input-date" required placeholder="Date"></td>
                         
                 </tr>
                 <tr>
-                    <td><label for="input-start-time">Start Time</label></td> 
-                    <td><input type="time" name="input-start-time" id="input-start-time" required placeholder="Start Time"></td>     
+                    <td><p class="inpboxlabel" for="input-start-time">Start Time</p></td> 
+                    <td><input class="inpbox" type="time" name="input-start-time" id="input-start-time" required placeholder="Start Time"></td>     
                 </tr>
                 <tr>
-                    <td><label for="input-location-name">Location Name </label></td> 
-                    <td><input type="text" name="input-location-name" id="input-location-name" required placeholder="Location Name"></td>
+                    <td><p class="inpboxlabel" for="input-location-name">Location Name </p></td> 
+                    <td><input class="inpbox" type="text" name="input-location-name" id="input-location-name" required placeholder="Location Name"></td>
                 </tr>
                 <tr>
-                    <td><label for="input-location-address">Address </label></td> 
-                    <td><input type="text" name="input-location-address" id="input-location-address" required placeholder="Location Address"></td>
+                    <td><p class="inpboxlabel" for="input-location-address">Address </p></td> 
+                    <td><input class="inpbox" type="text" name="input-location-address" id="input-location-address" required placeholder="Location Address"></td>
                         
                 </tr>
                 <tr>
-                    <td><label for="input-location-phone">Phone</label></td> 
-                    <td><input type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
+                    <td><p class="inpboxlabel" for="input-location-phone">Phone</p></td> 
+                    <td><input class="inpbox" type="text" name="input-location-phone" id="input-location-phone" required placeholder="Location Phone"></td>
                 </tr>
+               
                 <tr>
-                    <td><input onclick-"addCompetitionForm()" type="submit" value="Add"></td>
-                    <td><input type="reset" value="Cancel"></td>
+                    <td><input  class="button-62" onclick-"addCompetitionForm()" type="submit" value="Add"></td>
+                    <td><input class="button-62" type="reset" value="Cancel"></td>
                 </tr>
-            </table>
+           </table>
         </form>
 </section>
-
-        
-        
 
 <section class="sectionfour">
         <form id="update-competition-form">
             <h3 class="section-header"> Update Competition </h3>
-                <table class="tablefour">
+                <table class="updatetable">
                     <tr>
-                        <td><label>Select Competition to Update:</label></td>
+                        <td><p class="inpboxlabel" >Select Competition</p></td>
                         <td><select id='select-competition' onChange="formFill(this)">
                             <option value="">Select a Competition</option>
                             {{#each data}}
@@ -118,39 +112,36 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label for="update-competition-name">Name:</label></td>
-                        <td><input type="text" name="update-competition-name" id="update-competition-name" placeholder="Competition Name"></td>     
+                        <td><p class="inpboxlabel" for="update-competition-name">Competition Name</p></td>
+                        <td><input class="inpbox" type="text" name="update-competition-name" id="update-competition-name" placeholder="Competition Name"></td>     
                     </tr>
                     <tr>
-                        <td><label for="update-date" >Date: </label></td>
-                        <td><input type="text" name="update-date" id="update-date" placeholder="Date"></td>
+                        <td><p class="inpboxlabel" for="update-date">Date</p></td>
+                        <td><input class="inpbox" type="text" name="update-date" id="update-date" placeholder="Date"></td>
                     </tr>
                     <tr>
-                        <td><label for="update-start-time" >Start Time: </label></td>
-                        <td><input type="text" name="update-start-time" id="update-start-time" placeholder="Start Time"></td>
+                        <td><p class="inpboxlabel" for="update-start-time">Start Time</p></td>
+                        <td><input class="inpbox" type="text" name="update-start-time" id="update-start-time" placeholder="Start Time"></td>
                     </tr>
                     <tr>
-                        <td><label for="update-location-name" >Location Name: </label></td>
-                        <td><input type="text" name="update-location-name" id="update-location-name" placeholder="Location Name"></td>
+                        <td><p class="inpboxlabel" for="update-location-name">Location Name</p></td>
+                        <td><input class="inpbox" type="text" name="update-location-name" id="update-location-name" placeholder="Location Name"></td>
                     </tr>
                     <tr>
-                        <td><label for="update-location-address" >Address:</label></td>
-                        <td><input type="text" name="update-location-address" id="update-location-address" placeholder="Address"></td>
+                        <td><p class="inpboxlabel" for="update-location-address">Location Address</p></td>
+                        <td><input class="inpbox" type="text" name="update-location-address" id="update-location-address" placeholder="Address"></td>
                     </tr>
                     <tr>
-                        <td><label for="update-location-phone" >Phone: </label></td>
-                        <td><input type="text" name="update-location-phone" id="update-location-phone" placeholder="Phone"></td>
+                        <td><p class="inpboxlabel" for="update-location-phone">Location Phone</p></td>
+                        <td><input class="inpbox" type="text" name="update-location-phone" id="update-location-phone" placeholder="Phone"></td>
                     </tr>
                     <tr>
-                        <td><input onclick-"updateCompetitionForm()" type="submit" value="Update Competition"></td>
-                        <td><a href='/competitions'><input type="reset" value="Cancel"></a></td>
+                        <td><input class="button-62" onclick-"updateCompetitionForm()" type="submit" value="Update Competition"></td>
+                        <td><a href='/competitions'><input class="button-62" type="reset" value="Cancel"></a></td>
                     </tr>
                 </table>
         </form>
 </section>
-            
-
-
 
 <script src="./js/delete_competition.js"></script>
 <script src="./js/update_competition.js"></script>

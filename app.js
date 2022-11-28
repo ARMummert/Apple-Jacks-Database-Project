@@ -103,9 +103,6 @@ app.get('/', function(req, res)
     return res.render('index');                  
   });   
 
-app.get('/project-development', function(req, res) {
-    return res.render('project-development');
-});
 
 // Routes - Competitions
 
@@ -721,6 +718,111 @@ app.delete('/delete-teams/', function(req, res, next) {
     }
   });
 });
+
+// Routes = Athletes Events
+app.get('/athletes-events', function (req, res){
+  let athletsevents;
+  
+  if (req.query.athleteName, req.query.eventName, req.query.divisionName, req.query.eventlevelName === undefined)
+  {
+    athletesevents = `SELECT athlete_eventID as 'ID', Athletes.athleteName as 'Athlete',
+    Events.eventName as 'Event-Name', EventLevels.eventLevelName as 'Event-Level', Divisions.divisionName as 'Athlete-Division'
+    FROM Athletes_Events
+    INNER JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
+    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
+    INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
+    INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;`;
+  }
+  else 
+  {
+    athletesevents = `SELECT athlete_eventID as 'ID', Athletes.athleteName as 'Athlete',
+    Events.eventName as 'Event-Name',EventLevels.eventLevelName as 'Event-Level', Divisions.divisionName as 'Athlete-Division'
+    FROM Athletes_Events
+    INNER JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
+    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
+    INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
+    INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;
+    WHERE Athletes_Events = "${req.query.athletesevents}%"`;
+     }      
+  let events = `SELECT eventID FROM Events;`;
+
+  let eventName = `SELECT DISTINCT eventName from Events;`;
+
+  let eventLevelName = `SELECT DISTINCT eventLevelName FROM EventLevels;`;
+
+  let divisionName = `SELECT DISTINCT divisionName FROM Divisions;`;
+  
+  
+  db.pool.query(athletesevents, function(error, rows, fields) {
+      
+      let athleteseventsdata = rows;
+
+      db.pool.query(events, function(error, rows, fields){
+
+        let events= rows;
+
+          db.pool.query(eventName, function(error, rows, fieldss){
+
+            let eventName = rows;
+
+              db.pool.query(eventLevelName, function(error, rows, fields) {
+
+                let eventLevelName = rows;
+              
+                  db.pool.query(divisionName, function(error, rows, fields) {
+                    let divisionName = rows;
+                  
+                return res.render('athletes-events', {data: athleteseventsdata, eventsdata:events, eventNamedata:eventName, eventLevelNamedata: eventLevelName, divisionsNamedata: divisionName });
+              })
+              })
+              })
+          })
+      });
+});
+
+// Create Athletes Events
+app.post('/add-athlete-ajax', function(req, res) {
+  let data = req.body;
+  
+  // Create Athletes Events Query
+ 
+    query1 = `INSERT INTO Athletes_Events(athleteID,eventID)
+    VALUES( 
+            SELECT eventID FROM Events WHERE Events.eventName = ? and Events.eventlevelID = ? and
+            Events.DivisionID = SELECT DivisionID FROM Athletes WHERE Athletes.athleteID = ?;`;
+  
+    
+  db.pool.query(query1, function(error, rows, fields) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400);
+    }
+    else
+        {
+          res.send(rows);
+                    
+        }
+        })       
+      }
+    );
+   // Delete Athlete
+app.delete('/delete-athletes-event/', function(req, res, next) {
+  let data = req.body;
+  let athleteeventID = parseInt(data.id);
+  let deleteAthletesEvents = 'DELETE FROM Athlete_Events WHERE Athletes_Events.athlete_eventID = ? ';
+
+  db.pool.query(deleteAthletesEvents, [athleteeventID], function(error, rows, fields) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(400);
+    }
+    else {
+      res.sendStatus(204);
+      
+    }
+  });
+});
+
 // LISTENER
 
 app.listen(PORT, function () {

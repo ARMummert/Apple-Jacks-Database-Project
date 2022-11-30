@@ -1,9 +1,11 @@
-<!-- competitions.hbs -->
-
+<!-- athletes-events.hbs -->
+<!DOCTYPE html>
+<html>
+<head>
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-
+</head>
+<body>
 <h3 class=padtop >Athletes Events</h3>
 
 <section class="sectionone">
@@ -29,7 +31,7 @@
                 <td>{{this.Event-Name}}</td>
                 <td>{{this.Event-Level}}</td>
                 <td>{{this.Athlete-Division}}</td>
-                <td><button class="button-62" onClick="deleteAtheltes_Events({{this.ID}})">Delete</button></td>          
+                <td><button class="button-62" onClick="deleteAthletes_Events({{this.ID}})">Delete</button></td>          
             </tr>   
             {{/each}}
         </tbody>
@@ -38,50 +40,27 @@
 
 
 <section class="sectiontwo">
-        <h3 class="section-header">Search By</h3>
+        <h3 class="section-header">Search By Athlete</h3>
         <form id='search-athletes-events' method='GET' action ='/athletes-events'>
              <table class="addtable">
                 <th>
                     <select
-                    name="input-athletes-events"
+                    name="input-athlete-name"
                     class="button-62"
-                    id="input-athletes-events"
+                    id="input-athlete-name"
                     required>
                     <option class="dropdown" value="">
-                    Search By
+                    Search By Athlete
                     </option>
-                    {{#each athleteseventsdata}}
+                    {{#each athletesdata}}
                     <option class="dropdown" value="{{this.ID}}">
                     {{this.Athlete}} 
                     </option>
-                    <option class="dropdown" value="{{this.ID}}">
-                    {{this.Event-Name}}
-                    </option>
-                    <option class="dropdown" value="{{this.ID}}">
-                    {{this.Event-Level}}
-                    </option>
-                    <option class="dropdown" value="{{this.ID}}">
-                    </option>
                 {{/each}}
                 </select> 
                 </th>
-                <th>
-                    <select
-                    name="input-event-name"
-                    class="button-62"
-                    id="input-event-name"
-                    required>
-                    <option class="dropdown" value="">
-                    Select an Event
-                    </option>
-                    {{#each teamsdata}}
-                    <option class="dropdown" value="{{this.ID}}">
-                    {{this.Athlete}}
-                    </option>
-                {{/each}}
-                </select> 
-                </th>
-                <td><input class="search-box" type="text" name="athelteName" id="input-athlete-name" placeholder="Athlete Name..."></td>
+                
+                <td><input class="search-box" type="text" name="athleteName" id="input-athlete-name" placeholder="Athlete Name..."></td>
             
             </table>
             <div class="addtable">
@@ -111,8 +90,8 @@
                         
                 </tr>
                 <tr>
-                    <td><label for="input-event-level">Event Level</label></td> 
-                    <td><input type="text" name="input-event-level" id="input-event-level" required placeholder="Event Level"></td>     
+                    <td><label for="input-event-level-name">Event Level</label></td> 
+                    <td><input type="text" name="input-event-level-name" id="input-event-level-name" required placeholder="Event Level"></td>     
                 </tr>
                 <tr>
                     <td><label for="input-division-name">Location Name </label></td> 
@@ -177,9 +156,9 @@
                 </table>
         </form>
 </section>
-            
+</body>            
 
+</html>
 
-
-<script src="./js/delete_athletes-events.js"></script>
-<script src="./js/add_athletes-events.js"></script>
+<script src="./js/delete_athletes_events.js"></script>
+<script src="./js/add_athletes_events.js"></script>

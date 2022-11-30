@@ -169,16 +169,17 @@ app.post('/add-competition-ajax', function(req, res) {
 // Update Competition
 app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
+  let competitionID = parseInt(data.competitionID);
+  let competitionName = data.competitionName;
+  let date = data.date;
+  let startTime = data.startTime;
+  let locationName = data.locationPhone;
+  let locationAddress = data.locationAddress;
+  let locationPhone = data.locationPhone;
+  updateCompetition = `UPDATE Competitions SET competitionName = ?, date = ?, startTime = ?, locationName = ?, locationAddress =  ?, locationPhone = ? WHERE competitionID = ?`;
   
-
-
-  let updateCompetition = `UPDATE Competitions SET competitionName = 
-   '${data.competitionName}', date = '${data.date}', startTime = '${data.startTime}', locationName = '${data.locationName}', locationAddress = '${data.locationAddress}', locationPhone = '${data.locationPhone}' WHERE competitionID = ?;`
-  
-  let selectCompetition = `SELECT competitionID, competitionName, data, startTime, locationName, locationAddress, locationPhone FROM Competitons WHERE competitionID = ?`
-    db.pool.query(
-      updateCompetition,
-
+  selectCompetition = `SELECT competitionName, date, startTime, locationName, locationAddress, locationPhone FROM Competitions WHERE competitionID = '${data.competitionID}';`;
+    db.pool.query(updateCompetition,
         [
         competitionID,
         competitionName,
@@ -186,7 +187,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
         startTime,
         locationName,
         locationAddress,
-        locationPhone,
+        locationPhone
        ],
 
     function (error, rows, fields) {
@@ -195,7 +196,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
         res.sendStatus(400);
       }
       else {
-      db.pool.query(selectCompetition, [competitionID], function(error, rows, fields){
+      db.pool.query(selectCompetition, [competitionName, date, startTime, locationName, locationAddress, locationPhone], function(error, rows, fields){
         if (error) {
           console.log(error)
           res.sendStatus(400);
@@ -204,10 +205,10 @@ app.put('/put-competition-ajax', function(req, res, next) {
           res.send(rows);
           
         }
-      })
+      });
       
     }
-  })
+  });
 });
 
 // Delete Competition
@@ -845,7 +846,7 @@ app.delete('/delete-athletes-events/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

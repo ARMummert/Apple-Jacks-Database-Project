@@ -39,7 +39,7 @@ app.use(
           "blob:", 
           "data:", 
           "gap:",
-          'unsafe-inline'
+          
       ],
       "base-uri": "'self'",
       "font-src": [
@@ -53,7 +53,8 @@ app.use(
       ],
       "img-src": [
           "'self'",
-          "data:"
+          "data:",
+          "http://127.0.0.1/favicon.ico"
       ],
       "object-src": [
           "'none'"
@@ -786,11 +787,13 @@ app.post('/add-athletes-events-ajax', function(req, res) {
   
   // Create Athletes Events Query
  
-    query1 = `INSERT INTO Athletes_Events(athleteID,eventID)
-    VALUES( 
-            SELECT eventID FROM Events WHERE Events.eventName = ? and Events.eventlevelID = ? and
-            Events.DivisionID = SELECT DivisionID FROM Athletes WHERE Athletes.athleteID = ?;`;
-  
+    query1 = `INSERT INTO Athletes_Events(athleteID, eventID, eventleveID, divisionID)
+    VALUES(
+      '${data.athleteName}',
+      '${data.eventName}',
+      '${data.eventlevelName}',
+      '${data.divisionName}'
+      )`;
     
   db.pool.query(query1, function(error, rows, fields) {
     if (error) {
@@ -799,12 +802,28 @@ app.post('/add-athletes-events-ajax', function(req, res) {
     }
     else
         {
-          res.send(rows);
-                    
-        }
-        })       
+          
+        query2 = `SELECT athlete_eventID as 'ID',Athlete_Events as 'Athlete-Event', Athlete.athleteName as 'Athlete', Events.eventName as 'Event',
+        EventLevels.eventlevelName as 'EventLevel', Divisions.divisionName as 'Division'
+        FROM Atheltes_Events
+        INNER JOIN Athletes ON Athletes_Events.athleteID = Athlete.athleteID
+        INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
+        INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
+        INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID;`;  
+        db.pool.query(query2, function(error, rows, fields){  
+              if (error) {                    
+                  console.log(error);
+                  res.sendStatus(400);
+              }
+              else
+              {
+                  res.send(rows);
+                  
+              }
+          })       
       }
-    );
+  })
+});
    // Delete Athletes - Events
 app.delete('/delete-athletes-events/', function(req, res, next) {
   let data = req.body;

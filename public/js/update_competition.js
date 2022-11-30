@@ -13,11 +13,11 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     let inputstartTime = document.getElementById("update-start-time");
     let inputlocationName = document.getElementById("update-location-name");
     let inputlocationAddress = document.getElementById("update-location-address");
-    let inputlocationPhone = document.getlElementByID("update-competition-phone");
+    let inputlocationPhone = document.getElementById("update-location-phone");
     
 
     // Get the values from the form fields
-    let competitionIDValue =  inputcompetitionID.value
+    let competitionIDValue =  inputcompetitionID.value;
     let competitionNameValue = inputcompetitionName.value;
     let dateValue = inputdate.value;
     let startTimeValue = inputstartTime.value;
@@ -27,7 +27,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     
     // Must abort if being bassed NULL for competitions
 
-    if (isNaN(competitionNameValue) || isNan(locationNameValue) || isNan(locationAddressValue)) 
+    if (isNaN(competitionNameValue) || isNaN(locationNameValue) || isNaN(locationAddressValue)) 
     {
         return;
     }
@@ -54,7 +54,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, inputcompetitionID); 
+            updateRow(xhttp.response, competitionIDValue); 
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -116,9 +116,9 @@ function updateRow(data, competitionID){
           
             // Reassign location Phone to value we updated to
             td6.innerHTML = parsedData[0].LocationPhone
-                  
+                 
       }
-      location.reload();
+      window.location.reload(); 
       }
 
 };

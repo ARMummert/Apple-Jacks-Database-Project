@@ -1,5 +1,5 @@
 // Get the objects we need to modify
-let addAthletes_EventsForm = document.getElementById('add-athlete-form');
+let addAthletes_EventsForm = document.getElementById('add-athletes-events-form');
 
 // Modify the objects we need
 addAthletes_EventsForm.addEventListener("submit", function (e) {
@@ -26,9 +26,9 @@ addAthletes_EventsForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
       athleteName:athleteNameValue,
-      eventID: eventNameValue,
-      eventlevelID: eventlevelNameValue,
-      divisionID: divisionNameValue
+      eventName: eventNameValue,
+      eventlevelName: eventlevelNameValue,
+      divisionName: divisionNameValue
     };
     
     // Setup our AJAX request

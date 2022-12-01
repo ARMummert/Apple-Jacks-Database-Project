@@ -6,7 +6,7 @@ var app     = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-PORT = 8800;
+PORT = 4060;
 
 // Database
 var db = require('./database/db-connector')
@@ -169,45 +169,38 @@ app.post('/add-competition-ajax', function(req, res) {
 // Update Competition
 app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
-  let competitionID = parseInt(data.competitionID);
+  console.log(data)
+  let competitionID = data.competitionID;
   let competitionName = data.competitionName;
   let date = data.date;
   let startTime = data.startTime;
-  let locationName = data.locationPhone;
+  let locationName = data.locationName;
   let locationAddress = data.locationAddress;
   let locationPhone = data.locationPhone;
+  
   updateCompetition = `UPDATE Competitions SET competitionName = ?, date = ?, startTime = ?, locationName = ?, locationAddress =  ?, locationPhone = ? WHERE competitionID = ?`;
   
-  selectCompetition = `SELECT competitionName, date, startTime, locationName, locationAddress, locationPhone FROM Competitions WHERE competitionID = '${data.competitionID}';`;
     db.pool.query(updateCompetition,
         [
-        competitionID,
         competitionName,
         date,
         startTime,
         locationName,
         locationAddress,
-        locationPhone
+        locationPhone,
+        competitionID
        ],
-
+       
     function (error, rows, fields) {
       if (error) {
         console.log(error);
         res.sendStatus(400);
       }
       else {
-      db.pool.query(selectCompetition, [competitionName, date, startTime, locationName, locationAddress, locationPhone], function(error, rows, fields){
-        if (error) {
-          console.log(error)
-          res.sendStatus(400);
-        }
-        else {
+      
           res.send(rows);
           
         }
-      });
-      
-    }
   });
 });
 
@@ -846,7 +839,7 @@ app.delete('/delete-athletes-events/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

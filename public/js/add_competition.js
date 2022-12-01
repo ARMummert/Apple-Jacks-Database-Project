@@ -23,10 +23,11 @@ addCompetitionForm.addEventListener("submit", function (e) {
     let locationNameValue = inputlocationName.value;
     let locationAddressValue = inputlocationAddress.value;
     let locationPhoneValue = inputlocationPhone.value;
-
-    if (competitionNameValue, dateValue, startTimeValue, locationNameValue, locationAddressValue, locationPhoneValue === '') {
-        return;
-    }
+    console.log(locationPhoneValue);
+    if (locationPhoneValue === " "){
+        locationPhoneValue = NULL
+    };
+    console.log(locationPhoneValue);
     // Put our data we want to send in a javascript object
     let data = {
       competitionName:competitionNameValue,

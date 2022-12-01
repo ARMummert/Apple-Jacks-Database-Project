@@ -7,23 +7,23 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputcompetitionID = document.getElementById("select-competition");
-    let inputcompetitionName = document.getElementById("update-competition-name");
-    let inputdate = document.getElementById("update-date");
-    let inputstartTime = document.getElementById("update-start-time");
-    let inputlocationName = document.getElementById("update-location-name");
-    let inputlocationAddress = document.getElementById("update-location-address");
-    let inputlocationPhone = document.getElementById("update-location-phone");
+    let updatecompetitionID = document.getElementById("select-competition");
+    let updatecompetitionName = document.getElementById("update-competition-name");
+    let updatedate = document.getElementById("update-date");
+    let updatestartTime = document.getElementById("update-start-time");
+    let updatelocationName = document.getElementById("update-location-name");
+    let updatelocationAddress = document.getElementById("update-location-address");
+    let updatelocationPhone = document.getElementById("update-location-phone");
     
 
     // Get the values from the form fields
-    let competitionIDValue =  inputcompetitionID.value;
-    let competitionNameValue = inputcompetitionName.value;
-    let dateValue = inputdate.value;
-    let startTimeValue = inputstartTime.value;
-    let locationNameValue = inputlocationName.value;
-    let locationAddressValue = inputlocationAddress.value;
-    let locationPhoneValue = inputlocationPhone.value;
+    let competitionIDValue =  updatecompetitionID.value;
+    let competitionNameValue = updatecompetitionName.value;
+    let dateValue = updatedate.value;
+    let startTimeValue = updatestartTime.value;
+    let locationNameValue = updatelocationName.value;
+    let locationAddressValue = updatelocationAddress.value;
+    let locationPhoneValue = updatelocationPhone.value;
     
     // Must abort if being bassed NULL for competitions
 
@@ -35,13 +35,13 @@ updateCompetitionForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-      competitionID:competitionIDValue,
-      competitionName:competitionNameValue,
-      date:dateValue,
-      startTime:startTimeValue,
-      locationName:locationNameValue,
-      locationAddress:locationAddressValue,
-      LocationPhone:locationPhoneValue
+      competitionID: competitionIDValue,
+      competitionName: competitionNameValue,
+      date: dateValue,
+      startTime: startTimeValue,
+      locationName: locationNameValue,
+      locationAddress: locationAddressValue,
+      LocationPhone: locationPhoneValue
     };
     
     // Setup our AJAX request

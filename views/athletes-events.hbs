@@ -43,22 +43,6 @@
         <h3 class="section-header">Search By Athlete</h3>
         <form id='search-athletes-events' method='GET' action ='/athletes-events'>
              <table class="addtable">
-                <th>
-                    <select
-                    name="input-athlete-name"
-                    class="button-62"
-                    id="input-athlete-name"
-                    required>
-                    <option class="dropdown" value="">
-                    Search By Athlete
-                    </option>
-                    {{#each athletesdata}}
-                    <option class="dropdown" value="{{this.ID}}">
-                    {{this.Athlete}} 
-                    </option>
-                {{/each}}
-                </select> 
-                </th>
                 
                 <td><input class="search-box" type="text" name="athleteName" id="input-athlete-name" placeholder="Athlete Name..."></td>
             
@@ -75,27 +59,29 @@
         
 
 <section class="sectionthree">
-        <h3 class="section-header"> Add Athlete Event </h3>
+        <h3 class="section-header"> Add Athlete to Event </h3>
         <form id="add-athletes-events-form">         
             <table class="addtable">
                 
                 <tr>
-                    <td><label for="input-athlete-name">Name</label></td> 
-                    <td><input type="text" name="input-athlete-name" id="input-athlete-name" required  placeholder="Athlete Name"></td>
-                       
+                    <td><label>Select Athlete</label></td>
+                    <td><select id='select-athlete' class="button-62">
+                        <option class="dropdown" value="">Select an Athlete</option>
+                        {{#each athletesdata}}
+                        <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}</option>
+                        {{/each}}
+                        </select>
+                    </td>
                 </tr>
                 <tr>
-                    <td><label for="input-event-name">Date</Event Name></td> 
-                    <td><input type="text" name="input-event-name" id="input-event-name" required placeholder="Event Name"></td>
-                        
-                </tr>
-                <tr>
-                    <td><label for="input-event-level-name">Event Level</label></td> 
-                    <td><input type="text" name="input-event-level-name" id="input-event-level-name" required placeholder="Event Level"></td>     
-                </tr>
-                <tr>
-                    <td><label for="input-division-name">Location Name </label></td> 
-                    <td><input type="text" name="input-division-name" id="input-division-name" required placeholder="Division Name"></td>
+                    <td><label>Select Event</label></td>
+                    <td><select id='select-event' class="button-62">
+                        <option class="dropdown" value="">Select Event</option>
+                        {{#each eventsdata}}
+                        <option class="dropdown" value="{{this.ID}}">{{this.Event}}</option>
+                        {{/each}}
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td><input class="button-62" onclick-"addAthletes_EventsForm()" type="submit" value="Add"></td>
@@ -107,51 +93,31 @@
 
 <section class="sectionfour">
         <form id="update-athletes-events-form">
-            <h3 class="section-header"> Update Athlete Event </h3>
+            <h3 class="section-header"> Update Athlete's Event </h3>
                 <table class="tablefour">
                     <tr>
-                        <td><label>Select Athlete to Update:</label></td>
-                        <td><select id='select-athlete' onChange="formFill(this)">
-                            <option value="">Select an Athlete</option>
+                        <td><label>Select Athlete</label></td>
+                        <td><select id='select-athlete' class="button-62">
+                            <option class="dropdown" value="">Select an Athlete</option>
                             {{#each athletesdata}}
-                            <option value="{{this.ID}}">{{this.Athlete}}</option>
+                            <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}</option>
                             {{/each}}
                         </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Select Event to Update:</label></td>
-                        <td><select id='select-event' onChange="formFill(this)">
-                            <option value="">Select an Event</option>
+                        <td><label>Select Event</label></td>
+                        <td><select id='select-event' class="button-62">
+                            <option class="dropdown" value="">Select an Event</option>
                             {{#each eventsdata}}
-                            <option value="{{this.ID}}">{{this.Event}}</option>
+                            <option class="dropdown" value="{{this.ID}}">{{this.Event}}</option>
                             {{/each}}
                         </select>
                         </td>
                     </tr>
                     <tr>
-                        <td><label>Select Event Level:</label></td>
-                        <td><select id='select-event-level' onChange="formFill(this)">
-                            <option value="">Select Event Level </option>
-                            {{#each eventlevelsdata}}
-                            <option value="{{this.ID}}">{{this.Event-Level}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label>Select Division:</label></td>
-                        <td><select id='select-division' onChange="formFill(this)">
-                            <option value="">Select Division</option>
-                            {{#each divisionsdata}}
-                            <option value="{{this.ID}}">{{this.Division}}</option>
-                            {{/each}}
-                        </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input onclick-"updateAthletesEventsForm()" type="submit" value="Update Athlete Event"></td>
-                        <td><a href='/athletes-events'><input type="reset" value="Cancel"></a></td>
+                        <td><input class="button-62" onclick-"updateAthletesEventsForm()" type="submit" value="Update Athlete Event"></td>
+                        <td><a href='/athletes-events'><input class="button-62" type="reset" value="Cancel"></a></td>
                     </tr>
                 </table>
         </form>

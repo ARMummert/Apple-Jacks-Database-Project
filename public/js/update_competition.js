@@ -1,6 +1,5 @@
 // Get the objects we need to modify
 let updateCompetitionForm = document.getElementById('update-competition-form');
-
 // Modify the objects we need
 updateCompetitionForm.addEventListener("submit", function (e) {
   // Prevent the form from submitting
@@ -26,13 +25,11 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     let locationPhoneValue = updatelocationPhone.value;
     
     // Must abort if being bassed NULL for competitions
-
-    if (isNaN(competitionNameValue) || isNaN(locationNameValue) || isNaN(locationAddressValue)) 
-    {
-        return;
-    }
-    
-
+    console.log(locationPhoneValue)
+    if (locationPhoneValue === " "){
+      locationPhoneValue = NULL
+    };
+    console.log(locationPhoneValue)
     // Put our data we want to send in a javascript object
     let data = {
       competitionID: competitionIDValue,
@@ -43,7 +40,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
       locationAddress: locationAddressValue,
       LocationPhone: locationPhoneValue
     };
-    
+    console.log(data)
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-competition-ajax", true);

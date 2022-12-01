@@ -11,8 +11,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-body #radio {  
-    height: 600px;  
+body #radio {    
     display: grid;
     grid-template-rows: 500px 100px;
     grid-template-columns: 1fr 30px 30px 30px 30px 30px 30px 30px 1fr;

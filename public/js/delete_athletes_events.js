@@ -21,8 +21,7 @@ function deleteRow(athlete_eventID){
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
        if (row.getAttribute("data-value") == athlete_eventID) {
-            table.deleteRow(i);
-            table.deleteDropDown(i);
+            table.deleteRow(i);        
             break;
        }
     }
@@ -34,6 +33,7 @@ function deleteDropDown(athlete_eventID) {
     for (let i = 0; i < selectAthletes_Events.length; i++) {
         if(Number(selectAthletes_Events.options[i].value) === Number(athlete_eventID)) {
             selectAthletes_Events[i].remove();
+            table.deleteDropDown(i);
         }
     }
 }

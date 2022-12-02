@@ -98,5 +98,6 @@ addRowToTable = (data) => {
     option.text = newRow.divisionID + ' ' +  newRow.divisionName;
     option.value = newRow.divisionID;
     selectMenu.add(option);
+    window.location.reload();
    
 }

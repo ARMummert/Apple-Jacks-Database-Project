@@ -22,7 +22,6 @@ function deleteRow(divisionID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (row.getAttribute("data-value") == divisionID) {
             table.deleteRow(i);
-            table.deleteDropDown(i);
             break;
        }
     }
@@ -34,6 +33,7 @@ function deleteDropDown(divisionID) {
     for (let i = 0; i < selectDivision.length; i++) {
         if(Number(selectDivision.options[i].value) === Number(divisionID)) {
             selectDivision[i].remove();
+            table.deleteDropDown(i);
         }
     }
 }

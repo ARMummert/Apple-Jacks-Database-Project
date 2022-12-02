@@ -112,8 +112,8 @@ function updateRow(data, competitionID){
             
             let td6 = updateRowIndex.getElementsByTagName("td")[6];
           
-            
-            td6.innerHTML = parsedData[0].LocationPhone
+            // Reassign location Phone to value we updated to
+            td6.innerHTML = parsedData[0].locationPhone
                  
       }
       

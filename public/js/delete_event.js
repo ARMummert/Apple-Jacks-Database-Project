@@ -10,7 +10,7 @@ function deleteEvent(eventID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(eventID);
-            
+            deleteDropDown(eventID);
         }
     });
 }

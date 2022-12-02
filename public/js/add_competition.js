@@ -127,5 +127,5 @@ addRowToTable = (data) => {
     option.value = newRow.competitionID;
     selectMenu.add(option);
 
-    window.location.reload();
+
 }   

@@ -140,7 +140,7 @@
                 <table class="tablefour">
                     <th>
                         <td><p>Select Athlete</p></td>
-                        <td><select class="button-62" id='select-athlete' onChange="formFill(this)">
+                        <td><select class="button-62" id='select-athlete' required>
                             <option class="dropdown" value="">Select Athlete</option>
                             {{#each data}}
                             <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}</option>
@@ -148,7 +148,67 @@
                         </select>
                         </td>
                     </th>
-                    
+                <tr>
+                    <th>
+                    <select
+                    name="update-team-name"
+                    class="button-62"
+                    id="update-team-name"
+                    required>
+                    <option class="dropdown" value="">
+                    Select a Team
+                    </option>
+                    {{#each teamsdata}}
+                    <option class="dropdown" value="{{this.ID}}">
+                    {{this.Team}}
+                    </option>
+                {{/each}}
+                </select> 
+                </th>
+                 <th>
+                    <select
+                    name="update-division-name"
+                    class="button-62"
+                    id="update-division-name"
+                    required>
+                    <option class="dropdown" value="">
+                    Select a Division
+                    </option>
+                    {{#each divisionsdata}}
+                    <option class="dropdown" value="{{this.ID}}">
+                    {{this.Division}}
+                    </option>
+                {{/each}}
+                </select> 
+                </th>
+            <tr>
+                 <tr>
+                    <td><p class="inpboxlabel" for="update-athlete-name">Athlete Name</p></td> 
+                    <td><input class="inpbox" type="text" name="update-athlete-name" id="update-athlete-name" required  placeholder="Athlete Name"></td>  
+                </tr> 
+                <tr>
+                    <td><p class="inpboxlabel" for="update-athlete-phone">Athlete Phone</p></td> 
+                    <td><input class="inpbox" type="text" name="update-athlete-phone" id="update-athlete-phone" required placeholder="Athlete Phone"></td>
+                </tr> 
+                <tr>
+                    <td><p class="inpboxlabel" for="update-athlete-email">Athlete Email</p></td> 
+                    <td><input class="inpbox" type="text" name="update-athlete-email" id="update-athlete-email" required placeholder="Athlete Email"></td>
+                </tr>
+                <tr>
+                    <td><p class="inpboxlabel" for="update-athlete-address">Athlete Address</p></td> 
+                    <td><input class="inpbox" type="text" name="update-athlete-address" id="update-athlete-address" required placeholder="Athlete Address"></td>  
+                </tr>
+                <tr>
+                    <td><p class="inpboxlabel" for="update-athlete-DOB">Athlete DOB</p></td> 
+                    <td><input class="inpbox"type="date" name="update-athlete-DOB" id="update-athlete-DOB" required placeholder="DOB"></td>
+                        
+                </tr>
+                <tr>
+                    <td><p class="inpboxlabel" for="update-athlete-age">Athlete Age By August 31st</p></td> 
+                    <td><input class="inpbox" type="text" name="update-athlete-age" id="update-athlete-age" required placeholder="Age"></td>
+                        
+                </tr>
+                <tr>
                     <th>
                         <td><input class="button-62"  onclick-"updateAthleteForm()" type="submit" value="Update Athlete"></td>
                         <td><a href='/athletes'><input class="button-62" type="reset" value="Cancel"></a></td>

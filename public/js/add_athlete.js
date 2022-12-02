@@ -141,6 +141,5 @@ addRowToTable = (data) => {
     option.text = newRow.athleteID + ' ' +  newRow.athleteName;
     option.value = newRow.athleteID;
     selectMenu.add(option);
-    window.location.reload();
 }   
  

@@ -10,6 +10,7 @@ function deleteEventLevel(eventlevelID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(eventlevelID);
+            
         }
     });
 }

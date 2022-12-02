@@ -10,7 +10,7 @@ function deleteCompetition(competitionID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(competitionID);
-            deleteDropDown(competitionID);
+           
         }
     });
 }

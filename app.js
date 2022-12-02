@@ -179,7 +179,7 @@ app.put('/put-competition-ajax', function(req, res, next) {
   let locationPhone = data.locationPhone;
   
   updateCompetition = `UPDATE Competitions SET competitionName = ?, date = ?, startTime = ?, locationName = ?, locationAddress =  ?, locationPhone = ? WHERE competitionID = ?`;
-  
+  selectCompetitionsupdates =`SELECT competitionName, date, startTime, locationName, locationAddress, locationPhone FROM Competitions WHERE competitionID =?;`;
     db.pool.query(updateCompetition,
         [
         competitionName,
@@ -197,11 +197,19 @@ app.put('/put-competition-ajax', function(req, res, next) {
         res.sendStatus(400);
       }
       else {
+        db.pool.query(selectCompetitionsupdates, [competitionID], function(error, rows, fields){
+          if (error) {
+            console.log(error)
+            res.sendStatus(400);
+          }
+          else {
       
           res.send(rows);
           
         }
-  });
+        })
+      }
+  })
 });
 
 // Delete Competition
@@ -520,13 +528,22 @@ app.get('/athletes', function (req, res){
 // Create Athletes
 app.post('/add-athlete-ajax', function(req, res) {
   let data = req.body;
-  
+  let teamID = parseInt(data.teamID)
+  if (isNaN(teamID))
+  {
+    teamID = 'NULL'
+  }
+  let divisionID = parseInt(data.divisionID)
+  if (isNaN(divisionID))
+  {
+    divisionID = 'NULL'
+  }
   // Create Athletes Query
  
     query1 = `INSERT INTO Athletes(teamID,divisionID,athleteName, athletePhone, athleteEmail, athleteAddress, athleteDOB, athleteAge)
     VALUES (
-      '${data.teamID}',
-      '${data.divisionID}',
+      '${teamID}',
+      '${divisionID}',
       '${data.athleteName}',
       '${data.athletePhone}',
       '${data.athleteEmail}',
@@ -571,26 +588,36 @@ app.post('/add-athlete-ajax', function(req, res) {
 // Update Athlete
 app.put('/put-athlete-ajax', function(req, res, next) {
   let data = req.body;
+  let athleteID = data.athleteID;
+  let teamID = data.teamID;
+  let divisionID = data.divisionID;
+  let athleteName = data.athleteName;
+  let athletePhone = data.athletePhone;
+  let athleteEmail = data.athleteEmail;
+  let athleteAddress = data.athleteAddress;
+  let athleteDOB = data.athleteDOB
+  let athleteAge = data.athleteAge
+
+  updateAthlete = `UPDATE Athletes SET teamID = ?, divisionID = ?, athleteName = ?, athletePhone= ?,
+  athleteEmail = ?, athleteAddress = ?,athleteDOB = ?, athleteAge = ? WHERE athleteID = ?;`
+  selectAthleteupdates = `SELECT athleteName, Teams.teamName, Divisions.divisionName, 
+            athletePhone, athleteEmail, athleteAddress,athleteDOB, athleteAge FROM Athletes
+            INNER JOIN Teams ON Athletes.teamID = Teams.teamID
+            INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID where athleteID = ?;`;
   
-  let updateAthlete = `UPDATE athletes SET teamID = '${data.teamID}', divisionID = '${data.divisionID}', athleteName = '${data.athleteName}', athletePhone= '${data.athletePhone}',
-  athleteEmail = '${data.athleteEmail}', athleteAddress = '${data.athleteAddress}', athleteAge = '${data.athleteAge}' WHERE athleteID = ?;`
-  
-  let selectAthlete = `SELECT athleteID, teamID, divisionID, athleteName,AthletePhone, athleteEmail,athleteAddress,athleteAge
-  FROM Athletes
-  WERE Athletes.athleteID = ?`
     db.pool.query(
       updateAthlete,
 
         [
-        athleteID,
         teamID,
-        competitionID,
+        divisionID,
         athleteName,
         athletePhone,
         athleteEmail,
         athleteAddress,
         athleteDOB,
-        athleteAge
+        athleteAge,
+        athleteID
        ],
 
     function (error, rows, fields) {
@@ -599,14 +626,13 @@ app.put('/put-athlete-ajax', function(req, res, next) {
         res.sendStatus(400);
       }
       else {
-      db.pool.query(selectAthlete, [athleteID], function(error, rows, fields){
+      db.pool.query(selectAthleteupdates, [athleteID], function(error, rows, fields){
         if (error) {
           console.log(error)
           res.sendStatus(400);
         }
         else {
           res.send(rows);
-          res.redirect('/athletes');
         }
       })
       

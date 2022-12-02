@@ -61,7 +61,7 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
-   
+    updateCompetitionForm.reset()
   
     });
 
@@ -115,7 +115,6 @@ function updateRow(data, competitionID){
             td6.innerHTML = parsedData[0].locationPhone
                  
       }
-      window.location.reload(); 
       }
 
 };

@@ -25,11 +25,11 @@ updateCompetitionForm.addEventListener("submit", function (e) {
     let locationPhoneValue = updatelocationPhone.value;
     
     // Must abort if being bassed NULL for competitions
-    console.log(locationPhoneValue)
-    if (locationPhoneValue === " "){
-      locationPhoneValue = NULL
+  
+    if (locationPhoneValue === ''){
+      locationPhoneValue = 'NULL'
     };
-    console.log(locationPhoneValue)
+    
     // Put our data we want to send in a javascript object
     let data = {
       competitionID: competitionIDValue,
@@ -38,9 +38,9 @@ updateCompetitionForm.addEventListener("submit", function (e) {
       startTime: startTimeValue,
       locationName: locationNameValue,
       locationAddress: locationAddressValue,
-      LocationPhone: locationPhoneValue
+      locationPhone: locationPhoneValue
     };
-    console.log(data)
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-competition-ajax", true);

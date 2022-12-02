@@ -23,7 +23,6 @@ function deleteRow(competitionID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (row.getAttribute("data-value") == competitionID) {
             table.deleteRow(i);
-            
             break;
        }
     }

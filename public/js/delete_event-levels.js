@@ -9,8 +9,7 @@ function deleteEventLevel(eventlevelID) {
         data:JSON.stringify(data),
         contentType: "application/json; charset=utf=8",
         success: function(result){
-            deleteRow(eventlevelID);
-            
+            deleteRow(eventlevelID);    
         }
     });
 }

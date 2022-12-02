@@ -10,6 +10,7 @@ function deleteAthlete(athleteID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(athleteID);
+            deleteAthlete(athleteID);
         }
     });
 }

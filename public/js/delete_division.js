@@ -10,7 +10,6 @@ function deleteDivision(divisionID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(divisionID);
-            
         }
     });
 }
@@ -28,13 +27,3 @@ function deleteRow(divisionID){
     }
 }
 
-
-function deleteDropDown(divisionID) {
-    let selectDivision = document.getElementById("select-division")
-    for (let i = 0; i < selectDivision.length; i++) {
-        if(Number(selectDivision.options[i].value) === Number(divisionID)) {
-            selectDivision[i].remove();
-            table.deleteDropDown(i);
-        }
-    }
-}

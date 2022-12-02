@@ -6,7 +6,7 @@ var app     = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-PORT = 4060;
+PORT = 8800;
 
 // Database
 var db = require('./database/db-connector')
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 // Express Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     
-const { argvOptions } = require('forever/lib/forever/cli');
+const { argvOptions, resetColumns } = require('forever/lib/forever/cli');
 //Sets handlebars configurations
 app.engine('.hbs', engine({extname: ".hbs"})); 
 app.set('view engine', '.hbs'); 
@@ -161,6 +161,7 @@ app.post('/add-competition-ajax', function(req, res) {
                 else
                 {
                     res.send(rows);
+                    
                 }
             })       
         }
@@ -170,7 +171,7 @@ app.post('/add-competition-ajax', function(req, res) {
 app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
   console.log(data)
-  let competitionID = data.competitionID;
+  let competitionID = parseInt(data.competitionID)
   let competitionName = data.competitionName;
   let date = data.date;
   let startTime = data.startTime;
@@ -865,7 +866,7 @@ app.delete('/delete-athletes-events/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

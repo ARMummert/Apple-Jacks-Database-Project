@@ -120,5 +120,6 @@ addRowToTable = (data) => {
     option.text = newRow.eventID + ' ' +  newRow.eventName + '' + newRow.competitionName + '' + newRow.divisionName + '' + newRow.eventlevelName;
     option.value = newRow.eventID;
     selectMenu.add(option);
+    window.location.reload();
    
 }

@@ -104,6 +104,7 @@ addRowToTable = (data) => {
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
         deleteCompetition(newRow.competitionID);
+        
     }
   
     // Add the cells to the row 
@@ -125,4 +126,6 @@ addRowToTable = (data) => {
     option.text = newRow.competitionName;
     option.value = newRow.competitionID;
     selectMenu.add(option);
+
+    window.location.reload();
 }   

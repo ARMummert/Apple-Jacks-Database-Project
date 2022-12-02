@@ -49,5 +49,6 @@ function updateRow(data, athleteID) {
             td1.innerHTML = parsedData[0].name;
             td2.innerHTML = parsedData[0].name;
         }
+        window.location.reload();
     }
 }

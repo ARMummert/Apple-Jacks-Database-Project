@@ -10,6 +10,7 @@ function deleteTeams(teamID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(teamID);
+            
         }
     });
 }
@@ -22,7 +23,6 @@ function deleteRow(teamID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (row.getAttribute("data-value") == teamID) {
             table.deleteRow(i);
-            table.deleteDropDown(i);
             break;
        }
     }
@@ -34,6 +34,7 @@ function deleteDropDown(teamID) {
     for (let i = 0; i < selectTeam.length; i++) {
         if(Number(selectTeam.options[i].value) === Number(teamID)) {
             selectTeam[i].remove();
+            table.deleteDropDown(i);
         }
     }
 }

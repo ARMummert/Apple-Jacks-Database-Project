@@ -10,6 +10,7 @@ function deleteCompetition(competitionID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(competitionID);
+           
         }
     });
 }
@@ -22,7 +23,6 @@ function deleteRow(competitionID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (row.getAttribute("data-value") == competitionID) {
             table.deleteRow(i);
-            table.deleteDropDown(i);
             break;
        }
     }
@@ -34,6 +34,7 @@ function deleteDropDown(competitionID) {
     for (let i = 0; i < selectCompetition.length; i++) {
         if(Number(selectCompetition.options[i].value) === Number(competitionID)) {
             selectCompetition[i].remove();
+            table.deleteDropDown(i);
         }
     }
 }

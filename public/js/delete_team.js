@@ -10,7 +10,6 @@ function deleteTeams(teamID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(teamID);
-            
         }
     });
 }
@@ -25,16 +24,5 @@ function deleteRow(teamID){
             table.deleteRow(i);
             break;
        }
-    }
-}
-
-
-function deleteDropDown(teamID) {
-    let selectTeam = document.getElementById("select-team")
-    for (let i = 0; i < selectTeam.length; i++) {
-        if(Number(selectTeam.options[i].value) === Number(teamID)) {
-            selectTeam[i].remove();
-            table.deleteDropDown(i);
-        }
     }
 }

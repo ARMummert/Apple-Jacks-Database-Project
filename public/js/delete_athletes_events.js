@@ -10,6 +10,7 @@ function deleteAthletes_Events(athlete_eventID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(athlete_eventID);
+            deleteDropDown(athlete_eventID);
         }
     });
 }

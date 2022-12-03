@@ -77,9 +77,10 @@ addRowToTable = (data) => {
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
-    deleteCell.onclick = function(){
+    deleteCell.className = "button-62"
+    deleteCell.onclick = function(){   
         deleteEventLevel(newRow.eventlevelID);
-    }
+    };
   
     // Add the cells to the row 
     row.appendChild(idCell);
@@ -96,5 +97,5 @@ addRowToTable = (data) => {
     option.text = newRow.eventlevelID + ' ' +  newRow.eventlevelName;
     option.value = newRow.eventlevelID;
     selectMenu.add(option);
-    window.location.reload();
+    
 }   

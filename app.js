@@ -6,7 +6,7 @@ var app     = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-PORT = 8800;
+PORT = 4060;
 
 // Database
 var db = require('./database/db-connector')
@@ -109,6 +109,7 @@ app.get('/', function(req, res)
 
 app.get('/competitions', function (req, res){
   let competitions;
+  console.log(req.query.competitionName)
   if (req.query.competitionName === undefined)
   {
     competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', date as 'Date', startTime as 'Time', locationName as 'Location',
@@ -118,7 +119,7 @@ app.get('/competitions', function (req, res){
   {
     competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', date as 'Date', startTime as 'Time', locationName as 'Location',
     locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions
-    Where competitionName LIKE "${req.query.competitionName}%";`;
+    Where competitionName LIKE "%${req.query.competitionName}%";`;
   }
   
   db.pool.query(competitions, function(error, rows, fields) {
@@ -488,21 +489,21 @@ app.get('/athletes', function (req, res){
   let athletes;
   if (req.query.athleteName === undefined)
   {
-    athletes = `SELECT Athletes.athleteID as 'ID', athleteName as 'Athlete', Teams.teamName as 'Team', Divisions.divisionName as 'Division', 
+    athletes = `SELECT athleteID as 'ID', athleteName as 'Athlete', teamName as 'Team', divisionName as 'Division', 
     athletePhone as 'Athlete-Phone', athleteEmail as 'Athlete-Email', athleteAddress as 'Athlete-Address',
     athleteDOB as 'DOB', athleteAge as 'Age'
     FROM Athletes
-    INNER JOIN Teams ON Athletes.teamID = Teams.teamID
-    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID ORDER BY athleteID ASC` ;
+    LEFT JOIN Teams ON Athletes.teamID = Teams.teamID
+    LEFT JOIN Divisions ON Athletes.divisionID = Divisions.divisionID ORDER BY athleteID ASC` ;
   }
   else 
   {
-    athletes = `SELECT Athletes.athleteID as 'ID', athleteName as 'Athlete', Teams.teamName as 'Team', Divisions.divisionName as 'Division',
+    athletes = `SELECT athleteID as 'ID', athleteName as 'Athlete', teamName as 'Team', divisionName as 'Division',
     athletePhone as 'Athlete-Phone', athleteEmail as 'Athlete-Email', athleteAddress as 'Athlete-Address',
     athleteDOB as 'DOB', athleteAge as 'Age'
     FROM Athletes
-    INNER JOIN Teams ON Athletes.teamID = Teams.teamID
-    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID WHERE athleteName LIKE "${req.query.athleteName}%";`;
+    LEFT JOIN Teams ON Athletes.teamID = Teams.teamID
+    LEFT JOIN Divisions ON Athletes.divisionID = Divisions.divisionID WHERE athleteName LIKE "${req.query.athleteName}%";`;
   }
 
   let divisions = `SELECT divisionID as 'ID', divisionName as 'Division' FROM Divisions;`;
@@ -565,8 +566,8 @@ app.post('/add-athlete-ajax', function(req, res) {
             athletePhone as 'AthletePhone', athleteEmail as 'AthleteEmail', athleteAddress as 'AthleteAddress',
             athleteDOB as 'DOB', athleteAge as 'Age'
             FROM Athletes
-            INNER JOIN Teams ON Athletes.teamID = Teams.teamID
-            INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID;`;
+            LEFT JOIN Teams ON Athletes.teamID = Teams.teamID
+            LEFT JOIN Divisions ON Athletes.divisionID = Divisions.divisionID;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -744,62 +745,62 @@ app.delete('/delete-teams/', function(req, res, next) {
 // Routes = Athletes Events
 app.get('/athletes-events', function (req, res){
   let athletsevents;
-  
-  if (req.query.athleteName, req.query.eventName, req.query.divisionName, req.query.eventlevelName === undefined)
-  {
+  console.log(req.query.athleteName)
+  if (req.query.athleteName  === undefined)
+  { 
     athletesevents = `SELECT athlete_eventID as 'ID', Athletes.athleteName as 'Athlete',
     Events.eventName as 'Event-Name', EventLevels.eventLevelName as 'Event-Level', Divisions.divisionName as 'Athlete-Division'
     FROM Athletes_Events
-    INNER JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
-    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
-    INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
-    INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;`;
+    LEFT JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
+    LEFT JOIN Divisions ON Divisions.divisionID = Athletes.divisionID
+    LEFT JOIN Events ON Athletes_Events.eventID = Events.eventID
+    LEFT JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;`;
   }
   else 
   {
+    
     athletesevents = `SELECT athlete_eventID as 'ID', Athletes.athleteName as 'Athlete',
-    Events.eventName as 'Event-Name',EventLevels.eventLevelName as 'Event-Level', Divisions.divisionName as 'Athlete-Division'
+    Events.eventName as 'Event-Name', EventLevels.eventLevelName as 'Event-Level', Divisions.divisionName as 'Athlete-Division'
     FROM Athletes_Events
-    INNER JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
-    INNER JOIN Divisions ON Athletes.divisionID = Divisions.divisionID
-    INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
-    INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;
-    WHERE Athletes_Events = "${req.query.athletesevents}%"`;
+    LEFT JOIN Athletes ON Athletes_Events.athleteID =  Athletes.athleteID
+    LEFT JOIN Divisions ON Divisions.divisionID = Athletes.divisionID
+    LEFT JOIN Events ON Athletes_Events.eventID = Events.eventID
+    LEFT JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
+    WHERE Athletes_Events.athleteID IN (SELECT athleteId FROM Athletes WHERE athleteName Like "${req.query.athleteName}%");`;
      }      
-  let events = `SELECT eventID FROM Events;`;
+  
+  let events = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',
+  Divisions.divisionName as 'Division', EventLevels.eventlevelName as 'Event-Level'
+  FROM Events
+  INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
+  INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
+  INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID;`;
 
-  let eventName = `SELECT DISTINCT eventName from Events;`;
+  let athletes = `SELECT athleteID as 'ID', athleteName as 'Athlete', divisionName as 'Division'
+  From Athletes
+  LEFT JOIN Divisions on Athletes.divisionID = Divisions.divisionID;`;
 
-  let eventLevelName = `SELECT DISTINCT eventLevelName FROM EventLevels;`;
-
-  let divisionName = `SELECT DISTINCT divisionName FROM Divisions;`;
+ 
   
   
-  db.pool.query(athletesevents, function(error, rows, fields) {
-      
+    db.pool.query(athletesevents, function(error, rows, fields) {
+        
       let athleteseventsdata = rows;
 
-      db.pool.query(events, function(error, rows, fields){
+        db.pool.query(events, function(error, rows, fields){
 
-        let events= rows;
+          let eventsrows= rows;
+          
+            db.pool.query(athletes, function(error, rows, fieldss){
+                
+              let athletesrows = rows;
 
-          db.pool.query(eventName, function(error, rows, fieldss){
-
-            let eventName = rows;
-
-              db.pool.query(eventLevelName, function(error, rows, fields) {
-
-                let eventLevelName = rows;
-              
-                  db.pool.query(divisionName, function(error, rows, fields) {
-                    let divisionName = rows;
-                  
-                return res.render('athletes-events', {data: athleteseventsdata, eventsdata:events, eventNamedata:eventName, eventLevelNamedata: eventLevelName, divisionsNamedata: divisionName });
-              })
-              })
-              })
-          })
-      });
+                console.log(athletesrows)
+                    
+                  return res.render('athletes-events', {data: athleteseventsdata, eventsdata:eventsrows, athletesdata:athletesrows }); 
+                })
+                })
+                });
 });
 
 // Create Athletes Events
@@ -808,13 +809,10 @@ app.post('/add-athletes-events-ajax', function(req, res) {
   
   // Create Athletes Events Query
  
-    query1 = `INSERT INTO Athletes_Events(athleteID, eventID, eventleveID, divisionID)
+    query1 = `INSERT INTO Athletes_Events(athleteID, eventID)
     VALUES(
-      '${data.athleteName}',
-      '${data.eventName}',
-      '${data.eventlevelName}',
-      '${data.divisionName}'
-      )`;
+      '${data.athleteID}',
+      '${data.eventID}')`;
     
   db.pool.query(query1, function(error, rows, fields) {
     if (error) {
@@ -824,13 +822,13 @@ app.post('/add-athletes-events-ajax', function(req, res) {
     else
         {
           
-        query2 = `SELECT athlete_eventID as 'ID',Athlete_Events as 'Athlete-Event', Athlete.athleteName as 'Athlete', Events.eventName as 'Event',
+        query2 = `SELECT athlete_eventID as 'ID', Athletes.athleteName as 'Athlete', Events.eventName as 'Event',
         EventLevels.eventlevelName as 'EventLevel', Divisions.divisionName as 'Division'
-        FROM Atheltes_Events
-        INNER JOIN Athletes ON Athletes_Events.athleteID = Athlete.athleteID
-        INNER JOIN Events ON Athletes_Events.eventID = Events.eventID
-        INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
-        INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID;`;  
+        FROM Athletes_Events
+        LEFT JOIN Athletes ON Athletes_Events.athleteID = Athletes.athleteID
+        LEFT JOIN Events ON Athletes_Events.eventID = Events.eventID
+        LEFT JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
+        LEFT JOIN Divisions ON Events.divisionID = Divisions.divisionID;`;  
         db.pool.query(query2, function(error, rows, fields){  
               if (error) {                    
                   console.log(error);
@@ -866,7 +864,7 @@ app.delete('/delete-athletes-events/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
 
 

@@ -44,7 +44,7 @@
         <form id='search-athletes-events' method='GET' action ='/athletes-events'>
              <table class="addtable">
                 
-                <td><input class="search-box" type="text" name="athleteName" id="input-athlete-name" placeholder="Athlete Name..."></td>
+                <td><input class="search-box" type="text" name="athleteName" id="input-athlete-name-search" placeholder="Athlete Name..."></td>
             
             </table>
             <div class="addtable">
@@ -68,7 +68,7 @@
                     <td><select id='select-athlete' class="button-62">
                         <option class="dropdown" value="">Select an Athlete</option>
                         {{#each athletesdata}}
-                        <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}</option>
+                        <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}, {{this.Division}}</option>
                         {{/each}}
                         </select>
                     </td>
@@ -78,7 +78,7 @@
                     <td><select id='select-event' class="button-62">
                         <option class="dropdown" value="">Select Event</option>
                         {{#each eventsdata}}
-                        <option class="dropdown" value="{{this.ID}}">{{this.Event}}</option>
+                        <option class="dropdown" value="{{this.ID}}">{{this.Event}}, {{this.Competition}}, {{this.Division}},{{this.Event-Level}}</option>t
                         {{/each}}
                         </select>
                     </td>

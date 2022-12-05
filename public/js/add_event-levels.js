@@ -96,5 +96,5 @@ addRowToTable = (data) => {
     option.text = newRow.eventlevelID + ' ' +  newRow.eventlevelName;
     option.value = newRow.eventlevelID;
     selectMenu.add(option);
-    window.location.reload();
+    
 }   

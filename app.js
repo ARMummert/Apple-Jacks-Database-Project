@@ -171,7 +171,6 @@ app.post('/add-competition-ajax', function(req, res) {
 // Update Competition
 app.put('/put-competition-ajax', function(req, res, next) {
   let data = req.body;
-  console.log(data)
   let competitionID = parseInt(data.competitionID)
   let competitionName = data.competitionName;
   let date = data.date;
@@ -591,7 +590,13 @@ app.post('/add-athlete-ajax', function(req, res) {
 app.put('/put-athlete-ajax', function(req, res, next) {
   let data = req.body;
   let athleteID = data.athleteID;
+  if (isNaN(athleteID)){
+    athleteID = null
+  }
   let teamID = data.teamID;
+  if (isNaN(teamID)){
+    teamID = null
+  }
   let divisionID = data.divisionID;
   let athleteName = data.athleteName;
   let athletePhone = data.athletePhone;
@@ -744,8 +749,8 @@ app.delete('/delete-teams/', function(req, res, next) {
 
 // Routes = Athletes Events
 app.get('/athletes-events', function (req, res){
-  let athletsevents;
-  console.log(req.query.athleteName)
+  let athletesevents;
+  
   if (req.query.athleteName  === undefined)
   { 
     athletesevents = `SELECT athlete_eventID as 'ID', Athletes.athleteName as 'Athlete',
@@ -795,7 +800,6 @@ app.get('/athletes-events', function (req, res){
                 
               let athletesrows = rows;
 
-                console.log(athletesrows)
                     
                   return res.render('athletes-events', {data: athleteseventsdata, eventsdata:eventsrows, athletesdata:athletesrows }); 
                 })
@@ -806,7 +810,7 @@ app.get('/athletes-events', function (req, res){
 // Create Athletes Events
 app.post('/add-athletes-events-ajax', function(req, res) {
   let data = req.body;
-  
+
   // Create Athletes Events Query
  
     query1 = `INSERT INTO Athletes_Events(athleteID, eventID)
@@ -859,6 +863,50 @@ app.delete('/delete-athletes-events/', function(req, res, next) {
       
     }
   });
+});
+
+    // Update Athletes - Events
+app.put('/put-athletes-events-ajax/', function(req, res, next) {
+  let data = req.body;
+  let athlete_eventID = parseInt(data.athlete_eventID)
+  let athleteID = parseInt(data.athleteID)
+  let eventID = parseInt(data.eventID)
+  if(isNaN(athleteID)){
+    athleteID = null
+  }
+  if(isNaN(eventID)){
+    eventID = null
+  }
+  console.log(athleteID)
+  updateAthlete_Events = `UPDATE Athletes_Events SET athleteID = ?, eventID = ? WHERE athlete_eventID =?`
+  selectAthlete_Eventsupdates = `SELECT Athletes.athleteName, Events.eventName,
+  EventLevels.eventlevelName, Divisions.divisionName
+  FROM Athletes_Events
+  LEFT JOIN Athletes ON Athletes_Events.athleteID = Athletes.athleteID
+  LEFT JOIN Events ON Athletes_Events.eventID = Events.eventID
+  LEFT JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
+  LEFT JOIN Divisions ON Events.divisionID = Divisions.divisionID
+  WHERE athlete_eventID = ?;`
+
+    db.pool.query(updateAthlete_Events,[athleteID,eventID,athlete_eventID],function(error,rows,fields){
+      console.log(updateAthlete_Events);    
+      if (error){
+        console.log(error);
+        res.sendtatus(400);
+      }
+      else{
+      db.pool.query(selectAthlete_Eventsupdates, [athlete_eventID],function(error,rows,fields){
+        if(error){
+          console.log(error)
+          res.sendStatus(400);
+        }
+        else{
+          res.send(rows);
+          console.log(rows);
+        }
+      })  
+      }
+      })    
 });
 
 // LISTENER

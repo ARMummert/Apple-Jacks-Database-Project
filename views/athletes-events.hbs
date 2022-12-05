@@ -96,22 +96,34 @@
             <h3 class="section-header"> Update Athlete's Event </h3>
                 <table class="tablefour">
                     <tr>
-                        <td><label>Select Athlete</label></td>
-                        <td><select id='select-athlete' class="button-62">
-                            <option class="dropdown" value="">Select an Athlete</option>
-                            {{#each athletesdata}}
-                            <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}</option>
+                        <td><label>Select Athlete_Event </label></td>
+                        <td><select id='select-athlete-event' class="button-62">
+                            <option class="dropdown" value="">Select an Athlete-Event  </option>
+                            {{#each data}}
+                            <option class="dropdown" value="{{this.ID}}">{{this.ID}},{{this.Athlete}},{{this.Event-Name}},{{this.Event-Level}},{{this.Athlete-Division}}</option>
                             {{/each}}
                         </select>
                         </td>
                     </tr>
                     <tr>
+                        <td><label>Select Athlete</label></td>
+                        <td><select id='select-updateathlete' class="button-62">
+                            <option class="dropdown" value="">Select an Athlete</option>
+                            {{#each athletesdata}}
+                            <option class="dropdown" value="{{this.ID}}">{{this.Athlete}}</option>
+                            {{/each}}
+                            <option class= "dropdown" value= "NULL">NULL</option>
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><label>Select Event</label></td>
-                        <td><select id='select-event' class="button-62">
+                        <td><select id='select-updateevent' class="button-62">
                             <option class="dropdown" value="">Select an Event</option>
                             {{#each eventsdata}}
-                            <option class="dropdown" value="{{this.ID}}">{{this.Event}}</option>
+                            <option class="dropdown" value="{{this.ID}}">{{this.Event}},{{this.Competition}},{{this.Division}},{{this.Event-Level}}</option>
                             {{/each}}
+                            <option class= "dropdown" value= "NULL">NULL</option>
                         </select>
                         </td>
                     </tr>
@@ -128,3 +140,4 @@
 
 <script src="./js/delete_athletes_events.js"></script>
 <script src="./js/add_athletes_events.js"></script>
+<script src="./js/update_athletes_events.js"></script>

@@ -62,9 +62,9 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    console.log(ParsedData)
+    
     let newRow = parsedData[parsedData.length -1]
-    console.log(newRow)
+    
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
@@ -77,14 +77,14 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.ID;
     athleteNameCell.innerText = newRow.Athlete;
-    eventNameCell.innerText = newRow.eventName;
-    eventlevelNameCell .innerText = newRow.eventlevelName;
-    divisionNameCell.innerText = newRow.divisionName;
+    eventNameCell.innerText = newRow.Event;
+    eventlevelNameCell .innerText = newRow.EventLevel;
+    divisionNameCell.innerText = newRow.Division;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteAthletesEvents(newRow.athlete_eventID);
+        deleteAthletes_Events(newRow.ID);
     }
   
     // Add the cells to the row 
@@ -102,10 +102,11 @@ addRowToTable = (data) => {
 
   
 
-    let selectMenu = document.getElementById("select-athletes-events");
+    let selectMenu = document.getElementById("select-athlete-event");
     let option = document.createElement("option");
-    option.text = newRow.athlete_eventID + ' ' +  newRow.athleteName + '' + newRow.eventName + '' + newRow.eventlevelName + '' + newRow.divisionName;
-    option.value = newRow.athlete_eventID;
+    option.text = newRow.ID + ' ' +  newRow.Athlete + '' + newRow.Event + '' + newRow.EventLevel + '' + newRow.Division;
+    option.value = newRow.ID;
+    console.log(option)
     selectMenu.add(option);
 
 }   

@@ -98,7 +98,7 @@ INSERT INTO Teams(teamName,coachName,coachPhone,CoachEmail)
 CREATE TABLE Athletes (
     athleteID int NOT NULL AUTO_INCREMENT,
     divisionID int, -- choosen based on age
-    teamID int,
+    teamID int NULL,
     athleteName varchar(255) NOT NULL,
     athleteAddress varchar(255) NOT NULL,
     athletePhone varchar(15) NOT NULL,
@@ -119,8 +119,8 @@ INSERT INTO Athletes (TeamID,divisionID,AthleteName,AthletePhone,AthleteEmail,At
 
 CREATE TABLE Athletes_Events(
     athlete_eventID int NOT NULL AUTO_INCREMENT,
-    eventID int,
-    athleteID int,
+    eventID int NULL,
+    athleteID int NULL,
     PRIMARY KEY (athlete_eventID),
     CONSTRAINT FK__Athletes_Events__eventID FOREIGN KEY (eventID) REFERENCES Events(eventID) 
     ON DELETE SET NULL,  

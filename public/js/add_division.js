@@ -74,11 +74,12 @@ addRowToTable = (data) => {
     
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
-    deleteCell.className = 'button-62';
+
+    deleteCell.className = "button-62"
+
     deleteCell.onclick = function(){
         deleteDivision(newRow.divisionID);
     };
-
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(divisionNameCell);
@@ -99,6 +100,6 @@ addRowToTable = (data) => {
     option.text = newRow.divisionID + ' ' +  newRow.divisionName;
     option.value = newRow.divisionID;
     selectMenu.add(option);
-    window.location.reload();
+    
    
 }

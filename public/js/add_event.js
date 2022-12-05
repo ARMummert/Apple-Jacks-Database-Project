@@ -89,13 +89,13 @@ addRowToTable = (data) => {
     eventNameCell.innerText = newRow.Event;
 
     
+    
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
+    deleteCell.className = "button-62"
     deleteCell.onclick = function(){
         deleteEvent(newRow.ID);
     };
-
-
 
     // Add the cells to the row 
     row.appendChild(idCell);
@@ -120,6 +120,6 @@ addRowToTable = (data) => {
     option.text = newRow.eventID + ' ' +  newRow.eventName + '' + newRow.competitionName + '' + newRow.divisionName + '' + newRow.eventlevelName;
     option.value = newRow.eventID;
     selectMenu.add(option);
-    window.location.reload();
+    
    
 }

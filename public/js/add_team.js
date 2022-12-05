@@ -86,9 +86,11 @@ addRowToTable = (data) => {
     coachNameCell.innerText = newRow.coachName;
     coachPhoneCell.innerText = newRow.coachPhone;
     coachEmailCell.innerText = newRow.coachEmail;
+
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
-    deleteCell.onclick = function(){
+    deleteCell.className = "button-62"
+    deleteCell.onclick = function(){   
         deleteTeams(newRow.teamID);
     };
 
@@ -113,5 +115,5 @@ addRowToTable = (data) => {
     option.text = newRow.teamID + ' ' +  newRow.teamName;
     option.value = newRow.teamID;
     selectMenu.add(option);
-    window.location.reload();
+    
 }

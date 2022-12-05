@@ -1,4 +1,5 @@
 function deleteAthlete(athleteID) {
+    console.log(athleteID)
     let link = '/delete-athlete/'
     let data = {
         id: athleteID
@@ -10,7 +11,7 @@ function deleteAthlete(athleteID) {
         contentType: "application/json; charset=utf=8",
         success: function(result){
             deleteRow(athleteID);
-            deleteAthlete(athleteID);
+            deleteDropDown(athleteID);
         }
     });
 }
@@ -31,7 +32,7 @@ function deleteRow(athleteID){
 
 function deleteDropDown(athleteID) {
     let selectAthlete = document.getElementById("select-athlete")
-    for (let i = 0; i < selectAthletes.length; i++) {
+    for (let i = 0; i < selectAthlete.length; i++) {
         if(Number(selectAthlete.options[i].value) === Number(athleteID)) {
             selectAthlete[i].remove();
             table.deleteDropDown(i);

@@ -8,27 +8,20 @@ addAthletes_EventsForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputathleteName = document.getElementById("input-athlete-name");
-    let inputeventName = document.getElementById("input-event-name");
-    let inputeventlevelName = document.getElementById("input-event-level-name");
-    let inputdivisionName = document.getElementById("input-division-name");
-
-    // Get the values from the form fields
-    let athleteNameValue = inputathleteName.value;
-    let eventNameValue = inputeventName.value;
-    let eventlevelNameValue = inputeventlevelName.value;
-    let divisionNameValue= inputdivisionName.value;
+    let inputathleteID = document.getElementById("select-athlete")
+    let inputeventID = document.getElementById("select-event")
     
 
-    if (athleteNameValue, eventNameValue, eventlevelNameValue, divisionNameValue === '') {
-        return;
-    }
+    // Get the values from the form fields
+    let athleteIDValue = inputathleteID.value;
+    let eventIDValue = inputeventID.value;
+    
+    
     // Put our data we want to send in a javascript object
     let data = {
-      athleteName:athleteNameValue,
-      eventName: eventNameValue,
-      eventlevelName: eventlevelNameValue,
-      divisionName: divisionNameValue
+      athleteID:athleteIDValue,
+      eventID: eventIDValue,
+      
     };
     
     // Setup our AJAX request
@@ -60,7 +53,7 @@ addAthletes_EventsForm.addEventListener("submit", function (e) {
 // Creates a single row from an Object representing a single record from 
 // Competitions
 addRowToTable = (data) => {
-
+    
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("athletes-events-table");
 
@@ -69,8 +62,9 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
+    
     let newRow = parsedData[parsedData.length -1]
-    console.log(newRow)
+    
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
@@ -83,14 +77,14 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.ID;
     athleteNameCell.innerText = newRow.Athlete;
-    eventNameCell.innerText = newRow.eventName;
-    eventlevelNameCell .innerText = newRow.eventlevelName;
-    divisionNameCell.innerText = newRow.divisionName;
+    eventNameCell.innerText = newRow.Event;
+    eventlevelNameCell .innerText = newRow.EventLevel;
+    divisionNameCell.innerText = newRow.Division;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
     deleteCell.onclick = function(){
-        deleteAthletesEvents(newRow.athlete_eventID);
+        deleteAthletes_Events(newRow.ID);
     }
   
     // Add the cells to the row 
@@ -108,11 +102,12 @@ addRowToTable = (data) => {
 
   
 
-    let selectMenu = document.getElementById("select-athletes-events");
+    let selectMenu = document.getElementById("select-athlete-event");
     let option = document.createElement("option");
-    option.text = newRow.athlete_eventID + ' ' +  newRow.athleteName + '' + newRow.eventName + '' + newRow.eventlevelName + '' + newRow.divisionName;
-    option.value = newRow.athlete_eventID;
+    option.text = newRow.ID + ' ' +  newRow.Athlete + '' + newRow.Event + '' + newRow.EventLevel + '' + newRow.Division;
+    option.value = newRow.ID;
+    console.log(option)
     selectMenu.add(option);
-    window.location.reload();
+
 }   
  

@@ -57,12 +57,12 @@ INSERT INTO EventLevels (eventLevelName)
 CREATE TABLE Events (
     eventID int NOT NULL AUTO_INCREMENT,
     competitionID int,
-    divisionID int NOT NULL,
-    eventlevelID int NOT NULL,
+    divisionID int ,
+    eventlevelID int,
     eventName varchar(255) NOT NULL,
     PRIMARY KEY (eventID),
     CONSTRAINT FK_Events_CompetitionID_ FOREIGN KEY (competitionID) REFERENCES Competitions(competitionID)
-    ON DELETE SET NULL,
+    ON DELETE CASCADE,
     CONSTRAINT FK_Events_divisionID FOREIGN KEY (divisionID)    REFERENCES Divisions(divisionID)
     ON DELETE CASCADE,
     CONSTRAINT FK_Events_eventLevelID FOREIGN KEY (eventlevelID)  REFERENCES EventLevels(eventlevelID)
@@ -98,11 +98,11 @@ INSERT INTO Teams(teamName,coachName,coachPhone,CoachEmail)
 CREATE TABLE Athletes (
     athleteID int NOT NULL AUTO_INCREMENT,
     divisionID int, -- choosen based on age
-    teamID int,
+    teamID int NULL,
     athleteName varchar(255) NOT NULL,
     athleteAddress varchar(255) NOT NULL,
     athletePhone varchar(15) NOT NULL,
-    athleteEmail varchar(255),
+    athleteEmail varchar(255) NOT NULL,
     athleteDOB date NOT NULL,
     athleteAge int NOT NULL, -- Determined by what there age will be on or before 8/31 of current year
     PRIMARY KEY (athleteID),
@@ -119,13 +119,13 @@ INSERT INTO Athletes (TeamID,divisionID,AthleteName,AthletePhone,AthleteEmail,At
 
 CREATE TABLE Athletes_Events(
     athlete_eventID int NOT NULL AUTO_INCREMENT,
-    eventID int NOT NULL,
-    athleteID int NOT NULL,
+    eventID int NULL,
+    athleteID int NULL,
     PRIMARY KEY (athlete_eventID),
     CONSTRAINT FK__Athletes_Events__eventID FOREIGN KEY (eventID) REFERENCES Events(eventID) 
-    ON DELETE CASCADE,  
+    ON DELETE SET NULL,  
     CONSTRAINT FK__Athletes_Events__athleteID FOREIGN KEY(athleteID) REFERENCES Athletes(athleteID)
-    ON DELETE CASCADE
+    ON DELETE SET NULL
 );
 
           

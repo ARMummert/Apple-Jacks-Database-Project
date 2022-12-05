@@ -28,9 +28,7 @@ updateAthleteForm.addEventListener("submit", function (e) {
     let athleteAgeValue = updateathleteAge.value;
     // Must abort if being bassed NULL for competitions
   
-    if (athleteEmailValue === ''){
-      athleteEmailValue = 'NULL'
-    };
+   
     
     // Put our data we want to send in a javascript object
     let data = {

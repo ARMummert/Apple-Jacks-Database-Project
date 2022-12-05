@@ -74,7 +74,9 @@ addRowToTable = (data) => {
     
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
+
     deleteCell.className = "button-62"
+
     deleteCell.onclick = function(){
         deleteDivision(newRow.divisionID);
     };

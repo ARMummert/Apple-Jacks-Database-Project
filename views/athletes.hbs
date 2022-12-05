@@ -30,7 +30,7 @@
                 <td>{{this.Athlete-Phone}}</td>
                 <td>{{this.Athlete-Email}}</td>
                 <td>{{this.Athlete-Address}}</td>
-                <td>{{this.DOB}}</td>
+                <td>{{formatDate this.DOB 'MM DD YYYY'}}</td>
                 <td>{{this.Age}}</td>
                 <td><button class="button-62" onClick="deleteAthlete({{this.ID}})">Delete</button></td>    
             </tr>   
@@ -138,7 +138,8 @@
         <form id="update-athlete-form">
             <h3 class="section-header"> Update Athlete </h3>
                 <table class="tablefour">
-                    <th>
+                
+                    <tr>
                         <td><p>Select Athlete</p></td>
                         <td><select class="button-62" id='select-athlete' required>
                             <option class="dropdown" value="">Select Athlete</option>
@@ -147,10 +148,10 @@
                             {{/each}}
                         </select>
                         </td>
-                    </th>
-                <tr>
-                    <th>
-                    <select
+                    </tr>
+                    <tr>
+                    <td><p>Select Team</p></td>
+                    <td><select
                     name="update-team-name"
                     class="button-62"
                     id="update-team-name"
@@ -165,9 +166,11 @@
                 {{/each}}
                 <option class= "dropdown" value= "NULL">NULL</option>
                 </select> 
-                </th>
-                 <th>
-                    <select
+                </td>
+                </tr>
+                
+                 <tr><td><p>Select Athlete</p></td>
+                    <td><select
                     name="update-division-name"
                     class="button-62"
                     id="update-division-name"
@@ -181,9 +184,11 @@
                     </option>
                 {{/each}}
                 </select> 
-                </th>
-            <tr>
-                 <tr>
+                </td>
+                </tr>
+                
+            
+                <tr>
                     <td><p class="inpboxlabel" for="update-athlete-name">Athlete Name</p></td> 
                     <td><input class="inpbox" type="text" name="update-athlete-name" id="update-athlete-name" required  placeholder="Athlete Name"></td>  
                 </tr> 

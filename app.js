@@ -6,7 +6,7 @@ var app     = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-PORT = 4060;
+PORT = 8484;
 
 // Database
 var db = require('./database/db-connector')
@@ -22,7 +22,8 @@ app.engine('.hbs', engine({extname: ".hbs"}));
 app.set('view engine', '.hbs'); 
 //Serving static files
 app.use(express.static(__dirname + '/public'));
-
+const handlebars = require('handlebars');
+const hbtdate = require('handlebars-helper-formatdate')(handlebars);
 // Express Middleware for Security
 // Content Security Policy
 const helmet = require("helmet");
@@ -912,7 +913,5 @@ app.put('/put-athletes-events-ajax/', function(req, res, next) {
 // LISTENER
 
 app.listen(PORT, function () {
-  console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.');
 });
-
-

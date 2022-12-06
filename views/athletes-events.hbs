@@ -27,10 +27,26 @@
             {{#each data}}
             <tr data-value={{this.ID}}>
                 <td>{{this.ID}}</td>
-                <td>{{this.Athlete}}</td>
-                <td>{{this.Event-Name}}</td>
-                <td>{{this.Event-Level}}</td>
-                <td>{{this.Athlete-Division}}</td>
+                <td>{{#if this.Athlete}}
+                        {{this.Athlete}}
+                    {{else}}
+                        <p> NULL <p>
+                    {{/if}}</td>
+                <td>{{#if this.Event-Name}}
+                        {{this.Event-Name}}
+                    {{else}}
+                        <p> NULL <p>
+                    {{/if}}</td>
+                <td>{{#if this.Event-Level}}
+                        {{this.Event-Level}}
+                    {{else}}
+                        <p> NULL <p>
+                    {{/if}}</td>
+                <td>{{#if this.Athlete-Division}}
+                        {{this.Athlete-Division}}
+                    {{else}}
+                        <p> NULL <p>
+                    {{/if}}</td>
                 <td><button class="button-62" onClick="deleteAthletes_Events({{this.ID}})">Delete</button></td>          
             </tr>   
             {{/each}}

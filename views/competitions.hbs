@@ -2,7 +2,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type = "text/JavaScript" src = "https://MomentJS.com/downloads/moment.js"></script>
+
 
 <h3 class=padtop >Competitions</h3>
 
@@ -102,11 +102,11 @@
             <h3 class="section-header"> Update Competition </h3>
                 <table class="updatetable">
                     <tr>
-                        <td><p class="inpboxlabel" >Select Competition</p></td>
-                        <td><select id='select-competition'>
-                            <option value="">Select a Competition</option>
+                        <td><p class="inpboxlabel" class="button-62" >Select Competition</p></td>
+                        <td><select class="button-62" id='select-competition'>
+                            <option class="dropdown" value="">Select a Competition</option>
                             {{#each data}}
-                            <option value="{{this.ID}}">{{this.Competition}}</option>
+                            <option class="dropdown" value="{{this.ID}}">{{this.Competition}}</option>
                             {{/each}}
                         </select>
                         </td>

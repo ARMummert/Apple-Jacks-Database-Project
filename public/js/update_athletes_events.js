@@ -31,7 +31,8 @@ updateAthletesEventsForm.addEventListener("submit", function (e) {
         }
     }
     xhttp.send(JSON.stringify(data));
-})
+    updateAthletesEventsForm.reset();
+})  
 
 function updateRow(data,athlete_eventID) {
     let parsedData = JSON.parse(data);

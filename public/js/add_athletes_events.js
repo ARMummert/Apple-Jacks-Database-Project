@@ -97,7 +97,7 @@ addRowToTable = (data) => {
     row.appendChild(divisionNameCell);
     row.appendChild(deleteCell);
 
-    row.setAttribute('data-value', newRow.athlete_eventID);
+    row.setAttribute('data-value', newRow.ID);
   
     // Add the row to the table
     currentTable.appendChild(row);

@@ -30,7 +30,7 @@ function deleteRow(athlete_eventID){
 
 
 function deleteDropDown(athlete_eventID) {
-    let selectAthletes_Events = document.getElementById("select-athletes-events")
+    let selectAthletes_Events = document.getElementById("select-athlete-event")
     for (let i = 0; i < selectAthletes_Events.length; i++) {
         if(Number(selectAthletes_Events.options[i].value) === Number(athlete_eventID)) {
             selectAthletes_Events[i].remove();

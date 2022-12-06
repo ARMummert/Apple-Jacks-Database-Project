@@ -253,7 +253,7 @@ app.get('/events', function (req, res){
     INNER JOIN Competitions ON Events.competitionID = Competitions.competitionID
     INNER JOIN Divisions ON Events.divisionID = Divisions.divisionID
     INNER JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
-    WHERE eventName = "${req.query.eventName}%"`;
+    WHERE eventName = "%${req.query.eventName}%"`;
      }      
   let competitions = `SELECT competitionID as 'ID', competitionName as 'Competition', Date, startTime as 'Time', locationName as 'Location',
   locationAddress as 'Address',locationPhone as 'Phone' FROM Competitions;`;
@@ -503,7 +503,7 @@ app.get('/athletes', function (req, res){
     athleteDOB as 'DOB', athleteAge as 'Age'
     FROM Athletes
     LEFT JOIN Teams ON Athletes.teamID = Teams.teamID
-    LEFT JOIN Divisions ON Athletes.divisionID = Divisions.divisionID WHERE athleteName LIKE "${req.query.athleteName}%";`;
+    LEFT JOIN Divisions ON Athletes.divisionID = Divisions.divisionID WHERE athleteName LIKE "%${req.query.athleteName}%";`;
   }
 
   let divisions = `SELECT divisionID as 'ID', divisionName as 'Division' FROM Divisions;`;
@@ -678,7 +678,7 @@ app.get('/teams', function (req, res){
   else 
   {
     teams = `SELECT teamID as 'ID', teamName as 'Team', coachName as 'Coach-Name', coachPhone as 'Coach-Phone', 
-    coachEmail as 'Coach-Email' FROM Teams WHERE teamName =  LIKE "${req.query.teamName}%";`;
+    coachEmail as 'Coach-Email' FROM Teams WHERE teamName =  LIKE "%${req.query.teamName}%";`;
   }
   
   db.pool.query(teams, function(error, rows, fields) {
@@ -772,7 +772,7 @@ app.get('/athletes-events', function (req, res){
     LEFT JOIN Divisions ON Divisions.divisionID = Athletes.divisionID
     LEFT JOIN Events ON Athletes_Events.eventID = Events.eventID
     LEFT JOIN EventLevels ON Events.eventlevelID = EventLevels.eventlevelID
-    WHERE Athletes_Events.athleteID IN (SELECT athleteId FROM Athletes WHERE athleteName Like "${req.query.athleteName}%");`;
+    WHERE Athletes_Events.athleteID IN (SELECT athleteId FROM Athletes WHERE athleteName Like "%${req.query.athleteName}%");`;
      }      
   
   let events = `SELECT eventID as 'ID',eventName as 'Event', Competitions.competitionName as 'Competition',

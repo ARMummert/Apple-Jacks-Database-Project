@@ -24,9 +24,7 @@ addCompetitionForm.addEventListener("submit", function (e) {
     let locationAddressValue = inputlocationAddress.value;
     let locationPhoneValue = inputlocationPhone.value;
     console.log(locationPhoneValue);
-    if (locationPhoneValue === " "){
-        locationPhoneValue = NULL
-    };
+    
     console.log(locationPhoneValue);
     // Put our data we want to send in a javascript object
     let data = {
@@ -94,7 +92,8 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.competitionID;
     competitionNameCell.innerText = newRow.competitionName;
-    dateCell.innerText = newRow.date;
+    datestring = newRow.date.toString('MMM,DD,YYYY')
+    dateCell.innerText = datestring;
     startTimeCell.innerText = newRow.startTime;
     locationNameCell.innerText = newRow.locationName;
     locationAddressCell.innerText = newRow.locationAddress;

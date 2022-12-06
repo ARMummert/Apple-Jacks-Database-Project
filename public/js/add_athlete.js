@@ -108,7 +108,8 @@ addRowToTable = (data) => {
     athletePhoneCell.innerText = newRow.AthletePhone;
     athleteEmailCell.innerText = newRow.AthleteEmail;
     athleteAddressCell.innerText = newRow.AthleteAddress;
-    athleteDOBCell.innerText = newRow.DOB;
+    dobstring = newRow.DOB.toString('MMM,DD,YYYY');
+    athleteDOBCell.innerText = dobstring;
     athleteAgeCell.innerText = newRow.Age;
 
     deleteCell = document.createElement("button");

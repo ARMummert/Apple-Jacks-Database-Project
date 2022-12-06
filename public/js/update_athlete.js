@@ -122,7 +122,7 @@ function updateRow(data, athleteID){
             let td7 = updateRowIndex.getElementsByTagName("td")[7];
           
             // Reassign DOB to value we updated to
-            td7.innerHTML = parsedData[0].athleteDOB
+            td7.innerText = dobstring;
 
             // Get td of Athlete=Address Value
             let td8 = updateRowIndex.getElementsByTagName("td")[8];

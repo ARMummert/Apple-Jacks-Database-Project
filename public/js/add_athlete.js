@@ -133,7 +133,7 @@ addRowToTable = (data) => {
     row.appendChild(athleteAgeCell);
     row.appendChild(deleteCell);
 
-    row.setAttribute('data-value', newRow.athleteID);
+    row.setAttribute('data-value', newRow.ID);
   
     // Add the row to the table
     currentTable.appendChild(row);

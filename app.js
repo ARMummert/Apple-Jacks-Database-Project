@@ -6,7 +6,7 @@ var app     = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-PORT = 4080;
+PORT = 8484;
 
 // Database
 var db = require('./database/db-connector')
@@ -22,6 +22,8 @@ app.engine('.hbs', engine({extname: ".hbs"}));
 app.set('view engine', '.hbs'); 
 //Serving static files
 app.use(express.static(__dirname + '/public'));
+
+// Date Time Formatting
 const handlebars = require('handlebars');
 const hbtdate = require('handlebars-helper-formatdate')(handlebars);
 // Express Middleware for Security

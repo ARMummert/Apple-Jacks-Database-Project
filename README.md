@@ -5,17 +5,19 @@ The Baton Twirling Competition Entry Form Database (BTCE) creates an entry form 
 
 # Citations
 Citations:
-    # Citation for the following function:
-    # Date: 12/02/2020
-    # Copied from /OR/ Adapted from /OR/ Based on:
-    # Source URL: http://www.oregonstate.edu/mysource
-
+    
     # Citation for Node.js Express.JS and Handlebars.JS
     # Date: 12/5/2022
     # Copied /AND/ Adapted from:
     # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
     # Source URL: https://www.npmjs.com/package/express-handlebars
     
+    # Citation for LIKE queries
+    # Date: 11/23/2022
+    # Copied /AND/ Adapted from:
+    # Source URL: https://learnsql.com/blog/using-like-match-patterns-sql/
+    
+
     # Citation for CSS tables
     # Date: 11/23/2022
     # Copied from /AND/ Adapted from:

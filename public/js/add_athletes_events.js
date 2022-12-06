@@ -8,8 +8,8 @@ addAthletes_EventsForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputathleteID = document.getElementById("select-athlete")
-    let inputeventID = document.getElementById("select-event")
+    let inputathleteID = document.getElementById("input-athlete-name")
+    let inputeventID = document.getElementById("input-event-name")
     
 
     // Get the values from the form fields
@@ -73,6 +73,7 @@ addRowToTable = (data) => {
     let eventNameCell = document.createElement("TD");
     let eventlevelNameCell = document.createElement("TD");
     let divisionNameCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD")
 
     // Fill the cells with correct data
     idCell.innerText = newRow.ID;

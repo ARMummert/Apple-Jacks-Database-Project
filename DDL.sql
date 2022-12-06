@@ -16,7 +16,7 @@ CREATE TABLE Competitions (
     startTime TIME,
     locationName varchar(255) NOT NULL,
     locationAddress varchar(255) NOT NULL,
-    locationPhone varchar(15),
+    locationPhone varchar(15) NOT NULL,
     PRIMARY KEY (competitionID)
 );
 

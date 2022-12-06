@@ -90,6 +90,7 @@ function updateRow(data, competitionID){
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
           
             // Reassign date to value we updated to
+            
             td2.innerHTML = parsedData[0].date
             
             // Get td of start time Value

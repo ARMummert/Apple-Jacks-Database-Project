@@ -16,7 +16,6 @@ Citations:
     # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
     # Source URL: https://www.npmjs.com/package/express-handlebars
     
-
     # Citation for CSS tables
     # Date: 11/23/2022
     # Copied from /AND/ Adapted from:

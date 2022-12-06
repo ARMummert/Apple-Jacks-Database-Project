@@ -255,6 +255,13 @@ a {
     margin: 5px 5px 5px 5px;
 
 }
+.para {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: black;
+  text-align: center;
+
+}
 
 nav, #navmenu, li, ul {
     font-family: 'Montserrat', sans-serif;

@@ -92,7 +92,7 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     idCell.innerText = newRow.competitionID;
     competitionNameCell.innerText = newRow.competitionName;
-    datestring = newRow.date.toString('MMM,DD,YYYY')
+    datestring = newRow.date.toString('MM-DD-YYYY')
     dateCell.innerText = datestring;
     startTimeCell.innerText = newRow.startTime;
     locationNameCell.innerText = newRow.locationName;

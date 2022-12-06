@@ -92,43 +92,43 @@ function updateRow(data, athleteID){
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
           
             // Reassign Team to value we updated to
-            td2.innerHTML = parsedData[0].teamName
+            td2.innerHTML = parsedData[0].teamName;
             
             // Get td of Division Value
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
           
             // Reassign Division Name to value we updated to
-            td3.innerHTML = parsedData[0].divisionName
+            td3.innerHTML = parsedData[0].divisionName;
          
             // Get td of Athlete-Phone Value
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
           
             // Reassign Athlete-Phone to value we updated to
-            td4.innerHTML = parsedData[0].athletePhone
+            td4.innerHTML = parsedData[0].athletePhone;
          
             // Get td of Athlete-Email Value
             let td5 = updateRowIndex.getElementsByTagName("td")[5];
           
             // Reassign Athlete-Email to value we updated to
-            td5.innerHTML = parsedData[0].athleteEmail
+            td5.innerHTML = parsedData[0].athleteEmail;
 
             // Get td of Athlete=Address Value
             let td6 = updateRowIndex.getElementsByTagName("td")[6];
           
             // Reassign Athlete-Address to value we updated to
-            td6.innerHTML = parsedData[0].athleteAddress
+            td6.innerHTML = parsedData[0].athleteAddress;
             
             // Get td of DOB Value
             let td7 = updateRowIndex.getElementsByTagName("td")[7];
           
             // Reassign DOB to value we updated to
-            td7.innerText = dobstring;
+            td7.innerText = parsedData[0].athleteDOB;
 
             // Get td of Athlete=Address Value
             let td8 = updateRowIndex.getElementsByTagName("td")[8];
           
             // Reassign Athlete-Address to value we updated to
-            td8.innerHTML = parsedData[0].athleteAge
+            td8.innerHTML = parsedData[0].athleteAge;
       }
       }
 

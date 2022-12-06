@@ -1,5 +1,8 @@
---Project Group 4 Database Project - CS340 - Baton Twirling Competition Entry Form Database - DML Files
---Amy Mummert and Joel Vrieze
+-- Project Group 4 Database Project 
+-- CS340 
+-- Baton Twirling Competition Entry Form Database 
+-- DMQ Files
+-- Amy Mummert and Joel Vrieze
 
 --get all competiitions
 SELECT competitionID as `ID`, competitionName as `Competition Name`, Date, startTime as `Start Time`, locationName as `Location Name`,

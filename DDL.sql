@@ -1,5 +1,8 @@
---Project Group 4 Database Project - CS340 - Baton Twirling Competition Entry Form Database - DDL Files
---Amy Mummert and Joel Vrieze
+-- Project Group 4 Database Project 
+-- CS340 
+-- Baton Twirling Competition Entry Form Database 
+-- DDL Files
+-- Amy Mummert and Joel Vrieze
 
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT=0;

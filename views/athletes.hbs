@@ -30,7 +30,7 @@
                 <td>{{this.Athlete-Phone}}</td>
                 <td>{{this.Athlete-Email}}</td>
                 <td>{{this.Athlete-Address}}</td>
-                <td>{{moment this.Date format="MM-DD-YYYY"}}</td>
+                <td>{{formatDate this.Date 'MM-DD-YYYY'}}</td>
                 <td>{{this.Age}}</td>
                 <td><button class="button-62" onClick="deleteAthlete({{this.ID}})">Delete</button></td>    
             </tr>   

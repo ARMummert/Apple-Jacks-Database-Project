@@ -6,7 +6,7 @@ var app     = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-PORT = 4080;
+PORT = 8484;
 
 // Database
 var db = require('./database/db-connector')
@@ -22,8 +22,15 @@ app.engine('.hbs', engine({extname: ".hbs"}));
 app.set('view engine', '.hbs'); 
 //Serving static files
 app.use(express.static(__dirname + '/public'));
-const handlebars = require('handlebars');
-const hbtdate = require('handlebars-helper-formatdate')(handlebars);
+
+// Date Time Formatting
+var moment = require('moment')
+var handlebarshelpers = require('handlebars-helpers')
+var Handlebars = require("handlebars");
+var MomentHandler = require("handlebars.moment");
+MomentHandler.registerHelpers(Handlebars);
+
+
 // Express Middleware for Security
 // Content Security Policy
 const helmet = require("helmet");

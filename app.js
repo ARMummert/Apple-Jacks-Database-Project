@@ -24,13 +24,8 @@ app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'));
 
 // Date Time Formatting
-var moment = require('moment')
-var handlebarshelpers = require('handlebars-helpers')
-var Handlebars = require("handlebars");
-var MomentHandler = require("handlebars.moment");
-MomentHandler.registerHelpers(Handlebars);
-
-
+const handlebars = require('handlebars');
+const hbtdate = require('handlebars-helper-formatdate')(handlebars);
 // Express Middleware for Security
 // Content Security Policy
 const helmet = require("helmet");

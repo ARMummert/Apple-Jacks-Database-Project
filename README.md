@@ -5,6 +5,14 @@ The Baton Twirling Competition Entry Form Database (BTCE) creates an entry form 
 
 
 ![homepage ae85d5ed33164dae7cf9](https://github.com/user-attachments/assets/0c5f79fd-5e57-44a5-83fe-5cd16bfbcb00)
+![competitions 803ab0237cd1ee0b4362](https://github.com/user-attachments/assets/c960a425-c878-4031-bdf9-43ec2b8e3c2d)
+![athletes 134497ba924eefd8518b](https://github.com/user-attachments/assets/434efd32-09b2-472f-b712-7f4686954036)
+![events 87d9fe4ac6ef16684b54](https://github.com/user-attachments/assets/bb6edb8c-a856-42d7-96ae-c57beed5bd31)
+![athletesevents 3befa2736b3389193bc9](https://github.com/user-attachments/assets/70affca8-47c6-449c-a514-e8ef5bc415cf)
+![divisions 97023c9b02653da5238f](https://github.com/user-attachments/assets/5693db94-b8ce-4ee6-a0f9-fcd5b434e0d7)
+![eventlevels e748427556367e9fe1e1](https://github.com/user-attachments/assets/f5620450-10ac-4bfd-bb12-54c2a98fe520)
+![teams 32b99f83ea686d3c7306](https://github.com/user-attachments/assets/fb3b4a19-f424-4814-b16a-764559dab6ef)
+
 
 # Citations
 Citations:

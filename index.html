@@ -10,15 +10,18 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f0f8ff;
-            color: #333;
+            background-color: black;
+            color: white;
         }
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: white;
         }
+
         .description {
+            text-align: cetner;
             margin: 20px 0;
+            
         }
         .images {
             display: flex;
@@ -28,10 +31,9 @@
             margin: 20px 0;
         }
         .images img {
-            max-width: 300px;
+            max-width: 800px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            background-color: transparent;
         }
         .citations {
             margin: 20px 0;
@@ -46,11 +48,9 @@
 <body>
 
     <h1>Baton Twirling Competition Entry Form Database (BTCE)</h1>
-    
-    <div class="description">
-        <p>The Baton Twirling Competition Entry Form Database (BTCE) creates an entry form for baton twirling competitions for approximately 52 competitions per year and hundreds of events. A competition includes events that baton twirling athletes can register for and compete in. Athletes who enter in a competition can register to enter one or more events within that competition. Events include, but are not limited to, basic march, military march, parade march, presentation, 2-baton, 3-baton, solo, strut, and artistic twirl. The database includes six entity tables, one category table, and six relationships between tables. The tables are Competitions, Events, Teams, Athletes, and Divisions. The category table is named EventLevels. The database has one transition table between Events and Athletes, named Athletes_Events.</p>
+    <div>
+        <p class="description">The Baton Twirling Competition Entry Form Database (BTCE) creates an entry form for baton twirling competitions for approximately 52 competitions per year and hundreds of events. A competition includes events that baton twirling athletes can register for and compete in. Athletes who enter in a competition can register to enter one or more events within that competition. Events include, but are not limited to, basic march, military march, parade march, presentation, 2-baton, 3-baton, solo, strut, and artistic twirl. The database includes six entity tables, one category table, and six relationships between tables. The tables are Competitions, Events, Teams, Athletes, and Divisions. The category table is named EventLevels. The database has one transition table between Events and Athletes, named Athletes_Events.</p>
     </div>
-
 <div class="images">
     <img src="public/images/databasehomepage.png" alt="Homepage">
     <img src="public/images/athletes.png" alt="Athletes">
@@ -61,7 +61,6 @@
     <img src="public/images/divisions.png" alt="Divisions">
     <img src="public/images/athletesevents.png" alt="Atheletes Events">
 </div>
-
     <div class="citations">
         <h2>Citations</h2>
         <div class="citation">

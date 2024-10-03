@@ -1,71 +1,121 @@
-# Apple-Jacks-Database-Project
-A baton twirling competition entry form database
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baton Twirling Competition Entry Form Database</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .description {
+            margin: 20px 0;
+        }
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .images img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .citations {
+            margin: 20px 0;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .citation {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
 
-The Baton Twirling Competition Entry Form Database (BTCE) creates an entry form for baton twirling competitions for approximately 52 competitions per year and hundreds of events. A competition includes events that baton twirling athletes can register for and compete in. Athletes who enter in a competition can register to enter one or more events within that competition. Events include, but are not limited to, basic march, military march, parade march, presentation, 2-baton, 3-baton, solo, strut and artistic twirl. The database includes six entity tables, one category table and six relationships between tables. The tables are Competitions, Events, Teams, Athletes, and Divisions. The category table is named EventLevels. The database has one transition table between Events and Athletes, named Athletes_Events.
-
-
-![homepage ae85d5ed33164dae7cf9](https://github.com/user-attachments/assets/0c5f79fd-5e57-44a5-83fe-5cd16bfbcb00)
-![competitions 803ab0237cd1ee0b4362](https://github.com/user-attachments/assets/c960a425-c878-4031-bdf9-43ec2b8e3c2d)
-![athletes 134497ba924eefd8518b](https://github.com/user-attachments/assets/434efd32-09b2-472f-b712-7f4686954036)
-![events 87d9fe4ac6ef16684b54](https://github.com/user-attachments/assets/bb6edb8c-a856-42d7-96ae-c57beed5bd31)
-![athletesevents 3befa2736b3389193bc9](https://github.com/user-attachments/assets/70affca8-47c6-449c-a514-e8ef5bc415cf)
-![divisions 97023c9b02653da5238f](https://github.com/user-attachments/assets/5693db94-b8ce-4ee6-a0f9-fcd5b434e0d7)
-![eventlevels e748427556367e9fe1e1](https://github.com/user-attachments/assets/f5620450-10ac-4bfd-bb12-54c2a98fe520)
-![teams 32b99f83ea686d3c7306](https://github.com/user-attachments/assets/fb3b4a19-f424-4814-b16a-764559dab6ef)
-
-
-# Citations
-Citations:
+    <h1>Baton Twirling Competition Entry Form Database (BTCE)</h1>
     
-    # Citation for Node.js Express.JS and Handlebars.JS
-    # Date: 12/5/2022
-    # Copied /AND/ Adapted from:
-    # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
-    # Source URL: https://www.npmjs.com/package/express-handlebars
-    
-    # Citation for LIKE queries
-    # Date: 11/23/2022
-    # Copied /AND/ Adapted from:
-    # Source URL: https://learnsql.com/blog/using-like-match-patterns-sql/
-    
+    <div class="description">
+        <p>The Baton Twirling Competition Entry Form Database (BTCE) creates an entry form for baton twirling competitions for approximately 52 competitions per year and hundreds of events. A competition includes events that baton twirling athletes can register for and compete in. Athletes who enter in a competition can register to enter one or more events within that competition. Events include, but are not limited to, basic march, military march, parade march, presentation, 2-baton, 3-baton, solo, strut, and artistic twirl. The database includes six entity tables, one category table, and six relationships between tables. The tables are Competitions, Events, Teams, Athletes, and Divisions. The category table is named EventLevels. The database has one transition table between Events and Athletes, named Athletes_Events.</p>
+    </div>
 
-    # Citation for CSS tables
-    # Date: 11/23/2022
-    # Copied from /AND/ Adapted from:
-    # Source URL: https://css-tricks.com/complete-guide-table-element/
-    # Source URL: https://getcssscan.com/css-buttons-examples
-    
-    # Citation for Google Fonts:
-    # Date: 11/23/2022
-    # Copied from:
-    # https://fonts.google.com/
-    
-    # Citations for images:
-    # Date: 11/26/2022
-    # Copied from:
-    # Source URL: https://www.pinterest.com/pin/494973815293900621/
-    # Source URL: https://aaubaton.org/
-    # Source URL: https://hdqwalls.com/dark-blue-green-gradient-4k-wallpaper
-    # Source URL: https://cssgradient.io/
+    <div class="images">
+        <img src="https://github.com/user-attachments/assets/0c5f79fd-5e57-44a5-83fe-5cd16bfbcb00" alt="Homepage">
+        <img src="https://github.com/user-attachments/assets/c960a425-c878-4031-bdf9-43ec2b8e3c2d" alt="Competitions">
+        <img src="https://github.com/user-attachments/assets/434efd32-09b2-472f-b712-7f4686954036" alt="Athletes">
+        <img src="https://github.com/user-attachments/assets/bb6edb8c-a856-42d7-96ae-c57beed5bd31" alt="Events">
+        <img src="https://github.com/user-attachments/assets/70affca8-47c6-449c-a514-e8ef5bc415cf" alt="Athletes_Events">
+        <img src="https://github.com/user-attachments/assets/5693db94-b8ce-4ee6-a0f9-fcd5b434e0d7" alt="Divisions">
+        <img src="https://github.com/user-attachments/assets/f5620450-10ac-4bfd-bb12-54c2a98fe520" alt="EventLevels">
+        <img src="https://github.com/user-attachments/assets/fb3b4a19-f424-4814-b16a-764559dab6ef" alt="Teams">
+    </div>
 
-    # Citation for Content Security Policy:
-    # Date: 11/26/2022  
-    # Copied AND Adapted from:
-    # Source URL: https://stackoverflow.com/questions/63643775/content-security-policy-the-page-s-settings-blocked-the-loading-of-a-resource-a
-    # Source URL: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+    <div class="citations">
+        <h2>Citations</h2>
+        <div class="citation">
+            Citation for Node.js Express.JS and Handlebars.JS<br>
+            Date: 12/5/2022<br>
+            Source URL: <a href="https://github.com/osu-cs340-ecampus/nodejs-starter-app" target="_blank">GitHub</a><br>
+            Source URL: <a href="https://www.npmjs.com/package/express-handlebars" target="_blank">npmjs</a>
+        </div>
+        <div class="citation">
+            Citation for LIKE queries<br>
+            Date: 11/23/2022<br>
+            Source URL: <a href="https://learnsql.com/blog/using-like-match-patterns-sql/" target="_blank">Learn SQL</a>
+        </div>
+        <div class="citation">
+            Citation for CSS tables<br>
+            Date: 11/23/2022<br>
+            Source URL: <a href="https://css-tricks.com/complete-guide-table-element/" target="_blank">CSS-Tricks</a><br>
+            Source URL: <a href="https://getcssscan.com/css-buttons-examples" target="_blank">CSS Scan</a>
+        </div>
+        <div class="citation">
+            Citation for Google Fonts<br>
+            Date: 11/23/2022<br>
+            Source URL: <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>
+        </div>
+        <div class="citation">
+            Citations for images<br>
+            Date: 11/26/2022<br>
+            Source URL: <a href="https://www.pinterest.com/pin/494973815293900621/" target="_blank">Pinterest</a><br>
+            Source URL: <a href="https://aaubaton.org/" target="_blank">AAU Baton</a><br>
+            Source URL: <a href="https://hdqwalls.com/dark-blue-green-gradient-4k-wallpaper" target="_blank">HDQ Walls</a><br>
+            Source URL: <a href="https://cssgradient.io/" target="_blank">CSS Gradient</a>
+        </div>
+        <div class="citation">
+            Citation for Content Security Policy<br>
+            Date: 11/26/2022<br>
+            Source URL: <a href="https://stackoverflow.com/questions/63643775/content-security-policy-the-page-s-settings-blocked-the-loading-of-a-resource-a" target="_blank">Stack Overflow</a><br>
+            Source URL: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank">MDN Web Docs</a>
+        </div>
+        <div class="citation">
+            Citation for homepage carousel<br>
+            Date: 11/27/2022<br>
+            Source URL: <a href="https://codepen.io/onion2k/pen/xxZYBVj" target="_blank">CodePen</a>
+        </div>
+        <div class="citation">
+            Citation for buttons<br>
+            Date: 11/27/2022<br>
+            Source URL: <a href="https://getcssscan.com/css-buttons-examples" target="_blank">CSS Scan</a>
+        </div>
+        <div class="citation">
+            Citation for dateFormat<br>
+            Date: 12/5/2022<br>
+            Source URL: <a href="https://momentjs.com/guides/" target="_blank">Moment.js</a><br>
+            Source URL: <a href="https://www.npmjs.com/package/handlebars.moment" target="_blank">npmjs</a>
+        </div>
+    </div>
 
-    # Citation for homepage carousel:
-    # Date: 11/27/2022
-    # Copied AND Adapted from:
-    # Source URL: https://codepen.io/onion2k/pen/xxZYBVj
-
-    # Citation for buttons:
-    # Date: 11/27/2022
-    # Copied from:
-    # Source URL: https://getcssscan.com/css-buttons-examples
-    
-    # Citation for dateFormat:
-    # Date: 12/5/2022
-    # Copied from:
-    # Source URL: https://momentjs.com/guides/
-    # Source URL: https://www.npmjs.com/package/handlebars.moment
+</body>
+</html>
